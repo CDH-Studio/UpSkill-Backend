@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
 
-const sequelize = require("../../config/database");
+const sequelize = require("../config/database");
 
 // let sequelize;
 // if (config.use_env_variable) {
