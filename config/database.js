@@ -9,7 +9,7 @@ module.exports = new Sequelize(
   process.env.PGUSERNAME,
   process.env.PGPASS,
   {
-    host: process.env.PGHOST,
+    uri: process.env.PGHOST,
     dialect: "postgres",
     pool: {
       max: 5,
