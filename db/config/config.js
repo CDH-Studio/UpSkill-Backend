@@ -12,12 +12,10 @@ module.exports = {
     password: process.env.PGPASS,
     database: process.env.PGDATABASE,
     uri: process.env.PGHOST,
-    dialect: "postgres",
-    operatorsAliases: false
+    dialect: "postgres"
   },
   staging: {
     uri: process.env.DATABASE_URL,
-    dialect: "postgres",
-    operatorsAliases: false
+    dialect: "postgres"
   }
 };
