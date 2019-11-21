@@ -4,8 +4,9 @@
   "description": "Upskill backend",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "npm run dbsetup && node server.js",
+    "dev": "nodemon server.js",
+    "dbsetup": "npm i -g sequelize-cli && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
   },
   "author": "Upskill team",
   "license": "MIT",
