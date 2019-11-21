@@ -1,6 +1,6 @@
 const moment = require("moment");
 
-const Models = require("../../db/models");
+const Models = require("../../models");
 const Profile = Models.profile;
 const Education = Models.education;
 const Experience = Models.experience;

@@ -1,4 +1,4 @@
-const Models = require("../../db/models");
+const Models = require("../../models");
 const User = Models.user;
 const Location = Models.location;
 const axios = require("axios");
