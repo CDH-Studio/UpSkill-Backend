@@ -14,5 +14,10 @@ module.exports = {
     uri: process.env.PGHOST,
     dialect: "postgres",
     operatorsAliases: false
+  },
+  staging: {
+    uri: process.env.DATABASE_URL,
+    dialect: "postgres",
+    operatorsAliases: false
   }
 };
