@@ -4,14 +4,14 @@ module.exports = {
     username: process.env.PGUSERNAME,
     password: process.env.PGPASS,
     database: process.env.PGDATABASE,
-    host: process.env.PGHOST,
+    uri: process.env.PGHOST,
     dialect: "postgres"
   },
   production: {
     username: process.env.PGUSERNAME,
     password: process.env.PGPASS,
     database: process.env.PGDATABASE,
-    host: process.env.PGHOST,
+    uri: process.env.PGHOST,
     dialect: "postgres",
     operatorsAliases: false
   }
