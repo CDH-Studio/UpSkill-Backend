@@ -24,7 +24,11 @@ const getCareerMobility = async (request, response) => {
 };
 
 const getCompetency = async (request, response) => {
-  let all = await Competency.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "competency"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
