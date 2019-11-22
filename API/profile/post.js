@@ -19,7 +19,7 @@ const createProfile = async (request, response) => {
     dbObject[mappedValues[key] ? mappedValues[key] : key] = value;
   }
 
-  if (dbObject.jobTitleEn) {
+  if (dbObject.jobTitle) {
     dbObject.jobTitleEn = dbObject.jobTitle.en;
     dbObject.jobTitleFr = dbObject.jobTitle.fr;
   }

@@ -1,38 +1,88 @@
 const moment = require("moment");
-const Models = require("../../models");
+const Fuse = require("fuse.js");
+
+const Models = require("../../../models");
 const Profile = Models.profile;
 
-const getProfile = async (request, response) => {
-  response.status(200).json(await Profile.findAll());
+const fuzzySearch = async searchValue => {
+  console.log(searchValue);
+
+  const profiles = await Profile.findAll({
+    attributes: [
+      "id",
+      "firstName",
+      "lastName",
+      "jobTitleEn",
+      "jobTitleFr",
+      "telephone",
+      "cellphone",
+      "manager",
+      "team",
+      "groupLevelId",
+      "locationId",
+      "actingId"
+    ]
+  });
+  const allProf = await getProfs(profiles).then(profs => profs);
+
+  const options = {
+    shouldSort: true,
+    keys: [
+      "acting.description",
+      "branch.en",
+      "branch.fr",
+      "careerSummary.header",
+      "careerSummary.subheader",
+      "careerSummary.content",
+      "competencies.en",
+      "competencies.fr",
+      "education.school.description.en",
+      "education.school.description.fr",
+      "education.diploma.description.en",
+      "education.diploma.description.fr",
+      "email",
+      "firstName",
+      "jobTitle.en",
+      "jobTitle.fr",
+      "lastName",
+      "location.description.en",
+      "location.description.fr",
+      "manager",
+      "cellphone",
+      "organizationList.en",
+      "organizationList.fr",
+      "skills.description.en",
+      "skills.description.fr",
+      "team",
+      "telephone",
+      "projects.text"
+    ]
+  };
+
+  const fuse = new Fuse(allProf, options);
+
+  const results = fuse.search(searchValue);
+
+  return results;
 };
 
-const getProfileById = async (request, response) => {
-  const id = request.params.id;
-  let profile = await Profile.findOne({ where: { id: id } });
-  let user = await profile.getUser();
+getProfs = profiles => {
+  return Promise.all(
+    profiles.map(profile => {
+      return getProf(profile);
+    })
+  );
+};
+
+getProf = async profile => {
+  let user = await profile.getUser({ attributes: ["email"] });
 
   if (!profile) response.status(404).send("Profile Not Found");
-  let data = { ...profile.dataValues, ...user.dataValues };
 
-  let tenure = await profile.getTenure().then(res => {
-    if (res) return res.dataValues;
-  });
+  let profileData = profile ? profile.dataValues : {};
+  let userData = user ? user.dataValues : {};
 
-  let careerMobility = await profile.getCareerMobility().then(res => {
-    if (res) return res.dataValues;
-  });
-
-  let talentMatrixResult = await profile.getTalentMatrixResult().then(res => {
-    if (res) return res.dataValues;
-  });
-
-  let groupLevel = await profile.getGroupLevel().then(res => {
-    if (res) return res.dataValues;
-  });
-
-  let securityClearance = await profile.getSecurityClearance().then(res => {
-    if (res) return res.dataValues;
-  });
+  let data = { ...profileData, ...userData };
 
   let acting = await profile.getActing().then(res => {
     if (res) return res.dataValues;
@@ -100,7 +150,7 @@ const getProfileById = async (request, response) => {
   let branch;
 
   let organizationList = await profile
-    .getProfileOrganizations({ order: [["tier", "ASC"]] })
+    .getProfileOrganizations({ order: [["tier", "DESC"]] })
     .then(organizations => {
       let branchOrg = organizations[Math.min(2, organizations.length - 1)];
       branch = {
@@ -139,57 +189,21 @@ const getProfileById = async (request, response) => {
       };
   });
 
-  let developmentalGoals = await profile.getDevelopmentGoals().map(goal => {
-    if (goal)
-      return {
-        id: goal.dataValues.id,
-        description: {
-          en: goal.dataValues.descriptionEn,
-          fr: goal.dataValues.descriptionFr
-        }
-      };
-  });
-
-  let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
-    if (res) return res.dataValues;
-  });
-
   //Response Object
   let resData = {
+    id: data.id,
     acting: {
       id: acting ? acting.id : null,
       description: acting ? acting.description : null
     },
-    actingPeriodStartDate: data.actingStartDate,
-    actingPeriodEndDate: data.actingEndDate,
     branch,
-    careerMobility: {
-      id: careerMobility ? careerMobility.id : null,
-      description: {
-        en: careerMobility ? careerMobility.descriptionEn : null,
-        fr: careerMobility ? careerMobility.descriptionFr : null
-      }
-    },
     careerSummary,
     competencies,
-    developmentalGoals,
     education: educArray,
     email: data.email,
-    exFeeder: data.exFeeder,
-    firstLanguage:
-      data.firstLanguage == "fr"
-        ? { en: "French", fr: "Français" }
-        : { en: "English", fr: "Anglais" },
     firstName: data.firstName,
-    githubUrl: data.github,
-    gradedOnSecondLanguage: true,
-    classification: {
-      id: groupLevel ? groupLevel.id : null,
-      description: groupLevel ? groupLevel.description : null
-    },
     jobTitle: { en: data.jobTitleEn, fr: data.jobTitleFr },
     lastName: data.lastName,
-    linkedinUrl: data.linkedin,
     location: {
       id: location ? location.id : null,
       description: {
@@ -212,50 +226,15 @@ const getProfileById = async (request, response) => {
     manager: data.manager,
     cellphone: data.cellphone,
     organizationList,
-    secondaryOralDate: secLangProf ? secLangProf.oralDate : null,
-    secondaryOralProficiency: secLangProf ? secLangProf.oralProficiency : null,
-    secondaryReadingDate: secLangProf ? secLangProf.readingDate : null,
-    secondaryReadingProficiency: secLangProf
-      ? secLangProf.readingProficiency
-      : null,
-    secondaryWritingDate: secLangProf ? secLangProf.writingDate : null,
-    secondaryWritingProficiency: secLangProf
-      ? secLangProf.writingProficiency
-      : null,
-    secondLanguage: null,
-    security: {
-      id: securityClearance ? securityClearance.id : null,
-      description: {
-        en: securityClearance ? securityClearance.descriptionEn : null,
-        fr: securityClearance ? securityClearance.descriptionFr : null
-      }
-    },
     skills,
-    tenure: {
-      id: tenure ? tenure.id : null,
-      description: {
-        en: tenure ? tenure.descriptionEn : null,
-        fr: tenure ? tenure.descriptionFr : null
-      }
-    },
-    talentMatrixResult: {
-      id: talentMatrixResult ? talentMatrixResult.id : null,
-      description: {
-        en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
-        fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
-      }
-    },
     team: data.team,
     telephone: data.telephone,
-    twitterUrl: data.twitter,
-    yearsOfService: data.yearService,
     projects: projects
   };
 
-  response.status(200).json(resData);
+  // console.log(" DASFASDFASDFASDFASDFADFASDFASDF", resData.firstName);
+
+  return resData;
 };
 
-module.exports = {
-  getProfile,
-  getProfileById
-};
+module.exports = { fuzzySearch };
