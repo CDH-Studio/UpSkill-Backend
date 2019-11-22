@@ -1,4 +1,4 @@
-const Models = require("../../../db/models");
+const Models = require("../../../models");
 const Profile = Models.profile;
 const sequelize = require("sequelize");
 const Op = sequelize.Op;

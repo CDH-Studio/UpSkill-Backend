@@ -1,5 +1,5 @@
 const moment = require("moment");
-const Models = require("../../db/models");
+const Models = require("../../models");
 const Profile = Models.profile;
 
 const getProfile = async (request, response) => {
