@@ -3222,21 +3222,21 @@ module.exports = {
           {
             descriptionEn: "Demonstrating integrity and respect",
             descriptionFr: "Faire preuve d'intégrité et de respect",
-            type: "skill",
+            type: "competency",
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             descriptionEn: "Thinking Things Through",
             descriptionFr: "Réflexion approfondie",
-            type: "skill",
+            type: "competency",
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             descriptionEn: "Working Effectively with Others",
             descriptionFr: "Travailler efficacement avec les autres",
-            type: "skill",
+            type: "competency",
             createdAt: new Date(),
             updatedAt: new Date()
           },
