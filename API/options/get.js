@@ -40,11 +40,7 @@ const getCompetency = async (request, response) => {
 };
 
 const getDevelopmentalGoals = async (request, response) => {
-  let all = await Skill.findAll({
-    where: {
-      type: "competency"
-    }
-  });
+  let all = await Skill.findAll();
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
