@@ -123,7 +123,11 @@ const getSecurityClearance = async (request, response) => {
 };
 
 const getSkill = async (request, response) => {
-  let all = await Skill.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "skill"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
