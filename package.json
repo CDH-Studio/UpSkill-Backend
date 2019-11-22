@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "fuse.js": "^3.4.6",
     "keycloak-connect": "^7.0.1",
     "npm-install-all": "^1.1.21",
     "pg": "^7.12.1",
