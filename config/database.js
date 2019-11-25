@@ -3,6 +3,10 @@ const Sequelize = require("sequelize");
 
 require("dotenv").config();
 
+let [host, port] = process.env.PGHOST.split(":");
+
+console.log(host, port);
+
 // Option 1: Passing parameters separately
 module.exports = new Sequelize(
   // process.env.DATABASE_URL,
@@ -10,7 +14,8 @@ module.exports = new Sequelize(
   process.env.PGUSERNAME,
   process.env.PGPASS,
   {
-    uri: process.env.PGHOST,
+    host: host,
+    port: port,
     dialect: "postgres",
     pool: {
       max: 5,
