@@ -5,6 +5,8 @@ require("dotenv").config();
 
 let [host, port] = process.env.PGHOST.split(":");
 
+console.log("PGHOST:", process.env.PGHOST);
+
 console.log(host, port);
 
 // Option 1: Passing parameters separately
