@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     "skill",
     {
       descriptionEn: DataTypes.STRING,
-      descriptionFr: DataTypes.STRING
+      descriptionFr: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     {}
   );

@@ -30,10 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     profile.belongsToMany(models.skill, {
       through: "profileSkills"
     });
-    profile.belongsToMany(models.competency, {
-      through: "profileCompetencies"
+    profile.belongsToMany(models.skill, {
+      through: "profileCompetencies",
+      as: "competencies"
     });
-    profile.belongsToMany(models.competency, {
+    profile.belongsToMany(models.skill, {
       through: "profileDevelopmentGoals",
       as: "developmentGoals"
     });

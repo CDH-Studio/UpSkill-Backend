@@ -3,6 +3,8 @@ const Profile = Models.profile;
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
+const utils = require("../util");
+
 const getProfileByName = async (request, response) => {
   let { searchValue } = request.params;
   //Make lowercase
@@ -26,6 +28,15 @@ const getProfileByName = async (request, response) => {
   response.status(200).json(results);
 };
 
+const getFuzzySearch = async (request, response) => {
+  const searchValue = request.query.searchValue;
+
+  const results = await utils.fuzzySearch(searchValue);
+
+  response.status(200).json(results);
+};
+
 module.exports = {
-  getProfileByName
+  getProfileByName,
+  getFuzzySearch
 };

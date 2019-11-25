@@ -110,7 +110,11 @@ router.use("/option", options);
 router.get("/profGen/:id", profileGeneration.getGedsAssist);
 
 // Search routes
-router.get("/search/basicSearch/:searchValue", search.getProfileByName);
+router.get(
+  "/search/basicSearch/:searchValue",
+  search.basicSearch.getProfileByName
+);
+router.get("/search/fuzzySearch/", search.basicSearch.getFuzzySearch);
 
 // REGISTER OUR ROUTES ===============================================
 // Note: All of our routes will be prefixed with /api

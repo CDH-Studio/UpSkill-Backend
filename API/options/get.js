@@ -24,7 +24,11 @@ const getCareerMobility = async (request, response) => {
 };
 
 const getCompetency = async (request, response) => {
-  let all = await Competency.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "competency"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
@@ -36,7 +40,7 @@ const getCompetency = async (request, response) => {
 };
 
 const getDevelopmentalGoals = async (request, response) => {
-  let all = await Competency.findAll();
+  let all = await Skill.findAll();
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
@@ -123,7 +127,11 @@ const getSecurityClearance = async (request, response) => {
 };
 
 const getSkill = async (request, response) => {
-  let all = await Skill.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "skill"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
