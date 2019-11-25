@@ -3,11 +3,13 @@ const Sequelize = require("sequelize");
 
 require("dotenv").config();
 
-let [host, port] = process.env.PGHOST.split(":");
+const str = process.env.PGHOST;
 
+const host = str.substring(0, str.lastIndexOf(":"));
+const port = str.substring(str.lastIndexOf(":") + 1, str.length);
+console.log(host);
+console.log(port);
 console.log("PGHOST:", process.env.PGHOST);
-
-console.log(host, port);
 
 // Option 1: Passing parameters separately
 module.exports = new Sequelize(
