@@ -5,20 +5,11 @@ require("dotenv").config();
 
 const str = process.env.DATABASE_URL;
 
-// const host = str.substring(0, str.lastIndexOf(":"));
-// const port = str.substring(str.lastIndexOf(":") + 1, str.length);
-
 let [dialect, host, port] = str.split(":");
-
 host = host.replace("//", "");
-
-console.log(dialect);
-console.log(host);
-console.log(port);
 
 // Option 1: Passing parameters separately
 module.exports = new Sequelize(
-  // process.env.DATABASE_URL
   process.env.PGDATABASE,
   process.env.PGUSERNAME,
   process.env.PGPASS,
