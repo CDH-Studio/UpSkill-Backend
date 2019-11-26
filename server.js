@@ -58,7 +58,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, Authorization, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
@@ -77,7 +77,7 @@ const port = process.env.PORT || 8080; // set our port
 const router = express.Router(); // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api/)
-router.get("/", function(req, res) {
+router.get("/", keycloak.protect(), function(req, res) {
   res.json({ message: "hooray! welcome to our api!" });
 });
 
@@ -90,31 +90,36 @@ router.get("/getEmployeeInfo/:searchValue", keycloak.protect(), async function(
   res.json(JSON.parse(data.body));
 });
 
-router.get("/geds/:searchValue", geds.getEmployeeInfo);
+router.get("/geds/:searchValue", keycloak.protect(), geds.getEmployeeInfo);
 
 //User endpoints
-router.get("/user/", user.getUser);
-router.get("/user/:id", user.getUserById);
-router.post("/user/", user.createUser);
+router.get("/user/", keycloak.protect(), user.getUser);
+router.get("/user/:id", keycloak.protect(), user.getUserById);
+router.post("/user/", keycloak.protect(), user.createUser);
 
 //Profile endpoints
-router.get("/profile/", profile.getProfile);
+router.get("/profile/", keycloak.protect(), profile.getProfile);
 router
   .route("/profile/:id")
-  .get(profile.getProfileById)
-  .post(profile.createProfile)
-  .put(profile.updateProfile);
+  .get(keycloak.protect(), profile.getProfileById)
+  .post(keycloak.protect(), profile.createProfile)
+  .put(keycloak.protect(), profile.updateProfile);
 
 router.use("/option", options);
 
-router.get("/profGen/:id", profileGeneration.getGedsAssist);
+router.get("/profGen/:id", keycloak.protect(), profileGeneration.getGedsAssist);
 
 // Search routes
 router.get(
   "/search/basicSearch/:searchValue",
+  keycloak.protect(),
   search.basicSearch.getProfileByName
 );
-router.get("/search/fuzzySearch/", search.basicSearch.getFuzzySearch);
+router.get(
+  "/search/fuzzySearch/",
+  keycloak.protect(),
+  search.basicSearch.getFuzzySearch
+);
 
 // REGISTER OUR ROUTES ===============================================
 // Note: All of our routes will be prefixed with /api
