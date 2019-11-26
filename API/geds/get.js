@@ -61,7 +61,6 @@ async function getEmployeeInfo(request, response) {
             ...contactInfo
           };
           info.push(empInfo);
-          console.log(empInfo);
         });
         if (info.length == 0) {
           response.status(204).send("No results found");
@@ -75,7 +74,7 @@ async function getEmployeeInfo(request, response) {
       }
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       if (err.response.status == 429) {
         response.status(429).send("Limit Exceeded!");
         return;
