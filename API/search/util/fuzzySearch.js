@@ -5,8 +5,6 @@ const Models = require("../../../models");
 const Profile = Models.profile;
 
 const fuzzySearch = async searchValue => {
-  console.log(searchValue);
-
   const profiles = await Profile.findAll({
     attributes: [
       "id",
@@ -231,9 +229,6 @@ getProf = async profile => {
     telephone: data.telephone,
     projects: projects
   };
-
-  // console.log(" DASFASDFASDFASDFASDFADFASDFASDF", resData.firstName);
-
   return resData;
 };
 
