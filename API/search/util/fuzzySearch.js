@@ -21,7 +21,7 @@ const fuzzySearch = async searchValue => {
       "actingId"
     ]
   });
-  const allProf = await getProfs(profiles).then(profs => profs);
+  const allProf = await getProfs(profiles, searchValue).then(profs => profs);
 
   const options = {
     shouldSort: true,
@@ -64,15 +64,15 @@ const fuzzySearch = async searchValue => {
   return results;
 };
 
-getProfs = profiles => {
+getProfs = (profiles, searchValue) => {
   return Promise.all(
     profiles.map(profile => {
-      return getProf(profile);
+      return getProf(profile, searchValue);
     })
   );
 };
 
-getProf = async profile => {
+getProf = async (profile, searchValue) => {
   let user = await profile.getUser({ attributes: ["email"] });
 
   if (!profile) response.status(404).send("Profile Not Found");
@@ -187,6 +187,19 @@ getProf = async profile => {
       };
   });
 
+  let allSkill = skills.concat(competencies);
+
+  allSkill = allSkill.map(skill => skill.description);
+
+  const options = {
+    shouldSort: true,
+    keys: ["en", "fr"]
+  };
+
+  const fuse = new Fuse(allSkill, options);
+
+  const resultSkills = fuse.search(searchValue);
+
   //Response Object
   let resData = {
     id: data.id,
@@ -227,7 +240,8 @@ getProf = async profile => {
     skills,
     team: data.team,
     telephone: data.telephone,
-    projects: projects
+    projects: projects,
+    resultSkills
   };
   return resData;
 };
