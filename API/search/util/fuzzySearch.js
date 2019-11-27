@@ -193,12 +193,13 @@ getProf = async (profile, searchValue) => {
 
   const options = {
     shouldSort: true,
-    keys: ["en", "fr"]
+    keys: ["en", "fr"],
+    limit: 8
   };
 
   const fuse = new Fuse(allSkill, options);
 
-  const resultSkills = fuse.search(searchValue);
+  const resultSkills = fuse.search(searchValue).slice(0, 8);
 
   //Response Object
   let resData = {
