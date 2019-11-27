@@ -193,8 +193,7 @@ getProf = async (profile, searchValue) => {
 
   const options = {
     shouldSort: true,
-    keys: ["en", "fr"],
-    limit: 8
+    keys: ["en", "fr"]
   };
 
   const fuse = new Fuse(allSkill, options);
