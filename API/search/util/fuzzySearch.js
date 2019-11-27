@@ -198,7 +198,7 @@ getProf = async (profile, searchValue) => {
 
   const fuse = new Fuse(allSkill, options);
 
-  const resultSkills = fuse.search(searchValue);
+  const resultSkills = fuse.search(searchValue).slice(0, 8);
 
   //Response Object
   let resData = {
