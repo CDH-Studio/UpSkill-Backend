@@ -106,19 +106,6 @@ router
   .post(profile.createProfile)
   .put(profile.updateProfile);
 
-/*
-router
-  .route("/admin/:type")
-  .get(admin.getOptions)*/
-console.log(
-  "admina##################",
-  admin,
-  admin.getOption,
-  admin.createOption,
-  admin.deleteOption,
-  admin.updateOption
-);
-
 router.get("/admin/:type", admin.getOption);
 
 router
