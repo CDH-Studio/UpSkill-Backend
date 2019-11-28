@@ -11,6 +11,7 @@ const sequelizedb = require("./config/database");
 
 const app = express(); // define our app using express
 
+const admin = require("./API/admin");
 const profile = require("./API/profile");
 const user = require("./API/user");
 const geds = require("./API/geds");
@@ -104,6 +105,28 @@ router
   .get(profile.getProfileById)
   .post(profile.createProfile)
   .put(profile.updateProfile);
+
+/*
+router
+  .route("/admin/:type")
+  .get(admin.getOptions)*/
+console.log(
+  "admina##################",
+  admin,
+  admin.getOption,
+  admin.createOption,
+  admin.deleteOption,
+  admin.updateOption
+);
+
+router.get("/admin/:type", admin.getOption);
+
+router
+  .route("/admin/:type/:id")
+  //.get(admin.getProfileById)
+  .put(admin.updateOption)
+  .delete(admin.deleteOption)
+  .post(admin.createOption);
 
 router.use("/option", options);
 
