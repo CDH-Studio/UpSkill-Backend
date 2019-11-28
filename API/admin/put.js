@@ -2,21 +2,17 @@ const getModel = require("./getModel.js").getModel;
 
 const updateOption = async (request, response) => {
   try {
-    console.log("GOT POST", request.params, request.body);
     const { id, type } = request.params;
+    const model = getModel(type);
 
     dbObject = {
       id: id,
       ...request.body
     };
-
-    const model = getModel(type);
-
     if (type === "skill" || type === "competency") {
       dbObject.type = type;
     }
 
-    console.log("dbobj", dbObject);
     await model
       .update(dbObject, { where: { id: id } })
       .then(updateInfo =>

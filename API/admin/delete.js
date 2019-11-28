@@ -3,12 +3,7 @@ const getModel = require("./getModel.js").getModel;
 const deleteOption = async (request, response) => {
   try {
     const { id, type } = request.params;
-
-    console.log("get model");
-
     const model = getModel(type);
-
-    console.log(model, type);
 
     model
       .destroy({
