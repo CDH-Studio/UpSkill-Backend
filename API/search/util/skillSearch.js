@@ -1,0 +1,15 @@
+const Models = require("../../../models");
+const Profile = Models.profile;
+
+const skillSearch = async (profiles, skillarray) => {
+  let skillProf = [];
+  profiles.forEach(profile => {
+    if (!profile.skills) return;
+
+    const skillIds = profile.skills.map(skill => skill.id);
+    if (skillIds.some(id => skillarray.includes(id))) skillProf.push(profile);
+  });
+  return skillProf;
+};
+
+module.exports = skillSearch;
