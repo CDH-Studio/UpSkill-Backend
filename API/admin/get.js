@@ -1,4 +1,7 @@
 const getModel = require("./getModel.js").getModel;
+const Models = require("../../models");
+const User = Models.user;
+const Profile = Models.profile;
 
 const getOption = async (request, response) => {
   try {
@@ -19,4 +22,28 @@ const getOption = async (request, response) => {
   }
 };
 
-module.exports = { getOption };
+const getFlagged = async (request, response) => {
+  try {
+    console.log("flagged");
+    const { id } = request.params;
+    Profile.findOne({ where: { id: id } }).then(row =>
+      response.status(200).json({ value: row.flagged })
+    );
+    //console.log("rpw", row.toJson());
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
+
+const getInactive = async (request, response) => {
+  try {
+    const { id } = request.params;
+    User.findOne({ where: { id: id } }).then(row =>
+      response.status(200).json({ value: row.inactive })
+    );
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
+
+module.exports = { getOption, getFlagged, getInactive };

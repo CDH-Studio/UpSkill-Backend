@@ -7,5 +7,9 @@ module.exports = {
   createOption: post.createOption,
   deleteOption: del.deleteOption,
   updateOption: put.updateOption,
-  getOption: get.getOption
+  getOption: get.getOption,
+  updateFlagged: put.updateFlagged,
+  updateInactive: put.updateInactive,
+  getFlagged: get.getFlagged,
+  getInactive: get.getInactive
 };

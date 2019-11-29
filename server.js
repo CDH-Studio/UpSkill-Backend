@@ -106,10 +106,22 @@ router
   .post(profile.createProfile)
   .put(profile.updateProfile);
 
-router.get("/admin/:type", admin.getOption);
+//Admin endpoints
+console.log("###ADMINN", admin);
+router
+  .route("/admin/flagged/:id")
+  .put(admin.updateFlagged)
+  .get(admin.getFlagged);
 
 router
-  .route("/admin/:type/:id")
+  .route("/admin/inactive/:id")
+  .put(admin.updateInactive)
+  .get(admin.getInactive);
+
+router.get("/admin/options/:type", admin.getOption);
+
+router
+  .route("/admin/options/:type/:id")
   //.get(admin.getProfileById)
   .put(admin.updateOption)
   .delete(admin.deleteOption)
@@ -124,6 +136,7 @@ router.get(
   "/search/basicSearch/:searchValue",
   search.basicSearch.getProfileByName
 );
+
 router.get("/search/fuzzySearch/", search.basicSearch.getFuzzySearch);
 
 // REGISTER OUR ROUTES ===============================================

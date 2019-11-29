@@ -1,4 +1,7 @@
 const getModel = require("./getModel.js").getModel;
+const Models = require("../../models");
+const User = Models.user;
+const Profile = Models.profile;
 
 const updateOption = async (request, response) => {
   try {
@@ -25,4 +28,40 @@ const updateOption = async (request, response) => {
   }
 };
 
-module.exports = { updateOption };
+const updateInactive = async (request, response) => {
+  try {
+    const { id } = request.params;
+    console.log("inactive", id, request.body);
+
+    User.update(
+      { inactive: request.body.value },
+      { where: { id: id } }
+    ).then(updateInfo =>
+      response
+        .status(200)
+        .json({ updatePerformed: updateInfo[0] === 1, error: null })
+    );
+  } catch (error) {
+    response.status(500).json({ updatePerformed: false, error: error });
+  }
+};
+
+const updateFlagged = async (request, response) => {
+  try {
+    const { id } = request.params;
+    console.log("flag", id, request.body);
+
+    Profile.update(
+      { flagged: request.body.value },
+      { where: { id: id } }
+    ).then(updateInfo =>
+      response
+        .status(200)
+        .json({ updatePerformed: updateInfo[0] === 1, error: null })
+    );
+  } catch (error) {
+    response.status(500).json({ updatePerformed: false, error: error });
+  }
+};
+
+module.exports = { updateOption, updateFlagged, updateInactive };

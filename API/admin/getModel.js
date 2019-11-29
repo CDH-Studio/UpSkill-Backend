@@ -11,6 +11,21 @@ const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
 
+/*
+ getCareerMobility,
+  getCompetency,
+  getDiploma,
+  getDevelopmentalGoals,
+  getGroupLevel,
+  getKeyCompetency,
+  getLocation,
+  getSchool,
+  getSecurityClearance,
+  getSkill,
+  getTalentMatrixResult,
+  getTenure,
+  optionRouter
+*/
 const mapping = {
   careerMobility: CareerMobility,
   competency: Competency,
@@ -19,7 +34,7 @@ const mapping = {
   keyCompetency: KeyCompetency,
   location: Location,
   school: School,
-  security: SecurityClearance,
+  securityClearance: SecurityClearance,
   skill: Skill,
   competency: Skill,
   talentManager: TalentMatrixResult,
