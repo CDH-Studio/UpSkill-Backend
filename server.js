@@ -107,7 +107,6 @@ router
   .put(profile.updateProfile);
 
 //Admin endpoints
-console.log("###ADMINN", admin);
 router
   .route("/admin/flagged/:id")
   .put(admin.updateFlagged)

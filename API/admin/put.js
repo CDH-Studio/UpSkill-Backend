@@ -31,7 +31,6 @@ const updateOption = async (request, response) => {
 const updateInactive = async (request, response) => {
   try {
     const { id } = request.params;
-    console.log("inactive", id, request.body);
 
     User.update(
       { inactive: request.body.value },
@@ -49,7 +48,6 @@ const updateInactive = async (request, response) => {
 const updateFlagged = async (request, response) => {
   try {
     const { id } = request.params;
-    console.log("flag", id, request.body);
 
     Profile.update(
       { flagged: request.body.value },
