@@ -14,7 +14,7 @@ const search = async (request, response) => {
     results = await utils.fuzzySearch(results, query.searchValue);
   }
 
-  if (query.skills) result = await utils.skillSearch(results, query.skills);
+  // if (query.skills) results = await utils.skillSearch(results, query.skills);
 
   response.status(200).json(results);
 };
