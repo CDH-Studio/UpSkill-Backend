@@ -11,6 +11,7 @@ const sequelizedb = require("./config/database");
 
 const app = express(); // define our app using express
 
+const admin = require("./API/admin");
 const profile = require("./API/profile");
 const user = require("./API/user");
 const geds = require("./API/geds");
@@ -105,6 +106,28 @@ router
   .post(profile.createProfile)
   .put(profile.updateProfile);
 
+//Admin endpoints
+router
+  .route("/admin/flagged/:id")
+  .put(admin.updateFlagged)
+  .get(admin.getFlagged);
+
+router
+  .route("/admin/inactive/:id")
+  .put(admin.updateInactive)
+  .get(admin.getInactive);
+
+router
+  .route("/admin/options/:type")
+  .get(admin.getOption)
+  .post(admin.createOption);
+
+router
+  .route("/admin/options/:type/:id")
+  //.get(admin.getProfileById)
+  .put(admin.updateOption)
+  .delete(admin.deleteOption);
+
 router.use("/option", options);
 
 router.get("/profGen/:id", profileGeneration.getGedsAssist);
@@ -114,6 +137,7 @@ router.get(
   "/search/basicSearch/:searchValue",
   search.basicSearch.getProfileByName
 );
+
 router.get("/search/fuzzySearch/", search.basicSearch.getFuzzySearch);
 
 // REGISTER OUR ROUTES ===============================================
