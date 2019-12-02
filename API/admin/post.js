@@ -2,11 +2,10 @@ const getModel = require("./getModel.js").getModel;
 
 const createOption = async (request, response) => {
   try {
-    const { type, id } = request.params;
+    const { type } = request.params;
     const model = getModel(type);
 
     dbObject = {
-      id: id,
       ...request.body
     };
     if (type === "skill" || type === "competency") {

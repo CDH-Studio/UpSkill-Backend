@@ -117,14 +117,16 @@ router
   .put(admin.updateInactive)
   .get(admin.getInactive);
 
-router.get("/admin/options/:type", admin.getOption);
+router
+  .route("/admin/options/:type")
+  .get(admin.getOption)
+  .post(admin.createOption);
 
 router
   .route("/admin/options/:type/:id")
   //.get(admin.getProfileById)
   .put(admin.updateOption)
-  .delete(admin.deleteOption)
-  .post(admin.createOption);
+  .delete(admin.deleteOption);
 
 router.use("/option", options);
 
