@@ -33,7 +33,8 @@ const fuzzySearch = async (profiles, searchValue) => {
       "skills.description.fr",
       "team",
       "telephone",
-      "projects.text"
+      "projects.text",
+      "exFeeder"
     ]
   };
 
