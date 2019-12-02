@@ -3489,13 +3489,6 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          descriptionEn: "Humor",
-          descriptionFr: "Avoir le sens de l’humour",
-          type: "competency",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
           descriptionEn: "Informing",
           descriptionFr: "Savoir informer ",
           type: "competency",
@@ -3790,15 +3783,7 @@ module.exports = {
     //       {
     //         id: "3a57095e-0174-11ea-8d71-362b9e155667",
     //         descriptionEn: "Humour",
-    //         descriptionFr: "Humur",
-    //         type: "competency",
-    //         createdAt: new Date(),
-    //         updatedAt: new Date()
-    //       },
-    //       {
-    //         id: "3a57095f-0174-11ea-8d71-362b9e155667",
-    //         descriptionEn: "Thinks",
-    //         descriptionFr: "Penseur",
+    //         descriptionFr: "Humour",
     //         type: "competency",
     //         createdAt: new Date(),
     //         updatedAt: new Date()
