@@ -23,6 +23,8 @@ const search = async (request, response) => {
 
   if (query.name) results = await utils.nameSearch(results, query.name);
 
+  if (query.branch) results = await utils.branchSearch(results, query.branch);
+
   if (query.location)
     results = await utils.locationSearch(results, query.location);
 

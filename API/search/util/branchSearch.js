@@ -1,10 +1,10 @@
 const Fuse = require("fuse.js");
 
-const nameSearch = async (profiles, searchValue) => {
+const branchSearch = async (profiles, searchValue) => {
   const options = {
     shouldSort: true,
-    threshold: 0.3,
-    keys: ["firstName", "lastName"]
+    threshold: 0.4,
+    keys: ["branch.en", "branch.fr"]
   };
 
   const fuse = new Fuse(profiles, options);
@@ -13,4 +13,4 @@ const nameSearch = async (profiles, searchValue) => {
   return results;
 };
 
-module.exports = nameSearch;
+module.exports = branchSearch;

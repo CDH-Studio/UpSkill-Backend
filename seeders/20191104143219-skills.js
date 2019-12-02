@@ -110,22 +110,8 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          descriptionEn: "Polices & Procedures",
-          descriptionFr: "Politiques et procédures ",
-          type: "skill",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
           descriptionEn: "Classification Process",
           descriptionFr: "Processus de classification ",
-          type: "skill",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Polices & Procedures",
-          descriptionFr: "Politiques et procédures ",
           type: "skill",
           createdAt: new Date(),
           updatedAt: new Date()
@@ -3166,13 +3152,6 @@ module.exports = {
         {
           descriptionEn: "ColdFusion CFML",
           descriptionFr: "Langage de balisage ColdFusion (CFML)",
-          type: "skill",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "jQuery",
-          descriptionFr: "jQuery",
           type: "skill",
           createdAt: new Date(),
           updatedAt: new Date()
