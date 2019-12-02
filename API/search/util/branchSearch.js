@@ -1,7 +1,6 @@
-const Fuse = require("fuse.js");
-
 const branchSearch = async (profiles, branchArray) => {
-  let locationProf = [];
+  let branchProf = [];
+
   profiles.forEach(profile => {
     if (!profile.branch) return;
     const branchId = profile.branch.id;
