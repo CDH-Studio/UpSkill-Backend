@@ -42,6 +42,11 @@ const getGedsAssist = async (request, response) => {
           }
         );
 
+        let branchOrg = organizations[Math.min(2, organizations.length - 1)];
+
+        profile.branchEn = branchOrg.description.en;
+        profile.branchFr = branchOrg.description.fr;
+
         profile.organizations = organizations;
 
         let location = await Location.findOne({

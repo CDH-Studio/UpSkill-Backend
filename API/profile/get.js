@@ -97,17 +97,9 @@ const getProfileById = async (request, response) => {
 
   let educArray = await educations();
 
-  let branch;
-
   let organizationList = await profile
     .getProfileOrganizations({ order: [["tier", "ASC"]] })
     .then(organizations => {
-      let branchOrg = organizations[Math.min(2, organizations.length - 1)];
-      branch = {
-        en: branchOrg.descriptionEn,
-        fr: branchOrg.descriptionFr
-      };
-
       let orgList = organizations.map(organization => {
         return {
           en: organization.descriptionEn,
@@ -116,6 +108,8 @@ const getProfileById = async (request, response) => {
       });
       return orgList;
     });
+
+  console.log(data);
 
   let skills = await profile.getSkills().map(skill => {
     if (skill)
@@ -162,7 +156,7 @@ const getProfileById = async (request, response) => {
     },
     actingPeriodStartDate: data.actingStartDate,
     actingPeriodEndDate: data.actingEndDate,
-    branch,
+    branch: { en: data.branchEn, fr: data.branchFr },
     careerMobility: {
       id: careerMobility ? careerMobility.id : null,
       description: {
