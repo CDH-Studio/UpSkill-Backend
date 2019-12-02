@@ -3,6 +3,7 @@ const Fuse = require("fuse.js");
 const fuzzySearch = async (profiles, searchValue) => {
   const options = {
     shouldSort: true,
+    threshold: 0.3,
     keys: [
       "acting.description",
       "branch.en",
@@ -10,6 +11,7 @@ const fuzzySearch = async (profiles, searchValue) => {
       "careerSummary.header",
       "careerSummary.subheader",
       "careerSummary.content",
+      "classification.description",
       "competencies.en",
       "competencies.fr",
       "education.school.description.en",

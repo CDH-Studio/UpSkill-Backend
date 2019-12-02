@@ -21,16 +21,15 @@ const getAllProfiles = async searchValue => {
       "actingId"
     ]
   });
-
   const allProf = await _getProfs(profiles, searchValue).then(profs => profs);
 
   return allProf;
 };
 
-_getProfs = profiles => {
+_getProfs = (profiles, searchValue) => {
   return Promise.all(
     profiles.map(profile => {
-      return _getProf(profile);
+      return _getProf(profile, searchValue);
     })
   );
 };
@@ -44,6 +43,10 @@ _getProf = async (profile, searchValue) => {
   let userData = user ? user.dataValues : {};
 
   let data = { ...profileData, ...userData };
+
+  let groupLevel = await profile.getGroupLevel().then(res => {
+    if (res) return res.dataValues;
+  });
 
   let acting = await profile.getActing().then(res => {
     if (res) return res.dataValues;
@@ -172,6 +175,10 @@ _getProf = async (profile, searchValue) => {
     },
     branch,
     careerSummary,
+    classification: {
+      id: groupLevel ? groupLevel.id : null,
+      description: groupLevel ? groupLevel.description : null
+    },
     competencies,
     education: educArray,
     email: data.email,

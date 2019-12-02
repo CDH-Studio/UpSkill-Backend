@@ -1,6 +1,3 @@
-const Models = require("../../../models");
-const Profile = Models.profile;
-
 const skillSearch = async (profiles, skillarray) => {
   let skillProf = [];
   profiles.forEach(profile => {
