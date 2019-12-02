@@ -31,6 +31,8 @@ const search = async (request, response) => {
   if (query.classification)
     results = await utils.classificationSearch(results, query.classification);
 
+  if (query.exFeeder === "true") results = utils.exFeederSearch(results);
+
   response.status(200).json(results);
 };
 module.exports = search;

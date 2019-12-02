@@ -18,7 +18,8 @@ const getAllProfiles = async searchValue => {
       "team",
       "groupLevelId",
       "locationId",
-      "actingId"
+      "actingId",
+      "exFeeder"
     ]
   });
   const allProf = await _getProfs(profiles, searchValue).then(profs => profs);
@@ -182,6 +183,7 @@ _getProf = async (profile, searchValue) => {
     competencies,
     education: educArray,
     email: data.email,
+    exFeeder: data.exFeeder,
     firstName: data.firstName,
     jobTitle: { en: data.jobTitleEn, fr: data.jobTitleFr },
     lastName: data.lastName,

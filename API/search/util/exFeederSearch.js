@@ -1,15 +1,15 @@
-const Fuse = require("fuse.js");
+const exFeederSearch = profiles => {
+  let results = profiles.filter(profile => profile.exFeeder === true);
 
-const exFeederSearch = async (profiles, searchValue) => {
-  const options = {
-    shouldSort: true,
-    threshold: 0.3,
-    keys: ["firstName", "lastName"]
-  };
+  //   profiles.forEach(profile => {
+  //     if (!profile.exFeeder) return;
+  //     const exFeederBool = profile.exFeeder;
 
-  const fuse = new Fuse(profiles, options);
+  //     // if (exFeederArray.includes(exFeederBool)) exFeederProf.push(profile);
+  //     const result = words.filter(word => word.length > 6);
+  //   });
+  //   return exFeederProf;
 
-  let results = fuse.search(searchValue);
   return results;
 };
 
