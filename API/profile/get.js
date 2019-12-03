@@ -109,8 +109,6 @@ const getProfileById = async (request, response) => {
       return orgList;
     });
 
-  console.log(data);
-
   let skills = await profile.getSkills().map(skill => {
     if (skill)
       return {
