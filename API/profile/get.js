@@ -170,6 +170,7 @@ const getProfileById = async (request, response) => {
     education: educArray,
     email: data.email,
     exFeeder: data.exFeeder,
+    flagged: data.flagged,
     firstLanguage:
       data.firstLanguage == "fr"
         ? { en: "French", fr: "Français" }
