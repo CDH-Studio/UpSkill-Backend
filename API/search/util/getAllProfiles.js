@@ -8,6 +8,7 @@ const getAllProfiles = async searchValue => {
   const profiles = await Profile.findAll({
     attributes: [
       "id",
+      "branchEn",
       "firstName",
       "lastName",
       "jobTitleEn",
@@ -112,17 +113,9 @@ _getProf = async (profile, searchValue) => {
 
   let educArray = await educations();
 
-  let branch;
-
   let organizationList = await profile
     .getProfileOrganizations({ order: [["tier", "DESC"]] })
     .then(organizations => {
-      let branchOrg = organizations[Math.min(2, organizations.length - 1)];
-      branch = {
-        en: branchOrg.descriptionEn,
-        fr: branchOrg.descriptionFr
-      };
-
       let orgList = organizations.map(organization => {
         return {
           en: organization.descriptionEn,
@@ -174,7 +167,7 @@ _getProf = async (profile, searchValue) => {
       id: acting ? acting.id : null,
       description: acting ? acting.description : null
     },
-    branch,
+    branch: data.branchEn,
     careerSummary,
     classification: {
       id: groupLevel ? groupLevel.id : null,
