@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       linkedin: DataTypes.STRING,
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
-      exFeeder: DataTypes.BOOLEAN
+      exFeeder: DataTypes.BOOLEAN,
+      flagged: DataTypes.BOOLEAN
     },
     {}
   );
