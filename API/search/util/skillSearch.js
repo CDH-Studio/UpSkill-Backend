@@ -4,11 +4,7 @@ const skillSearch = async (profiles, skillarray) => {
     if (!profile.skills) return;
 
     const skillIds = profile.skills.map(skill => skill.id);
-    if (
-      skillIds.some(id => skillarray.includes(id)) &&
-      profile.flagged === false
-    )
-      skillProf.push(profile);
+    if (skillIds.some(id => skillarray.includes(id))) skillProf.push(profile);
   });
   return skillProf;
 };

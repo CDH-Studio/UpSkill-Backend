@@ -5,8 +5,7 @@ const locationSearch = async (profiles, locationArray) => {
     if (!profile.location) return;
     const locationId = profile.location.id;
 
-    if (locationArray.includes(locationId) && profile.flagged === false)
-      locationProf.push(profile);
+    if (locationArray.includes(locationId)) locationProf.push(profile);
   });
   return locationProf;
 };

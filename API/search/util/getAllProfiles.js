@@ -3,6 +3,7 @@ const Fuse = require("fuse.js");
 
 const Models = require("../../../models");
 const Profile = Models.profile;
+const User = Models.user;
 
 const getAllProfiles = async searchValue => {
   const profiles = await Profile.findAll({
@@ -22,6 +23,9 @@ const getAllProfiles = async searchValue => {
       "actingId",
       "exFeeder",
       "flagged"
+    ],
+    include: [
+      { model: User, attributes: ["inactive"], where: { inactive: false } }
     ],
     where: {
       flagged: false
