@@ -20,7 +20,8 @@ const getAllProfiles = async searchValue => {
       "groupLevelId",
       "locationId",
       "actingId",
-      "exFeeder"
+      "exFeeder",
+      "flagged"
     ]
   });
   const allProf = await _getProfs(profiles, searchValue).then(profs => profs);

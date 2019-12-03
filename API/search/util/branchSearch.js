@@ -1,6 +1,6 @@
 const branchSearch = async (profiles, branchArray) => {
   let results = profiles.filter(profile =>
-    branchArray.includes(encodeURI(profile.branch))
+    branchArray.includes(encodeURI(profile.branch) && profile.flagged === false)
   );
   return results;
 };
