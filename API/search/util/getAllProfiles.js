@@ -177,6 +177,7 @@ _getProf = async (profile, searchValue) => {
     education: educArray,
     email: data.email,
     exFeeder: data.exFeeder,
+    flagged: data.flagged,
     firstName: data.firstName,
     jobTitle: { en: data.jobTitleEn, fr: data.jobTitleFr },
     lastName: data.lastName,
