@@ -1,3 +1,3 @@
-const basicSearch = require("./basicSearch");
+const get = require("./get");
 
-module.exports = { basicSearch };
+module.exports = get;

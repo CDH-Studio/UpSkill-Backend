@@ -1,4 +1,6 @@
 const Models = require("../../models");
+const Sequelize = require("sequelize");
+const Profile = Models.profile;
 const CareerMobility = Models.careerMobility;
 const Competency = Models.competency;
 const Diploma = Models.diploma;
@@ -10,6 +12,23 @@ const SecurityClearance = Models.securityClearance;
 const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
+
+const getBranch = async (request, response) => {
+  let all = await Profile.findAll({
+    attributes: [
+      [Sequelize.fn("DISTINCT", Sequelize.col("branchEn")), "branchEn"],
+      "branchFr"
+    ]
+  });
+
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    return {
+      description: { en: one.branchEn, fr: one.branchFr }
+    };
+  });
+  response.status(200).json(resBody);
+};
 
 const getCareerMobility = async (request, response) => {
   let all = await CareerMobility.findAll();
@@ -167,6 +186,7 @@ const getTenure = async (request, response) => {
 };
 
 module.exports = {
+  getBranch,
   getCareerMobility,
   getCompetency,
   getDevelopmentalGoals,
