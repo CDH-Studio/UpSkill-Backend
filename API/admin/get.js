@@ -2,6 +2,7 @@ const getModel = require("./getModel.js").getModel;
 const Models = require("../../models");
 const User = Models.user;
 const Profile = Models.profile;
+const Tenure = Models.tenure;
 
 const getOption = async (request, response) => {
   try {
@@ -44,4 +45,22 @@ const getInactive = async (request, response) => {
   }
 };
 
-module.exports = { getOption, getFlagged, getInactive };
+const getUser = async (request, response) => {
+  const values = await Profile.findAll({
+    include: [User, Tenure],
+    attributes: [
+      "firstName",
+      "lastName",
+      //"branchEn",
+      //"branchFr",
+      "flagged",
+      "createdAt",
+      "jobTitleEn",
+      "jobTitleFr"
+    ]
+  });
+
+  response.status(200).json(values);
+};
+
+module.exports = { getOption, getFlagged, getInactive, getUser };

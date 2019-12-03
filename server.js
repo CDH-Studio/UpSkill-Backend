@@ -127,6 +127,8 @@ router
   //.get(admin.getProfileById)
   .put(admin.updateOption)
   .delete(admin.deleteOption);
+console.log(admin.getUser);
+router.get("/admin/user", admin.getUser);
 
 router.use("/option", options);
 
