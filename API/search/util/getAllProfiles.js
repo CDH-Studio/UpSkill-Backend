@@ -22,7 +22,10 @@ const getAllProfiles = async searchValue => {
       "actingId",
       "exFeeder",
       "flagged"
-    ]
+    ],
+    where: {
+      flagged: false
+    }
   });
   const allProf = await _getProfs(profiles, searchValue).then(profs => profs);
 
