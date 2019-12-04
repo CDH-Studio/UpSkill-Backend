@@ -17,7 +17,7 @@ const getAllFlaggedProfiles = async (request, response) => {
   }
 };
 
-const getAllFlaggedProfiles = async (request, response) => {
+const getAllInactiveUsers = async (request, response) => {
   try {
     // const { id } = request.params;
 
@@ -29,9 +29,29 @@ const getAllFlaggedProfiles = async (request, response) => {
   }
 };
 
-const getAllInactiveUsers = async (request, response) => {};
-const getAllUsers = async (request, response) => {};
-const getAllExFeeders = async (request, response) => {};
+const getAllUsers = async (request, response) => {
+  try {
+    // const { id } = request.params;
+
+    Profile.count().then(numFlaggedProfiles =>
+      response.status(200).json({ value: numFlaggedProfiles })
+    );
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
+
+const getAllExFeeders = async (request, response) => {
+  try {
+    // const { id } = request.params;
+
+    Profile.count().then(numFlaggedProfiles =>
+      response.status(200).json({ value: numFlaggedProfiles })
+    );
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
 
 module.exports = {
   getAllFlaggedProfiles,
