@@ -120,7 +120,6 @@ router
 
 router
   .route("/admin/options/:type/:id")
-  //.get(admin.getProfileById)
   .put(admin.updateOption)
   .delete(admin.deleteOption);
 
