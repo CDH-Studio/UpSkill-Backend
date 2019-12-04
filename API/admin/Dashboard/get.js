@@ -14,11 +14,11 @@ const allCount = async (request, response) => {
 
     const user = await User.count();
 
-    const profile = await Profile.count({
+    const exFeeder = await Profile.count({
       where: { exFeeder: true }
     });
 
-    response.status(200).json({ user, profile, flagged, inactive });
+    response.status(200).json({ user, exFeeder, flagged, inactive });
   } catch (error) {
     response.status(500).json(error);
   }
