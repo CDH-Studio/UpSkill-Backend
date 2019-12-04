@@ -19,11 +19,7 @@ const getAllFlaggedProfiles = async (request, response) => {
 
 const getAllInactiveUsers = async (request, response) => {
   try {
-    // const { id } = request.params;
-
-    Profile.count().then(numFlaggedProfiles =>
-      response.status(200).json({ value: numFlaggedProfiles })
-    );
+    User.count().then(counter => response.status(200).json({ value: counter }));
   } catch (error) {
     response.status(500).json(error);
   }
@@ -31,10 +27,8 @@ const getAllInactiveUsers = async (request, response) => {
 
 const getAllUsers = async (request, response) => {
   try {
-    // const { id } = request.params;
-
-    Profile.count().then(numFlaggedProfiles =>
-      response.status(200).json({ value: numFlaggedProfiles })
+    Profile.count().then(counter =>
+      response.status(200).json({ value: counter })
     );
   } catch (error) {
     response.status(500).json(error);
@@ -43,10 +37,10 @@ const getAllUsers = async (request, response) => {
 
 const getAllExFeeders = async (request, response) => {
   try {
-    // const { id } = request.params;
-
-    Profile.count().then(numFlaggedProfiles =>
-      response.status(200).json({ value: numFlaggedProfiles })
+    Profile.count({
+      where: { exFeeder: true }
+    }).then(numOfFlaggedProfiles =>
+      response.status(200).json({ value: numOfFlaggedProfiles })
     );
   } catch (error) {
     response.status(500).json(error);
