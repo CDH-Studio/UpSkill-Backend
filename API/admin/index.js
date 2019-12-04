@@ -2,6 +2,7 @@ const put = require("./put");
 const post = require("./post");
 const del = require("./delete");
 const get = require("./get");
+const allCount = require("./Dashboard/get");
 
 module.exports = {
   createOption: post.createOption,
@@ -12,5 +13,6 @@ module.exports = {
   updateInactive: put.updateInactive,
   getFlagged: get.getFlagged,
   getInactive: get.getInactive,
-  getUser: get.getUser
+  getUser: get.getUser,
+  allCount
 };

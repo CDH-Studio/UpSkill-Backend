@@ -130,6 +130,8 @@ router
 
 router.get("/admin/user", admin.getUser);
 
+router.get("/admin/dashboard", admin.allCount);
+
 router.use("/option", options);
 
 router.get("/profGen/:id", profileGeneration.getGedsAssist);

@@ -1,55 +1,27 @@
-const getModel = require("./getModel.js").getModel;
-const Models = require("../../models");
+const Models = require("../../../models");
 const User = Models.user;
 const Profile = Models.profile;
 
-const getAllFlaggedProfiles = async (request, response) => {
+const allCount = async (request, response) => {
   try {
-    // const { id } = request.params;
-
-    Profile.count({
+    const flagged = await Profile.count({
       where: { flagged: true }
-    }).then(numOfFlaggedProfiles =>
-      response.status(200).json({ value: numOfFlaggedProfiles })
-    );
-  } catch (error) {
-    response.status(500).json(error);
-  }
-};
+    });
 
-const getAllInactiveUsers = async (request, response) => {
-  try {
-    User.count().then(counter => response.status(200).json({ value: counter }));
-  } catch (error) {
-    response.status(500).json(error);
-  }
-};
+    const inactive = await User.count({
+      where: { inactive: true }
+    });
 
-const getAllUsers = async (request, response) => {
-  try {
-    Profile.count().then(counter =>
-      response.status(200).json({ value: counter })
-    );
-  } catch (error) {
-    response.status(500).json(error);
-  }
-};
+    const user = await User.count();
 
-const getAllExFeeders = async (request, response) => {
-  try {
-    Profile.count({
+    const profile = await Profile.count({
       where: { exFeeder: true }
-    }).then(numOfFlaggedProfiles =>
-      response.status(200).json({ value: numOfFlaggedProfiles })
-    );
+    });
+
+    response.status(200).json({ user, profile, flagged, inactive });
   } catch (error) {
     response.status(500).json(error);
   }
 };
 
-module.exports = {
-  getAllFlaggedProfiles,
-  getAllInactiveUsers,
-  getAllUsers,
-  getAllExFeeders
-};
+module.exports = allCount;
