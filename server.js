@@ -123,6 +123,8 @@ router
   .put(admin.updateOption)
   .delete(admin.deleteOption);
 
+router.get("/admin/user", admin.getUser);
+
 router.use("/option", options);
 
 router.get("/profGen/:id", profileGeneration.getGedsAssist);
