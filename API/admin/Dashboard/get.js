@@ -9,8 +9,8 @@ const getAllFlaggedProfiles = async (request, response) => {
 
     Profile.count({
       where: { flagged: true }
-    }).then(numFlaggedProfiles =>
-      response.status(200).json({ value: numFlaggedProfiles })
+    }).then(numOfFlaggedProfiles =>
+      response.status(200).json({ value: numOfFlaggedProfiles })
     );
   } catch (error) {
     response.status(500).json(error);
@@ -29,8 +29,13 @@ const getAllFlaggedProfiles = async (request, response) => {
   }
 };
 
-getAllInactiveUsers;
-getAllUsers;
-getAllExFeeders;
+const getAllInactiveUsers = async (request, response) => {};
+const getAllUsers = async (request, response) => {};
+const getAllExFeeders = async (request, response) => {};
 
-module.exports = { getAllFlaggedProfiles };
+module.exports = {
+  getAllFlaggedProfiles,
+  getAllInactiveUsers,
+  getAllUsers,
+  getAllExFeeders
+};
