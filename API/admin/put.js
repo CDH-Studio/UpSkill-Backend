@@ -68,10 +68,8 @@ const updateFlagged = async (request, response) => {
 
 const updateProfileStatus = async (request, response) => {
   const statuses = Object.entries(request.body);
-  console.log("hiii");
-
   try {
-    statuses.forEach(([id, status]) => {
+    statuses.forEach(async ([id, status]) => {
       let flagged = false,
         inactive = false;
       if (status === "Inactive") {
@@ -80,20 +78,16 @@ const updateProfileStatus = async (request, response) => {
       if (status === "Hidden") {
         flagged = true;
       }
-      User.findOne({ where: { id } }).then(user =>
-        user.update({ inactive }).then(() =>
-          user
-            .getProfile()
-            .then(profile => profile.update(flagged))
-            .then(console.log({ id, flagged, inactive }))
-        )
+      await User.findOne({ where: { id } }).then(user =>
+        user.update({ inactive }).then(() => {
+          user.getProfile().then(profile => profile.update({ flagged }));
+        })
       );
     });
+    response.status(200).send("OK");
   } catch (error) {
     response.status(500).json({ updatePerformed: false, error: error });
   }
-
-  response.status(200).send("OK");
 };
 
 module.exports = {
