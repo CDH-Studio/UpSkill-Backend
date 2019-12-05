@@ -11,5 +11,7 @@ module.exports = {
   updateFlagged: put.updateFlagged,
   updateInactive: put.updateInactive,
   getFlagged: get.getFlagged,
-  getInactive: get.getInactive
+  getInactive: get.getInactive,
+  getUser: get.getUser,
+  updateProfileStatus: put.updateProfileStatus
 };
