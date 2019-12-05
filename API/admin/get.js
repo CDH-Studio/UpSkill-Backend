@@ -49,6 +49,7 @@ const getUser = async (request, response) => {
   const values = await Profile.findAll({
     include: [User, Tenure],
     attributes: [
+      "id",
       "firstName",
       "lastName",
       //"branchEn",

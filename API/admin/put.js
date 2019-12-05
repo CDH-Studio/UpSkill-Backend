@@ -62,4 +62,39 @@ const updateFlagged = async (request, response) => {
   }
 };
 
-module.exports = { updateOption, updateFlagged, updateInactive };
+const updateProfileStatus = async (request, response) => {
+  const statuses = Object.entries(request.body);
+  console.log("hiii");
+
+  try {
+    statuses.forEach(([id, status]) => {
+      let flagged = false,
+        inactive = false;
+      if (status === "Inactive") {
+        inactive = true;
+      }
+      if (status === "Hidden") {
+        flagged = true;
+      }
+      User.findOne({ where: { id } }).then(user =>
+        user.update({ inactive }).then(() =>
+          user
+            .getProfile()
+            .then(profile => profile.update(flagged))
+            .then(console.log({ id, flagged, inactive }))
+        )
+      );
+    });
+  } catch (error) {
+    response.status(500).json({ updatePerformed: false, error: error });
+  }
+
+  response.status(200).send("OK");
+};
+
+module.exports = {
+  updateOption,
+  updateFlagged,
+  updateInactive,
+  updateProfileStatus
+};
