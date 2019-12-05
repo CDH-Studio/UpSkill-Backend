@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       cellphone: DataTypes.STRING,
       manager: DataTypes.STRING,
       team: DataTypes.STRING,
+      branchEn: DataTypes.STRING,
+      branchFr: DataTypes.STRING,
       firstLanguage: DataTypes.STRING,
       secondLanguage: DataTypes.STRING,
       yearService: DataTypes.INTEGER,

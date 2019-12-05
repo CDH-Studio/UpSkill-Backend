@@ -107,15 +107,11 @@ router
   .put(profile.updateProfile);
 
 //Admin endpoints
-router
-  .route("/admin/flagged/:id")
-  .put(admin.updateFlagged)
-  .get(admin.getFlagged);
+router.put("/admin/flagged", admin.updateFlagged);
+router.get("/admin/flagged/:id", admin.getFlagged);
 
-router
-  .route("/admin/inactive/:id")
-  .put(admin.updateInactive)
-  .get(admin.getInactive);
+router.put("/admin/inactive", admin.updateInactive);
+router.get("/admin/inactive/:id", admin.getInactive);
 
 router
   .route("/admin/options/:type")
@@ -124,7 +120,6 @@ router
 
 router
   .route("/admin/options/:type/:id")
-  //.get(admin.getProfileById)
   .put(admin.updateOption)
   .delete(admin.deleteOption);
 
@@ -137,12 +132,7 @@ router.use("/option", options);
 router.get("/profGen/:id", profileGeneration.getGedsAssist);
 
 // Search routes
-router.get(
-  "/search/basicSearch/:searchValue",
-  search.basicSearch.getProfileByName
-);
-
-router.get("/search/fuzzySearch/", search.basicSearch.getFuzzySearch);
+router.get("/search/fuzzySearch/", search);
 
 // REGISTER OUR ROUTES ===============================================
 // Note: All of our routes will be prefixed with /api

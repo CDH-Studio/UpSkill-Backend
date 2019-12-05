@@ -829,11 +829,6 @@ module.exports = {
           description: "TI 08",
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          description: "TI 08",
-          createdAt: new Date(),
-          updatedAt: new Date()
         }
       ],
       {}

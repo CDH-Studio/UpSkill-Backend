@@ -65,6 +65,12 @@ module.exports = {
           team: {
             type: Sequelize.STRING
           },
+          branchEn: {
+            type: Sequelize.STRING
+          },
+          branchFr: {
+            type: Sequelize.STRING
+          },
           firstLanguage: {
             type: Sequelize.STRING
           },

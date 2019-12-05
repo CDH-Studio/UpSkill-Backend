@@ -1,36 +1,60 @@
 const moment = require("moment");
-const Models = require("../../models");
-const Profile = Models.profile;
+const Fuse = require("fuse.js");
 
-const getProfile = async (request, response) => {
-  response.status(200).json(await Profile.findAll());
+const Models = require("../../../models");
+const Profile = Models.profile;
+const User = Models.user;
+
+const getAllProfiles = async searchValue => {
+  const profiles = await Profile.findAll({
+    attributes: [
+      "id",
+      "branchEn",
+      "firstName",
+      "lastName",
+      "jobTitleEn",
+      "jobTitleFr",
+      "telephone",
+      "cellphone",
+      "manager",
+      "team",
+      "groupLevelId",
+      "locationId",
+      "actingId",
+      "exFeeder",
+      "flagged"
+    ],
+    include: [
+      { model: User, attributes: ["inactive"], where: { inactive: false } }
+    ],
+    where: {
+      flagged: false
+    }
+  });
+  const allProf = await _getProfs(profiles, searchValue).then(profs => profs);
+
+  return allProf;
 };
 
-const getProfileById = async (request, response) => {
-  const id = request.params.id;
-  let profile = await Profile.findOne({ where: { id: id } });
-  let user = await profile.getUser();
+_getProfs = (profiles, searchValue) => {
+  return Promise.all(
+    profiles.map(profile => {
+      return _getProf(profile, searchValue);
+    })
+  );
+};
+
+_getProf = async (profile, searchValue) => {
+  let user = await profile.getUser({ attributes: ["email"] });
 
   if (!profile) response.status(404).send("Profile Not Found");
-  let data = { ...profile.dataValues, ...user.dataValues };
 
-  let tenure = await profile.getTenure().then(res => {
-    if (res) return res.dataValues;
-  });
+  let profileData = profile ? profile.dataValues : {};
+  let userData = user ? user.dataValues : {};
 
-  let careerMobility = await profile.getCareerMobility().then(res => {
-    if (res) return res.dataValues;
-  });
-
-  let talentMatrixResult = await profile.getTalentMatrixResult().then(res => {
-    if (res) return res.dataValues;
-  });
+  let data = { ...profileData, ...userData };
 
   let groupLevel = await profile.getGroupLevel().then(res => {
-    if (res) return res.dataValues;
-  });
-
-  let securityClearance = await profile.getSecurityClearance().then(res => {
     if (res) return res.dataValues;
   });
 
@@ -98,7 +122,7 @@ const getProfileById = async (request, response) => {
   let educArray = await educations();
 
   let organizationList = await profile
-    .getProfileOrganizations({ order: [["tier", "ASC"]] })
+    .getProfileOrganizations({ order: [["tier", "DESC"]] })
     .then(organizations => {
       let orgList = organizations.map(organization => {
         return {
@@ -131,58 +155,40 @@ const getProfileById = async (request, response) => {
       };
   });
 
-  let developmentalGoals = await profile.getDevelopmentGoals().map(goal => {
-    if (goal)
-      return {
-        id: goal.dataValues.id,
-        description: {
-          en: goal.dataValues.descriptionEn,
-          fr: goal.dataValues.descriptionFr
-        }
-      };
-  });
+  let allSkill = skills.concat(competencies);
 
-  let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
-    if (res) return res.dataValues;
-  });
+  allSkill = allSkill.map(skill => skill.description);
+
+  const options = {
+    shouldSort: true,
+    keys: ["en", "fr"]
+  };
+
+  const fuse = new Fuse(allSkill, options);
+
+  const resultSkills = fuse.search(searchValue);
 
   //Response Object
   let resData = {
+    id: data.id,
     acting: {
       id: acting ? acting.id : null,
       description: acting ? acting.description : null
     },
-    actingPeriodStartDate: data.actingStartDate,
-    actingPeriodEndDate: data.actingEndDate,
-    branch: { en: data.branchEn, fr: data.branchFr },
-    careerMobility: {
-      id: careerMobility ? careerMobility.id : null,
-      description: {
-        en: careerMobility ? careerMobility.descriptionEn : null,
-        fr: careerMobility ? careerMobility.descriptionFr : null
-      }
-    },
+    branch: data.branchEn,
     careerSummary,
-    competencies,
-    developmentalGoals,
-    education: educArray,
-    email: data.email,
-    exFeeder: data.exFeeder,
-    flagged: data.flagged,
-    firstLanguage:
-      data.firstLanguage == "fr"
-        ? { en: "French", fr: "Français" }
-        : { en: "English", fr: "Anglais" },
-    firstName: data.firstName,
-    githubUrl: data.github,
-    gradedOnSecondLanguage: true,
     classification: {
       id: groupLevel ? groupLevel.id : null,
       description: groupLevel ? groupLevel.description : null
     },
+    competencies,
+    education: educArray,
+    email: data.email,
+    exFeeder: data.exFeeder,
+    flagged: data.flagged,
+    firstName: data.firstName,
     jobTitle: { en: data.jobTitleEn, fr: data.jobTitleFr },
     lastName: data.lastName,
-    linkedinUrl: data.linkedin,
     location: {
       id: location ? location.id : null,
       description: {
@@ -205,50 +211,13 @@ const getProfileById = async (request, response) => {
     manager: data.manager,
     cellphone: data.cellphone,
     organizationList,
-    secondaryOralDate: secLangProf ? secLangProf.oralDate : null,
-    secondaryOralProficiency: secLangProf ? secLangProf.oralProficiency : null,
-    secondaryReadingDate: secLangProf ? secLangProf.readingDate : null,
-    secondaryReadingProficiency: secLangProf
-      ? secLangProf.readingProficiency
-      : null,
-    secondaryWritingDate: secLangProf ? secLangProf.writingDate : null,
-    secondaryWritingProficiency: secLangProf
-      ? secLangProf.writingProficiency
-      : null,
-    secondLanguage: null,
-    security: {
-      id: securityClearance ? securityClearance.id : null,
-      description: {
-        en: securityClearance ? securityClearance.descriptionEn : null,
-        fr: securityClearance ? securityClearance.descriptionFr : null
-      }
-    },
     skills,
-    tenure: {
-      id: tenure ? tenure.id : null,
-      description: {
-        en: tenure ? tenure.descriptionEn : null,
-        fr: tenure ? tenure.descriptionFr : null
-      }
-    },
-    talentMatrixResult: {
-      id: talentMatrixResult ? talentMatrixResult.id : null,
-      description: {
-        en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
-        fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
-      }
-    },
     team: data.team,
     telephone: data.telephone,
-    twitterUrl: data.twitter,
-    yearsOfService: data.yearService,
-    projects: projects
+    projects: projects,
+    resultSkills
   };
-
-  response.status(200).json(resData);
+  return resData;
 };
 
-module.exports = {
-  getProfile,
-  getProfileById
-};
+module.exports = getAllProfiles;
