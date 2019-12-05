@@ -242,7 +242,8 @@ const getProfileById = async (request, response) => {
     telephone: data.telephone,
     twitterUrl: data.twitter,
     yearsOfService: data.yearService,
-    projects: projects
+    projects: projects,
+    interestedInRemote: data.interestedInRemote
   };
 
   response.status(200).json(resData);

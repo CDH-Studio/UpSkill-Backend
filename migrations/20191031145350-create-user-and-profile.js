@@ -110,6 +110,11 @@ module.exports = {
             allowNull: false,
             type: Sequelize.BOOLEAN,
             defaultValue: false
+          },
+          interestedInRemote: {
+            allowNull: true,
+            type: Sequelize.BOOLEAN,
+            defaultValue: null
           }
         });
       });
