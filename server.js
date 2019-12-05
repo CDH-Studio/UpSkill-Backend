@@ -127,6 +127,8 @@ router.get("/admin/user", admin.getUser);
 
 router.put("/admin/profileStatus", admin.updateProfileStatus);
 
+router.post("/admin/delete/:type", admin.bulkDeleteOption);
+
 router.use("/option", options);
 
 router.get("/profGen/:id", profileGeneration.getGedsAssist);

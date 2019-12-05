@@ -5,6 +5,7 @@ const get = require("./get");
 
 module.exports = {
   createOption: post.createOption,
+  bulkDeleteOption: post.bulkDeleteOption,
   deleteOption: del.deleteOption,
   updateOption: put.updateOption,
   getOption: get.getOption,
