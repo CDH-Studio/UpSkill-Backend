@@ -68,7 +68,6 @@ const updateFlagged = async (request, response) => {
 
 const updateProfileStatus = async (request, response) => {
   const statuses = Object.entries(request.body);
-  console.log("hiii");
 
   try {
     statuses.forEach(([id, status]) => {
