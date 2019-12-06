@@ -5,6 +5,8 @@ const Models = require("../../../models");
 const Profile = Models.profile;
 const User = Models.user;
 
+const NUMBER_OF_SKILL_RESULT = 4;
+
 const getAllProfiles = async searchValue => {
   const profiles = await Profile.findAll({
     attributes: [
@@ -161,12 +163,15 @@ _getProf = async (profile, searchValue) => {
 
   const options = {
     shouldSort: true,
-    keys: ["en", "fr"]
+    keys: ["en", "fr"],
+    threshold: 0.2
   };
 
   const fuse = new Fuse(allSkill, options);
 
-  const resultSkills = fuse.search(searchValue);
+  const resultSkills = fuse
+    .search(searchValue)
+    .slice(0, NUMBER_OF_SKILL_RESULT);
 
   //Response Object
   let resData = {
