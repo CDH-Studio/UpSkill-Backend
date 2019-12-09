@@ -42,14 +42,16 @@ const getProfileById = async (request, response) => {
     if (res) return res.dataValues;
   });
 
-  let experiences = await profile.getExperiences();
+  let experiences = await profile.getExperiences({
+    order: [["startDate", "DESC"]]
+  });
   let careerSummary = experiences.map(experience => {
     let startDate = moment(experience.startDate);
     let endDate = moment(experience.endDate);
 
     return {
-      header: experience.organization,
-      subheader: experience.jobTitle,
+      subheader: experience.organization,
+      header: experience.jobTitle,
       content: experience.description,
       startDate: startDate,
       endDate: endDate
@@ -61,7 +63,9 @@ const getProfileById = async (request, response) => {
     return { text: project.description };
   });
 
-  let education = await profile.getEducation();
+  let education = await profile.getEducation({
+    order: [["startDate", "DESC"]]
+  });
   let educations = () => {
     return Promise.all(
       education.map(async educ => {
