@@ -2,8 +2,7 @@
 
 // Import the packages we need
 const express = require("express"); // call express
-const Keycloak = require("keycloak-connect");
-const session = require("express-session");
+const { keycloak, sessionInstance } = require("./keycloak/keycloak");
 const expressHbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
@@ -41,19 +40,8 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
-
-// Configure session to use memoryStore and Setup keycloak middleware to use the session memoryStore.
-var memoryStore = new session.MemoryStore();
-var keycloak = new Keycloak({ store: memoryStore });
 //session
-app.use(
-  session({
-    secret: process.env.KEYCLOAK_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: memoryStore
-  })
-);
+app.use(sessionInstance);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -94,27 +82,27 @@ router.get("/getEmployeeInfo/:searchValue", keycloak.protect(), async function(
 router.get("/geds/:searchValue", geds.getEmployeeInfo);
 
 //User endpoints
-router.get("/user/", user.getUser);
-router.get("/user/:id", user.getUserById);
-router.post("/user/", user.createUser);
+router.get("/user/", keycloak.protect(), user.getUser);
+router.get("/user/:id", keycloak.protect(), user.getUserById);
+router.post("/user/", keycloak.protect(), user.createUser);
 
 //Profile endpoints
-router.get("/profile/", profile.getProfile);
+router.get("/profile/", keycloak.protect(), profile.getProfile);
 router
   .route("/profile/:id")
-  .get(profile.getProfileById)
-  .post(profile.createProfile)
-  .put(profile.updateProfile);
+  .get(keycloak.protect(), profile.getProfileById)
+  .post(keycloak.protect(), profile.createProfile)
+  .put(keycloak.protect(), profile.updateProfile);
 
 //Admin endpoints
-router.use("/admin", admin, keycloak.protect());
+router.use("/admin", admin);
 
 router.use("/option", options);
 
-router.get("/profGen/:id", profileGeneration.getGedsAssist);
+router.get("/profGen/:id", keycloak.protect(), profileGeneration.getGedsAssist);
 
 // Search routes
-router.get("/search/fuzzySearch/", search);
+router.get("/search/fuzzySearch/", keycloak.protect(), search);
 
 // REGISTER OUR ROUTES ===============================================
 // Note: All of our routes will be prefixed with /api
