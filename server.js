@@ -11,6 +11,7 @@ const sequelizedb = require("./config/database");
 
 const app = express(); // define our app using express
 
+const admin = require("./API/admin");
 const profile = require("./API/profile");
 const user = require("./API/user");
 const geds = require("./API/geds");
@@ -105,21 +106,36 @@ router
   .post(keycloak.protect(), profile.createProfile)
   .put(keycloak.protect(), profile.updateProfile);
 
+//Admin endpoints
+router.put("/admin/flagged", admin.updateFlagged);
+router.get("/admin/flagged/:id", admin.getFlagged);
+
+router.put("/admin/inactive", admin.updateInactive);
+router.get("/admin/inactive/:id", admin.getInactive);
+
+router
+  .route("/admin/options/:type")
+  .get(admin.getOption)
+  .post(admin.createOption);
+
+router
+  .route("/admin/options/:type/:id")
+  .put(admin.updateOption)
+  .delete(admin.deleteOption);
+
+router.get("/admin/user", admin.getUser);
+
+router.get("/admin/dashboard", admin.allCount);
+router.put("/admin/profileStatus", admin.updateProfileStatus);
+
+router.post("/admin/delete/:type", admin.bulkDeleteOption);
+
 router.use("/option", options);
 
 router.get("/profGen/:id", keycloak.protect(), profileGeneration.getGedsAssist);
 
 // Search routes
-router.get(
-  "/search/basicSearch/:searchValue",
-  keycloak.protect(),
-  search.basicSearch.getProfileByName
-);
-router.get(
-  "/search/fuzzySearch/",
-  keycloak.protect(),
-  search.basicSearch.getFuzzySearch
-);
+router.get("/search/fuzzySearch/", search);
 
 // REGISTER OUR ROUTES ===============================================
 // Note: All of our routes will be prefixed with /api

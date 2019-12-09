@@ -22,6 +22,11 @@ module.exports = {
         updatedAt: {
           allowNull: false,
           type: Sequelize.DATE
+        },
+        inactive: {
+          allowNull: false,
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
         }
       })
       .then(() => {
@@ -60,6 +65,12 @@ module.exports = {
           team: {
             type: Sequelize.STRING
           },
+          branchEn: {
+            type: Sequelize.STRING
+          },
+          branchFr: {
+            type: Sequelize.STRING
+          },
           firstLanguage: {
             type: Sequelize.STRING
           },
@@ -94,6 +105,11 @@ module.exports = {
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE
+          },
+          flagged: {
+            allowNull: false,
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
           }
         });
       });

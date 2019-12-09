@@ -1,4 +1,5 @@
 let {
+  getBranch,
   getCareerMobility,
   getCompetency,
   getDiploma,
@@ -16,6 +17,7 @@ let {
 const optionRouter = require("./router");
 
 module.exports = {
+  getBranch,
   getCareerMobility,
   getCompetency,
   getDiploma,

@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       cellphone: DataTypes.STRING,
       manager: DataTypes.STRING,
       team: DataTypes.STRING,
+      branchEn: DataTypes.STRING,
+      branchFr: DataTypes.STRING,
       firstLanguage: DataTypes.STRING,
       secondLanguage: DataTypes.STRING,
       yearService: DataTypes.INTEGER,
@@ -19,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       linkedin: DataTypes.STRING,
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
-      exFeeder: DataTypes.BOOLEAN
+      exFeeder: DataTypes.BOOLEAN,
+      flagged: DataTypes.BOOLEAN
     },
     {}
   );
