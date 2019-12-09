@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const {
+  getBranch,
   getCareerMobility,
   getCompetency,
   getDevelopmentalGoals,
@@ -15,6 +16,7 @@ const {
 } = require("./get");
 const optionRouter = Router();
 
+optionRouter.get("/getBranch", getBranch);
 optionRouter.get("/getCareerMobility", getCareerMobility);
 optionRouter.get("/getCompetency", getCompetency);
 optionRouter.get("/getDevelopmentalGoals", getDevelopmentalGoals);

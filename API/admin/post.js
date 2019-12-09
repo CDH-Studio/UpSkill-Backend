@@ -19,4 +19,22 @@ const createOption = async (request, response) => {
   }
 };
 
-module.exports = { createOption };
+const bulkDeleteOption = async (request, response) => {
+  try {
+    const { type } = request.params;
+    const ids = request.body.ids;
+    const model = getModel(type);
+
+    model
+      .destroy({
+        where: { id: ids }
+      })
+      .then(destroyCount =>
+        response.status(200).json({ deletePerformed: destroyCount > 1 })
+      );
+  } catch (error) {
+    response.status(500).json({ deletePerformed: false, error: error });
+  }
+};
+
+module.exports = { createOption, bulkDeleteOption };

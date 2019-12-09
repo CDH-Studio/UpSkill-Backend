@@ -6,6 +6,7 @@ const allCount = require("./Dashboard/get");
 
 module.exports = {
   createOption: post.createOption,
+  bulkDeleteOption: post.bulkDeleteOption,
   deleteOption: del.deleteOption,
   updateOption: put.updateOption,
   getOption: get.getOption,
@@ -14,5 +15,6 @@ module.exports = {
   getFlagged: get.getFlagged,
   getInactive: get.getInactive,
   getUser: get.getUser,
-  allCount
+  allCount,
+  updateProfileStatus: put.updateProfileStatus
 };

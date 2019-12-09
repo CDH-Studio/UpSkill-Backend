@@ -29,37 +29,70 @@ const updateOption = async (request, response) => {
 };
 
 const updateInactive = async (request, response) => {
-  try {
-    const { id } = request.params;
+  let updates = 0;
 
-    User.update(
-      { inactive: request.body.value },
-      { where: { id: id } }
-    ).then(updateInfo =>
-      response
-        .status(200)
-        .json({ updatePerformed: updateInfo[0] === 1, error: null })
-    );
+  try {
+    for (let i = 0; i < request.body.length; i++) {
+      const element = request.body[i];
+      const updateInfo = await User.update(
+        { inactive: element.value },
+        { where: { id: element.id } }
+      );
+      updates += updateInfo[0];
+    }
+
+    response.status(200).json({ updates: updates, error: null });
   } catch (error) {
-    response.status(500).json({ updatePerformed: false, error: error });
+    response.status(500).json({ updates: updates, error: error.message });
   }
 };
 
 const updateFlagged = async (request, response) => {
-  try {
-    const { id } = request.params;
+  let updates = 0;
 
-    Profile.update(
-      { flagged: request.body.value },
-      { where: { id: id } }
-    ).then(updateInfo =>
-      response
-        .status(200)
-        .json({ updatePerformed: updateInfo[0] === 1, error: null })
-    );
+  try {
+    for (let i = 0; i < request.body.length; i++) {
+      const element = request.body[i];
+      const updateInfo = await Profile.update(
+        { flagged: element.value },
+        { where: { id: element.id } }
+      );
+      updates += updateInfo[0];
+    }
+
+    response.status(200).json({ updates: updates, error: null });
+  } catch (error) {
+    response.status(500).json({ updates: updates, error: error.message });
+  }
+};
+
+const updateProfileStatus = async (request, response) => {
+  const statuses = Object.entries(request.body);
+  try {
+    statuses.forEach(async ([id, status]) => {
+      let flagged = false,
+        inactive = false;
+      if (status === "Inactive") {
+        inactive = true;
+      }
+      if (status === "Hidden") {
+        flagged = true;
+      }
+      await User.findOne({ where: { id } }).then(user =>
+        user.update({ inactive }).then(() => {
+          user.getProfile().then(profile => profile.update({ flagged }));
+        })
+      );
+    });
+    response.status(200).send("OK");
   } catch (error) {
     response.status(500).json({ updatePerformed: false, error: error });
   }
 };
 
-module.exports = { updateOption, updateFlagged, updateInactive };
+module.exports = {
+  updateOption,
+  updateFlagged,
+  updateInactive,
+  updateProfileStatus
+};

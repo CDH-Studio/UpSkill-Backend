@@ -29,13 +29,6 @@ module.exports = {
               email: "mary.doe@canada.ca",
               createdAt: new Date(),
               updatedAt: new Date()
-            },
-            {
-              id: "6becd47a-ffe5-11e9-8d71-362b9e155667",
-              name: "Trevor Bivi",
-              email: "trevor.bivi@canada.ca",
-              createdAt: new Date(),
-              updatedAt: new Date()
             }
           ],
           {}
