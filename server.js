@@ -125,6 +125,7 @@ router
 
 router.get("/admin/user", admin.getUser);
 
+router.get("/admin/dashboard", admin.allCount);
 router.put("/admin/profileStatus", admin.updateProfileStatus);
 
 router.post("/admin/delete/:type", admin.bulkDeleteOption);
