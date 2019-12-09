@@ -1,4 +1,4 @@
-const Models = require("../../db/models");
+const Models = require("../../models");
 const User = Models.user;
 const Location = Models.location;
 const axios = require("axios");
@@ -41,6 +41,11 @@ const getGedsAssist = async (request, response) => {
             return { description: organization.description, tier: i };
           }
         );
+
+        let branchOrg = organizations[Math.min(2, organizations.length - 1)];
+
+        profile.branchEn = branchOrg.description.en;
+        profile.branchFr = branchOrg.description.fr;
 
         profile.organizations = organizations;
 

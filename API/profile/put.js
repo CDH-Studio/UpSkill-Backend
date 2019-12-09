@@ -1,6 +1,6 @@
 const moment = require("moment");
 
-const Models = require("../../db/models");
+const Models = require("../../models");
 const Profile = Models.profile;
 const Education = Models.education;
 const Experience = Models.experience;
@@ -19,7 +19,7 @@ const updateProfile = async (request, response) => {
     dbObject[mappedValues[key] ? mappedValues[key] : key] = value;
   }
 
-  if (dbObject.jobTitleEn) {
+  if (dbObject.jobTitle) {
     dbObject.jobTitleEn = dbObject.jobTitle.en;
     dbObject.jobTitleFr = dbObject.jobTitle.fr;
   }
@@ -61,7 +61,7 @@ const updateProfile = async (request, response) => {
         dbObject.experience.forEach(exp => {
           let startDate = moment(exp.startDate);
           let endDate = moment(exp.endDate);
-          let content;
+          let content = exp.content;
           if (!startDate.isValid()) startDate = null;
           else startDate = startDate.format();
           if (!endDate.isValid()) endDate = null;

@@ -1,4 +1,6 @@
-const Models = require("../../db/models");
+const Models = require("../../models");
+const Sequelize = require("sequelize");
+const Profile = Models.profile;
 const CareerMobility = Models.careerMobility;
 const Competency = Models.competency;
 const Diploma = Models.diploma;
@@ -10,6 +12,23 @@ const SecurityClearance = Models.securityClearance;
 const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
+
+const getBranch = async (request, response) => {
+  let all = await Profile.findAll({
+    attributes: [
+      [Sequelize.fn("DISTINCT", Sequelize.col("branchEn")), "branchEn"],
+      "branchFr"
+    ]
+  });
+
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    return {
+      description: { en: one.branchEn, fr: one.branchFr }
+    };
+  });
+  response.status(200).json(resBody);
+};
 
 const getCareerMobility = async (request, response) => {
   let all = await CareerMobility.findAll();
@@ -24,7 +43,11 @@ const getCareerMobility = async (request, response) => {
 };
 
 const getCompetency = async (request, response) => {
-  let all = await Competency.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "competency"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
@@ -36,7 +59,7 @@ const getCompetency = async (request, response) => {
 };
 
 const getDevelopmentalGoals = async (request, response) => {
-  let all = await Competency.findAll();
+  let all = await Skill.findAll();
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
@@ -123,7 +146,11 @@ const getSecurityClearance = async (request, response) => {
 };
 
 const getSkill = async (request, response) => {
-  let all = await Skill.findAll();
+  let all = await Skill.findAll({
+    where: {
+      type: "skill"
+    }
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     return {
@@ -159,6 +186,7 @@ const getTenure = async (request, response) => {
 };
 
 module.exports = {
+  getBranch,
   getCareerMobility,
   getCompetency,
   getDevelopmentalGoals,

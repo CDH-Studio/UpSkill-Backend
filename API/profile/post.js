@@ -1,6 +1,6 @@
 const moment = require("moment");
 
-const Models = require("../../db/models");
+const Models = require("../../models");
 const Profile = Models.profile;
 const Education = Models.education;
 const Experience = Models.experience;
@@ -19,7 +19,7 @@ const createProfile = async (request, response) => {
     dbObject[mappedValues[key] ? mappedValues[key] : key] = value;
   }
 
-  if (dbObject.jobTitleEn) {
+  if (dbObject.jobTitle) {
     dbObject.jobTitleEn = dbObject.jobTitle.en;
     dbObject.jobTitleFr = dbObject.jobTitle.fr;
   }

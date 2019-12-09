@@ -1,5 +1,5 @@
 const moment = require("moment");
-const Models = require("../../db/models");
+const Models = require("../../models");
 const Profile = Models.profile;
 
 const getProfile = async (request, response) => {
@@ -42,14 +42,16 @@ const getProfileById = async (request, response) => {
     if (res) return res.dataValues;
   });
 
-  let experiences = await profile.getExperiences();
+  let experiences = await profile.getExperiences({
+    order: [["startDate", "DESC"]]
+  });
   let careerSummary = experiences.map(experience => {
     let startDate = moment(experience.startDate);
     let endDate = moment(experience.endDate);
 
     return {
-      header: experience.organization,
-      subheader: experience.jobTitle,
+      subheader: experience.organization,
+      header: experience.jobTitle,
       content: experience.description,
       startDate: startDate,
       endDate: endDate
@@ -61,7 +63,9 @@ const getProfileById = async (request, response) => {
     return { text: project.description };
   });
 
-  let education = await profile.getEducation();
+  let education = await profile.getEducation({
+    order: [["startDate", "DESC"]]
+  });
   let educations = () => {
     return Promise.all(
       education.map(async educ => {
@@ -97,17 +101,9 @@ const getProfileById = async (request, response) => {
 
   let educArray = await educations();
 
-  let branch;
-
   let organizationList = await profile
-    .getProfileOrganizations({ order: [["tier", "DESC"]] })
+    .getProfileOrganizations({ order: [["tier", "ASC"]] })
     .then(organizations => {
-      let branchOrg = organizations[Math.min(2, organizations.length - 1)];
-      branch = {
-        en: branchOrg.descriptionEn,
-        fr: branchOrg.descriptionFr
-      };
-
       let orgList = organizations.map(organization => {
         return {
           en: organization.descriptionEn,
@@ -162,7 +158,7 @@ const getProfileById = async (request, response) => {
     },
     actingPeriodStartDate: data.actingStartDate,
     actingPeriodEndDate: data.actingEndDate,
-    branch,
+    branch: { en: data.branchEn, fr: data.branchFr },
     careerMobility: {
       id: careerMobility ? careerMobility.id : null,
       description: {
@@ -176,6 +172,7 @@ const getProfileById = async (request, response) => {
     education: educArray,
     email: data.email,
     exFeeder: data.exFeeder,
+    flagged: data.flagged,
     firstLanguage:
       data.firstLanguage == "fr"
         ? { en: "French", fr: "Français" }

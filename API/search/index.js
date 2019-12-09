@@ -1,5 +1,3 @@
-const basicSearch = require("./basicSearch");
+const get = require("./get");
 
-module.exports = {
-  getProfileByName: basicSearch.getProfileByName
-};
+module.exports = get;

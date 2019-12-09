@@ -1,5 +1,6 @@
 "use strict";
 const axios = require("axios");
+require("dotenv").config();
 
 async function getEmployeeInfo(request, response) {
   let searchValue = request.params.searchValue;
@@ -14,8 +15,7 @@ async function getEmployeeInfo(request, response) {
     methon: "get",
     url: url,
     headers: {
-      "user-key": "1d373575a287c2597f4525d0c26eae7d",
-      // "user-key": "a4b8d0891e09354b46bbe061c72a7085",
+      "user-key": process.env.GEDSAPIKEY1,
       Accept: "application/json"
     }
   })
@@ -61,7 +61,6 @@ async function getEmployeeInfo(request, response) {
             ...contactInfo
           };
           info.push(empInfo);
-          console.log(empInfo);
         });
         if (info.length == 0) {
           response.status(204).send("No results found");
@@ -75,7 +74,7 @@ async function getEmployeeInfo(request, response) {
       }
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       if (err.response.status == 429) {
         response.status(429).send("Limit Exceeded!");
         return;
