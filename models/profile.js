@@ -63,9 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     profile.hasMany(models.profileProject);
     profile.belongsTo(models.lookingForANewJob);
-    profile.belongsToMany(models.relocationLocation, {
-      through: "relocationLocations"
-    });
+    profile.hasMany(models.relocationLocation);
   };
   return profile;
 };

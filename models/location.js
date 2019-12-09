@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   location.associate = function(models) {
     location.hasMany(models.profile);
+    location.hasMany(models.relocationLocation);
   };
   return location;
 };

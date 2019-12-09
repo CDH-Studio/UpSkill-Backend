@@ -1,9 +1,9 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const lookingForANewJob = sequelize.define("relocationLocation", {}, {});
-  lookingForANewJob.associate = function(models) {
-    lookingForANewJob.hasMany(models.profile);
-    lookingForANewJob.hasMany(models.location);
+  const relocationLocation = sequelize.define("relocationLocation", {}, {});
+  relocationLocation.associate = function(models) {
+    relocationLocation.belongsTo(models.profile);
+    relocationLocation.belongsTo(models.location);
   };
-  return lookingForANewJob;
+  return relocationLocation;
 };

@@ -204,7 +204,14 @@ const getLookingForANewJob = async (request, response) => {
 
 const getWillingToRelocateTo = async (request, response) => {
   try {
-    let all = await Location.findAll();
+    let all = await Location.findAll({
+      attributes: [
+        [Sequelize.fn("DISTINCT", Sequelize.col("city")), "city"],
+        "provinceEn",
+        "provinceFr",
+        "id"
+      ]
+    });
     let resBody = all.map(one => {
       one = one.dataValues;
       return {
