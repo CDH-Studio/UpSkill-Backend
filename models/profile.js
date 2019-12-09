@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
       exFeeder: DataTypes.BOOLEAN,
-      flagged: DataTypes.BOOLEAN
+      flagged: DataTypes.BOOLEAN,
+      interestedInRemote: DataTypes.BOOLEAN
     },
     {}
   );
@@ -61,6 +62,8 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
     profile.hasMany(models.profileProject);
+    profile.belongsTo(models.lookingForANewJob);
+    profile.hasMany(models.relocationLocation);
   };
   return profile;
 };

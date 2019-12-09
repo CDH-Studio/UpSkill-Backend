@@ -150,6 +150,33 @@ const getProfileById = async (request, response) => {
     if (res) return res.dataValues;
   });
 
+  let relocationLocations = await profile
+    .getRelocationLocations()
+    .then(relocs =>
+      Promise.all(
+        relocs.map(element =>
+          element.getLocation().then(loc => ({
+            description: {
+              en: loc.city + ", " + loc.provinceEn,
+              fr: loc.city + ", " + loc.provinceFr
+            },
+            id: element.id,
+            locationId: loc.id
+          }))
+        )
+      )
+    );
+
+  let lookingForNewJob = await profile.getLookingForANewJob().then(value => {
+    if (!value) {
+      return null;
+    }
+    return {
+      id: value.id,
+      description: { en: value.descriptionEn, fr: value.descriptionFr }
+    };
+  });
+
   //Response Object
   let resData = {
     acting: {
@@ -246,7 +273,10 @@ const getProfileById = async (request, response) => {
     telephone: data.telephone,
     twitterUrl: data.twitter,
     yearsOfService: data.yearService,
-    projects: projects
+    projects: projects,
+    interestedInRemote: data.interestedInRemote,
+    relocationLocations: relocationLocations,
+    lookingForNewJob: lookingForNewJob
   };
 
   response.status(200).json(resData);

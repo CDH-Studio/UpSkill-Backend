@@ -12,6 +12,7 @@ const SecurityClearance = Models.securityClearance;
 const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
+const LookingForANewJob = Models.lookingForANewJob;
 
 const getBranch = async (request, response) => {
   let all = await Profile.findAll({
@@ -185,6 +186,48 @@ const getTenure = async (request, response) => {
   response.status(200).json(resBody);
 };
 
+const getLookingForANewJob = async (request, response) => {
+  try {
+    let all = await LookingForANewJob.findAll();
+    let resBody = all.map(element => ({
+      id: element.id,
+      description: {
+        en: element.descriptionEn,
+        fr: element.descriptionFr
+      }
+    }));
+    response.status(200).json(resBody);
+  } catch (error) {
+    response.status(500).json(error.message);
+  }
+};
+
+const getWillingToRelocateTo = async (request, response) => {
+  try {
+    let all = await Location.findAll({
+      attributes: [
+        [Sequelize.fn("DISTINCT", Sequelize.col("city")), "city"],
+        "provinceEn",
+        "provinceFr",
+        "id"
+      ]
+    });
+    let resBody = all.map(one => {
+      one = one.dataValues;
+      return {
+        id: one.id,
+        description: {
+          en: one.city + ", " + one.provinceEn,
+          fr: one.city + ", " + one.provinceFr
+        }
+      };
+    });
+    response.status(200).json(resBody);
+  } catch (error) {
+    response.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getBranch,
   getCareerMobility,
@@ -198,5 +241,7 @@ module.exports = {
   getSecurityClearance,
   getSkill,
   getTalentMatrixResult,
-  getTenure
+  getTenure,
+  getLookingForANewJob,
+  getWillingToRelocateTo
 };

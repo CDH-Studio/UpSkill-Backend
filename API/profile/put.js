@@ -7,6 +7,8 @@ const Experience = Models.experience;
 const ProfileOrganization = Models.profileOrganization;
 const Project = Models.profileProject;
 const SecLang = Models.secondLanguageProficiency;
+const RelocationLocation = Models.relocationLocation;
+const Location = Models.location;
 
 const mappedValues = require("./mappedValues.json");
 
@@ -153,6 +155,22 @@ const updateProfile = async (request, response) => {
       SecLang.destroy({
         where: { id: profile.dataValues.secondLanguageProficiencyId }
       });
+    }
+
+    if (dbObject.relocationLocations) {
+      await RelocationLocation.destroy({
+        where: { profileId: id }
+      }).then(() =>
+        dbObject.relocationLocations.forEach(element => {
+          RelocationLocation.create({}).then(relocationLocation => {
+            profile.addRelocationLocation(relocationLocation).then(() => {
+              Location.findOne({ where: { id: element } }).then(location => {
+                location.addRelocationLocation(relocationLocation);
+              });
+            });
+          });
+        })
+      );
     }
 
     //End of logic~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

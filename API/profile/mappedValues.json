@@ -4,6 +4,7 @@
   "telephone": "telephone",
   "cellphone": "cellphone",
   "location": "locationId",
+  "lookingForNewJob": "lookingForANewJobId",
   "team": "team",
   "tenure": "tenureId",
   "groupOrLevel": "groupLevelId",

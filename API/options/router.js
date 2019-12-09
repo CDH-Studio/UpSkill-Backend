@@ -12,7 +12,9 @@ const {
   getSecurityClearance,
   getSkill,
   getTalentMatrixResult,
-  getTenure
+  getTenure,
+  getLookingForANewJob,
+  getWillingToRelocateTo
 } = require("./get");
 const optionRouter = Router();
 
@@ -29,5 +31,7 @@ optionRouter.get("/getSecurityClearance", getSecurityClearance);
 optionRouter.get("/getSkill", getSkill);
 optionRouter.get("/getTalentMatrixResult", getTalentMatrixResult);
 optionRouter.get("/getTenure", getTenure);
+optionRouter.get("/getLookingForANewJob", getLookingForANewJob);
+optionRouter.get("/getWillingToRelocateTo", getWillingToRelocateTo);
 
 module.exports = optionRouter;
