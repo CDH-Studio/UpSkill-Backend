@@ -78,7 +78,7 @@ const port = process.env.PORT || 8080; // set our port
 const router = express.Router(); // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api/)
-router.get("/", function(req, res) {
+router.get("/", keycloak.protect(), function(req, res) {
   res.json({ message: "hooray! welcome to our api!" });
 });
 
@@ -107,7 +107,7 @@ router
   .put(profile.updateProfile);
 
 //Admin endpoints
-router.use("/admin", admin);
+router.use("/admin", admin, keycloak.protect());
 
 router.use("/option", options);
 
