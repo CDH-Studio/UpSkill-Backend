@@ -64,4 +64,32 @@ const getUser = async (request, response) => {
   response.status(200).json(values);
 };
 
-module.exports = { getOption, getFlagged, getInactive, getUser };
+const dashboardCount = async (request, response) => {
+  try {
+    const flagged = await Profile.count({
+      where: { flagged: true }
+    });
+
+    const inactive = await User.count({
+      where: { inactive: true }
+    });
+
+    const user = await User.count();
+
+    const exFeeder = await Profile.count({
+      where: { exFeeder: true }
+    });
+
+    response.status(200).json({ user, exFeeder, flagged, inactive });
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
+
+module.exports = {
+  getOption,
+  getFlagged,
+  getInactive,
+  getUser,
+  dashboardCount
+};

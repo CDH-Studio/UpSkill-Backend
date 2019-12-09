@@ -11,12 +11,12 @@ const sequelizedb = require("./config/database");
 
 const app = express(); // define our app using express
 
-const admin = require("./API/admin");
 const profile = require("./API/profile");
 const user = require("./API/user");
 const geds = require("./API/geds");
 const profileGeneration = require("./API/profileGeneration");
 const options = require("./API/options").optionRouter;
+const admin = require("./API/admin/router");
 const search = require("./API/search/");
 
 dotenv.config(); // Config() function reads the .env file and sets the environment variables
@@ -107,28 +107,7 @@ router
   .put(profile.updateProfile);
 
 //Admin endpoints
-router.put("/admin/flagged", admin.updateFlagged);
-router.get("/admin/flagged/:id", admin.getFlagged);
-
-router.put("/admin/inactive", admin.updateInactive);
-router.get("/admin/inactive/:id", admin.getInactive);
-
-router
-  .route("/admin/options/:type")
-  .get(admin.getOption)
-  .post(admin.createOption);
-
-router
-  .route("/admin/options/:type/:id")
-  .put(admin.updateOption)
-  .delete(admin.deleteOption);
-
-router.get("/admin/user", admin.getUser);
-
-router.get("/admin/dashboard", admin.allCount);
-router.put("/admin/profileStatus", admin.updateProfileStatus);
-
-router.post("/admin/delete/:type", admin.bulkDeleteOption);
+router.use("/admin", admin);
 
 router.use("/option", options);
 
