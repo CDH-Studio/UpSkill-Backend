@@ -18,12 +18,12 @@ module.exports = {
           team: "CDH Studio",
           firstLanguage: "Français",
           secondLanguage: "English",
-          yearService: "23",
           linkedin: "linkedinUrl",
           github: "githubUrl",
           createdAt: new Date(),
           updatedAt: new Date(),
-          interestedInRemote: true
+          interestedInRemote: true,
+          indeterminate: true
           // tenureId: "725c6d40-ddc3-4a55-bdf5-f85155091acd",
           // groupLevelId: "a3975faa-ff43-11e9-8f0b-362b9e155667",
           // securityClearanceId: "882ef330-ff44-11e9-8f0b-362b9e155667",
