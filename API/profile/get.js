@@ -255,7 +255,7 @@ const getProfileById = async (request, response) => {
       }
     },
     skills,
-    tenure: {
+    temporaryRole: {
       id: tenure ? tenure.id : null,
       description: {
         en: tenure ? tenure.descriptionEn : null,
@@ -272,11 +272,11 @@ const getProfileById = async (request, response) => {
     team: data.team,
     telephone: data.telephone,
     twitterUrl: data.twitter,
-    yearsOfService: data.yearService,
     projects: projects,
     interestedInRemote: data.interestedInRemote,
     relocationLocations: relocationLocations,
-    lookingForNewJob: lookingForNewJob
+    lookingForNewJob: lookingForNewJob,
+    indeterminate: data.indeterminate
   };
 
   response.status(200).json(resData);

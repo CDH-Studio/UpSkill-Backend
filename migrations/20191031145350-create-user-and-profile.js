@@ -115,6 +115,11 @@ module.exports = {
             allowNull: true,
             type: Sequelize.BOOLEAN,
             defaultValue: null
+          },
+          indeterminate: {
+            allowNull: true,
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
           }
         });
       });

@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       branchFr: DataTypes.STRING,
       firstLanguage: DataTypes.STRING,
       secondLanguage: DataTypes.STRING,
-      yearService: DataTypes.INTEGER,
       actingStartDate: DataTypes.DATE,
       actingEndDate: DataTypes.DATE,
       linkedin: DataTypes.STRING,
@@ -23,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       twitter: DataTypes.STRING,
       exFeeder: DataTypes.BOOLEAN,
       flagged: DataTypes.BOOLEAN,
-      interestedInRemote: DataTypes.BOOLEAN
+      interestedInRemote: DataTypes.BOOLEAN,
+      indeterminate: DataTypes.BOOLEAN
     },
     {}
   );
