@@ -6,7 +6,6 @@ module.exports = {
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
     */
-    console.log("LFANJ up");
     return queryInterface.bulkInsert(
       "lookingForANewJobs",
       [
@@ -44,7 +43,6 @@ module.exports = {
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
     */
-    console.log("LFANJ down");
     return queryInterface.bulkDelete("lookingForANewJobs", null, {});
   }
 };
