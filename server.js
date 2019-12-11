@@ -90,11 +90,11 @@ router.post("/user/", keycloak.protect(), user.createUser);
 router.get("/profile/", keycloak.protect(), profile.getProfile);
 router
   .route("/profile/:id")
-  .get(keycloak.protect(), profile.getPublicProfileById)
+  .get(keycloak.protect(), profile.getProfileById)
   .post(keycloak.protect(), profile.createProfile)
   .put(keycloak.protect(), profile.updateProfile);
 
-router.route("/private/profile/:id").get(profile.getPrivateProfileById);
+router.route("/public/profile/:id").get(profile.getPublicProfileById);
 
 //Admin endpoints
 router.use("/admin", admin);

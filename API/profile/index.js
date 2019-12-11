@@ -4,7 +4,7 @@ const put = require("./put");
 
 module.exports = {
   getProfile: get.getProfile,
-  getPrivateProfileById: get.getPrivateProfileById,
+  getProfileById: get.getProfileById,
   getPublicProfileById: get.getPublicProfileById,
   createProfile: post.createProfile,
   updateProfile: put.updateProfile
