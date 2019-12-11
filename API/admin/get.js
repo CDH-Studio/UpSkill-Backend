@@ -86,10 +86,14 @@ const dashboardCount = async (request, response) => {
   }
 };
 
+const checkAdmin = (request, response) =>
+  response.status(200).send("Access Granted");
+
 module.exports = {
   getOption,
   getFlagged,
   getInactive,
   getUser,
-  dashboardCount
+  dashboardCount,
+  checkAdmin
 };

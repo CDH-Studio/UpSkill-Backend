@@ -9,6 +9,11 @@ adminRouter.get("/flagged/:id", keycloak.protect(), admin.getFlagged);
 adminRouter.get("/inactive/:id", keycloak.protect(), admin.getInactive);
 adminRouter.get("/user", keycloak.protect(), admin.getUser);
 adminRouter.get("/dashboard", keycloak.protect(), admin.dashboardCount);
+adminRouter.get(
+  "/check",
+  keycloak.protect("view-admin-console"),
+  admin.checkAdmin
+);
 adminRouter.post("/options/:type", keycloak.protect(), admin.createOption);
 adminRouter.post("/delete/:type", keycloak.protect(), admin.bulkDeleteOption);
 adminRouter.put(
