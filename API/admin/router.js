@@ -25,7 +25,11 @@ adminRouter.get(
   keycloak.protect("view-admin-console"),
   admin.dashboardCount
 );
-adminRouter.post("/options/:type", keycloak.protect(), admin.createOption);
+adminRouter.post(
+  "/options/:type",
+  keycloak.protect("manage-options"),
+  admin.createOption
+);
 adminRouter.post("/delete/:type", keycloak.protect(), admin.bulkDeleteOption);
 adminRouter.put(
   "/profileStatus",
@@ -34,8 +38,8 @@ adminRouter.put(
 );
 adminRouter
   .route("/options/:type/:id")
-  .put(keycloak.protect(), admin.updateOption)
-  .delete(keycloak.protect(), admin.deleteOption);
+  .put(keycloak.protect("manage-options"), admin.updateOption)
+  .delete(keycloak.protect("manage-options"), admin.deleteOption);
 adminRouter.put("/flagged", keycloak.protect(), admin.updateFlagged);
 adminRouter.put("/inactive", keycloak.protect(), admin.updateInactive);
 
