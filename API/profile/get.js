@@ -363,7 +363,7 @@ const getPublicProfileById = async (request, response) => {
   response.status(200).json(resData);
 };
 
-const getProfileById = async (request, response) => {
+const getPrivateProfileById = async (request, response) => {
   const id = request.params.id;
   let profile = await Profile.findOne({ where: { id: id } });
   let user = await profile.getUser();
@@ -536,6 +536,7 @@ const getProfileById = async (request, response) => {
 
   //Response Object
   let resData = {
+    visibleCards: data.visibleCards,
     acting: {
       id: acting ? acting.id : null,
       description: acting ? acting.description : null
@@ -642,5 +643,5 @@ const getProfileById = async (request, response) => {
 module.exports = {
   getProfile,
   getPublicProfileById,
-  getProfileById
+  getPrivateProfileById
 };
