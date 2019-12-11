@@ -98,14 +98,6 @@ module.exports = {
           exFeeder: {
             type: Sequelize.BOOLEAN
           },
-          createdAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-          },
-          updatedAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-          },
           flagged: {
             allowNull: false,
             type: Sequelize.BOOLEAN,
@@ -120,6 +112,31 @@ module.exports = {
             allowNull: true,
             type: Sequelize.BOOLEAN,
             defaultValue: false
+          },
+          visibleCards: {
+            allowNull: false,
+            type: Sequelize.JSON,
+            defaultValue: {
+              info: true,
+              manager: true,
+              talentManagement: true,
+              officialLanguage: true,
+              skills: true,
+              competencies: true,
+              developmentalGoals: true,
+              education: true,
+              experience: true,
+              projects: true,
+              careerInterests: true
+            }
+          },
+          createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          },
+          updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
           }
         });
       });

@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       exFeeder: DataTypes.BOOLEAN,
       flagged: DataTypes.BOOLEAN,
       interestedInRemote: DataTypes.BOOLEAN,
-      indeterminate: DataTypes.BOOLEAN
+      indeterminate: DataTypes.BOOLEAN,
+      visibleCards: DataTypes.JSON
     },
     {}
   );
