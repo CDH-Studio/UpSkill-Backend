@@ -1,7 +1,18 @@
 const { Router } = require("express");
 const admin = require("./index");
 
-const { keycloak } = require("../../keycloak/keycloak");
+const { keycloak } = require("../../util/keycloak");
+
+const catchAdminCheck = token => {
+  let hasRole = false;
+  try {
+    hasRole = token.hasRole("view-admin-console");
+  } catch (error) {
+    return false;
+  } finally {
+    return hasRole;
+  }
+};
 
 const adminRouter = Router();
 adminRouter.get(
@@ -25,11 +36,7 @@ adminRouter.get(
   keycloak.protect("view-admin-console"),
   admin.dashboardCount
 );
-adminRouter.get(
-  "/check",
-  keycloak.protect("view-admin-console"),
-  admin.checkAdmin
-);
+adminRouter.get("/check", keycloak.protect(catchAdminCheck), admin.checkAdmin);
 adminRouter.post(
   "/options/:type",
   keycloak.protect("manage-options"),

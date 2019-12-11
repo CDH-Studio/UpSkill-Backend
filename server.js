@@ -2,7 +2,7 @@
 
 // Import the packages we need
 const express = require("express"); // call express
-const { keycloak, sessionInstance } = require("./keycloak/keycloak");
+const { keycloak, sessionInstance } = require("./util/keycloak");
 const expressHbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
