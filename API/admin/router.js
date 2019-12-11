@@ -30,7 +30,11 @@ adminRouter.post(
   keycloak.protect("manage-options"),
   admin.createOption
 );
-adminRouter.post("/delete/:type", keycloak.protect(), admin.bulkDeleteOption);
+adminRouter.post(
+  "/delete/:type",
+  keycloak.protect("manage-options"),
+  admin.bulkDeleteOption
+);
 adminRouter.put(
   "/profileStatus",
   keycloak.protect(),
@@ -40,7 +44,15 @@ adminRouter
   .route("/options/:type/:id")
   .put(keycloak.protect("manage-options"), admin.updateOption)
   .delete(keycloak.protect("manage-options"), admin.deleteOption);
-adminRouter.put("/flagged", keycloak.protect(), admin.updateFlagged);
-adminRouter.put("/inactive", keycloak.protect(), admin.updateInactive);
+adminRouter.put(
+  "/flagged",
+  keycloak.protect("manage-users"),
+  admin.updateFlagged
+);
+adminRouter.put(
+  "/inactive",
+  keycloak.protect("manage-users"),
+  admin.updateInactive
+);
 
 module.exports = adminRouter;
