@@ -113,7 +113,7 @@ module.exports = {
             type: Sequelize.BOOLEAN,
             defaultValue: false
           },
-          visibleCard: {
+          visibleCards: {
             allowNull: false,
             type: Sequelize.JSON,
             defaultValue: {
