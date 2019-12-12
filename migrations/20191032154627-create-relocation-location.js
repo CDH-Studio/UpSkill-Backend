@@ -1,7 +1,6 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    console.log("create relocation location");
     return queryInterface.createTable("relocationLocations", {
       id: {
         allowNull: false,

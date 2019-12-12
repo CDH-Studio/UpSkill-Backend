@@ -35,5 +35,6 @@
   "secondaryReadingDate": "readingDate",
   "secondaryWritingDate": "writingDate",
   "secondaryOralDate": "oralDate",
-  "substantive": "indeterminate"
+  "substantive": "indeterminate",
+  "visibleProfileCards": "visibleCards"
 }
