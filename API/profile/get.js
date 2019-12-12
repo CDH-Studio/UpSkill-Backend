@@ -243,7 +243,8 @@ const getPublicProfileById = async (request, response) => {
           en: securityClearance ? securityClearance.descriptionEn : null,
           fr: securityClearance ? securityClearance.descriptionFr : null
         }
-      }
+      },
+      indeterminate: data.indeterminate
     };
 
   if (visibleCards.manager)
