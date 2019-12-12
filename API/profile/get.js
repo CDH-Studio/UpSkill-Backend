@@ -298,10 +298,10 @@ const getPublicProfileById = async (request, response) => {
     resData = {
       ...resData,
       gradedOnSecondLanguage: true,
-      firstLanguage:
-        data.firstLanguage == "fr"
-          ? { en: "French", fr: "Français" }
-          : { en: "English", fr: "Anglais" },
+      firstLanguage: {
+        fr: { en: "French", fr: "Français" },
+        en: { en: "English", fr: "Anglais" }
+      }[data.firstLanguage],
       secondaryOralDate: secLangProf ? secLangProf.oralDate : null,
       secondaryOralProficiency: secLangProf
         ? secLangProf.oralProficiency
@@ -559,10 +559,10 @@ const getPrivateProfileById = async (request, response) => {
     email: data.email,
     exFeeder: data.exFeeder,
     flagged: data.flagged,
-    firstLanguage:
-      data.firstLanguage == "fr"
-        ? { en: "French", fr: "Français" }
-        : { en: "English", fr: "Anglais" },
+    firstLanguage: {
+      fr: { en: "French", fr: "Français" },
+      en: { en: "English", fr: "Anglais" }
+    }[data.firstLanguage],
     firstName: data.firstName,
     githubUrl: data.github,
     gradedOnSecondLanguage: true,

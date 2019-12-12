@@ -113,12 +113,12 @@ const updateProfile = async (request, response) => {
     }
 
     if (
-      dbObject.readingProficiency ||
-      dbObject.writingProficiency ||
-      dbObject.oralProficiency ||
-      dbObject.readingDate ||
-      dbObject.writingDate ||
-      dbObject.oralDate
+      "readingProficiency" in dbObject ||
+      "writingProficiency" in dbObject ||
+      "oralProficiency" in dbObject ||
+      "readingDate" in dbObject ||
+      "writingDate" in dbObject ||
+      "oralDate" in dbObject
     ) {
       let secLangProf;
       secLangProf = await profile.getSecondLanguageProficiency();
