@@ -15,5 +15,6 @@ module.exports = {
   getInactive: get.getInactive,
   getUser: get.getUser,
   dashboardCount: get.dashboardCount,
+  checkAdmin: get.checkAdmin,
   updateProfileStatus: put.updateProfileStatus
 };

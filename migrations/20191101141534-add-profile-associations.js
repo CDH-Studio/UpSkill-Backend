@@ -122,19 +122,35 @@ module.exports = {
                                 }
                               )
                               .then(() => {
-                                return queryInterface.addColumn(
-                                  "profiles", // name of Source model
-                                  "secondLanguageProficiencyId", // name of the key we're adding
-                                  {
-                                    type: Sequelize.UUID,
-                                    references: {
-                                      model: "secondLanguageProficiencies", // name of Target model
-                                      key: "id" // key in Target model that we're referencing
-                                    },
-                                    onUpdate: "CASCADE",
-                                    onDelete: "SET NULL"
-                                  }
-                                );
+                                return queryInterface
+                                  .addColumn(
+                                    "profiles", // name of Source model
+                                    "secondLanguageProficiencyId", // name of the key we're adding
+                                    {
+                                      type: Sequelize.UUID,
+                                      references: {
+                                        model: "secondLanguageProficiencies", // name of Target model
+                                        key: "id" // key in Target model that we're referencing
+                                      },
+                                      onUpdate: "CASCADE",
+                                      onDelete: "SET NULL"
+                                    }
+                                  )
+                                  .then(() => {
+                                    return queryInterface.addColumn(
+                                      "profiles", // name of Source model
+                                      "lookingForANewJobId", // name of the key we're adding
+                                      {
+                                        type: Sequelize.UUID,
+                                        references: {
+                                          model: "lookingForANewJobs", // name of Target model
+                                          key: "id" // key in Target model that we're referencing
+                                        },
+                                        onUpdate: "CASCADE",
+                                        onDelete: "SET NULL"
+                                      }
+                                    );
+                                  });
                               });
                           });
                       });
@@ -193,10 +209,17 @@ module.exports = {
                                     "keyCompetencyId" // key we want to remove
                                   )
                                   .then(() => {
-                                    return queryInterface.removeColumn(
-                                      "profiles", // name of Source model
-                                      "secondLanguageProficiencyId" // key we want to remove
-                                    );
+                                    return queryInterface
+                                      .removeColumn(
+                                        "profiles", // name of Source model
+                                        "secondLanguageProficiencyId" // key we want to remove
+                                      )
+                                      .then(() => {
+                                        return queryInterface.removeColumn(
+                                          "profiles", // name of Source model
+                                          "lookingForANewJobId" // key we want to remove
+                                        );
+                                      });
                                   });
                               });
                           });
@@ -207,3 +230,8 @@ module.exports = {
       });
   }
 };
+/*
+
+
+
+*/

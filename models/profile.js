@@ -15,14 +15,16 @@ module.exports = (sequelize, DataTypes) => {
       branchFr: DataTypes.STRING,
       firstLanguage: DataTypes.STRING,
       secondLanguage: DataTypes.STRING,
-      yearService: DataTypes.INTEGER,
       actingStartDate: DataTypes.DATE,
       actingEndDate: DataTypes.DATE,
       linkedin: DataTypes.STRING,
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
       exFeeder: DataTypes.BOOLEAN,
-      flagged: DataTypes.BOOLEAN
+      flagged: DataTypes.BOOLEAN,
+      interestedInRemote: DataTypes.BOOLEAN,
+      indeterminate: DataTypes.BOOLEAN,
+      visibleCards: DataTypes.JSON
     },
     {}
   );
@@ -61,6 +63,8 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
     profile.hasMany(models.profileProject);
+    profile.belongsTo(models.lookingForANewJob);
+    profile.hasMany(models.relocationLocation);
   };
   return profile;
 };

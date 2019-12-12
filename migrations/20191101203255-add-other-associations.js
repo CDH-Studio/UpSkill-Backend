@@ -32,19 +32,51 @@ module.exports = {
             }
           )
           .then(() => {
-            return queryInterface.addColumn(
-              "profileOrganizations", // name of Source model
-              "profileId", // name of the key we're adding
-              {
-                type: Sequelize.UUID,
-                references: {
-                  model: "profiles", // name of Target model
-                  key: "id" // key in Target model that we're referencing
-                },
-                onUpdate: "CASCADE",
-                onDelete: "SET NULL"
-              }
-            );
+            return queryInterface
+              .addColumn(
+                "profileOrganizations", // name of Source model
+                "profileId", // name of the key we're adding
+                {
+                  type: Sequelize.UUID,
+                  references: {
+                    model: "profiles", // name of Target model
+                    key: "id" // key in Target model that we're referencing
+                  },
+                  onUpdate: "CASCADE",
+                  onDelete: "SET NULL"
+                }
+              )
+              .then(() => {
+                return queryInterface
+                  .addColumn(
+                    "relocationLocations", // name of Source model
+                    "profileId", // name of the key we're adding
+                    {
+                      type: Sequelize.UUID,
+                      references: {
+                        model: "profiles", // name of Target model
+                        key: "id" // key in Target model that we're referencing
+                      },
+                      onUpdate: "CASCADE",
+                      onDelete: "SET NULL"
+                    }
+                  )
+                  .then(() => {
+                    return queryInterface.addColumn(
+                      "relocationLocations", // name of Source model
+                      "locationId", // name of the key we're adding
+                      {
+                        type: Sequelize.UUID,
+                        references: {
+                          model: "locations", // name of Target model
+                          key: "id" // key in Target model that we're referencing
+                        },
+                        onUpdate: "CASCADE",
+                        onDelete: "SET NULL"
+                      }
+                    );
+                  });
+              });
           });
       });
   },
@@ -65,6 +97,18 @@ module.exports = {
             return queryInterface.removeColumn(
               "profileOrganizations", // name of Source model
               "profileId" // key we want to remove
+            );
+          })
+          .then(() => {
+            return queryInterface.removeColumn(
+              "relocationLocations", // name of Source model
+              "profileId" // key we want to remove
+            );
+          })
+          .then(() => {
+            return queryInterface.removeColumn(
+              "relocationLocations", // name of Source model
+              "locationId" // key we want to remove
             );
           });
       });

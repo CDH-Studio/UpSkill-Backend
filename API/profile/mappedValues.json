@@ -4,14 +4,15 @@
   "telephone": "telephone",
   "cellphone": "cellphone",
   "location": "locationId",
+  "lookingForNewJob": "lookingForANewJobId",
   "team": "team",
-  "tenure": "tenureId",
-  "groupOrLevel": "groupLevelId",
+  "temporaryRole": "tenureId",
+  "classification": "groupLevelId",
   "yearsOfService": "yearService",
   "security": "securityClearanceId",
   "acting": "actingId",
-  "actingStartDate": "actingStartDate",
-  "actingEndDate": "actingEndDate",
+  "actingPeriodStartDate": "actingStartDate",
+  "actingPeriodEndDate": "actingEndDate",
   "manager": "manager",
   "firstLanguage": "firstLanguage",
   "careerMobility": "careerMobilityId",
@@ -33,5 +34,7 @@
   "secondaryOralProficiency": "oralProficiency",
   "secondaryReadingDate": "readingDate",
   "secondaryWritingDate": "writingDate",
-  "secondaryOralDate": "oralDate"
+  "secondaryOralDate": "oralDate",
+  "substantive": "indeterminate",
+  "visibleProfileCards": "visibleCards"
 }

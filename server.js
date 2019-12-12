@@ -2,7 +2,7 @@
 
 // Import the packages we need
 const express = require("express"); // call express
-const { keycloak, sessionInstance } = require("./keycloak/keycloak");
+const { keycloak, sessionInstance } = require("./util/keycloak");
 const expressHbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
@@ -90,9 +90,11 @@ router.post("/user/", keycloak.protect(), user.createUser);
 router.get("/profile/", keycloak.protect(), profile.getProfile);
 router
   .route("/profile/:id")
-  .get(keycloak.protect(), profile.getProfileById)
+  .get(keycloak.protect(), profile.getPublicProfileById)
   .post(keycloak.protect(), profile.createProfile)
   .put(keycloak.protect(), profile.updateProfile);
+
+router.route("/private/profile/:id").get(profile.getPrivateProfileById);
 
 //Admin endpoints
 router.use("/admin", admin);
