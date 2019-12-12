@@ -26,6 +26,8 @@ const updateProfile = async (request, response) => {
     dbObject.jobTitleFr = dbObject.jobTitle.fr;
   }
 
+  console.log("update profile", dbObject);
+
   try {
     let [updated] = await Profile.update(dbObject, {
       where: { id: id }
@@ -113,12 +115,12 @@ const updateProfile = async (request, response) => {
     }
 
     if (
-      dbObject.readingProficiency ||
-      dbObject.writingProficiency ||
-      dbObject.oralProficiency ||
-      dbObject.readingDate ||
-      dbObject.writingDate ||
-      dbObject.oralDate
+      "readingProficiency" in dbObject ||
+      "writingProficiency" in dbObject ||
+      "oralProficiency" in dbObject ||
+      "readingDate" in dbObject ||
+      "writingDate" in dbObject ||
+      "oralDate" in dbObject
     ) {
       let secLangProf;
       secLangProf = await profile.getSecondLanguageProficiency();
@@ -134,6 +136,8 @@ const updateProfile = async (request, response) => {
         oralDate,
         readingProficiency
       } = dbObject;
+
+      console.log("DB OBJ", dbObject);
 
       secLangProf
         .update(
