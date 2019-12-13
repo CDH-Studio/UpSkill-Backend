@@ -22,38 +22,8 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          descriptionEn: "Deployment",
-          descriptionFr: "Mutations",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Indeterminate",
-          descriptionFr: "Indeterminée",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Secondment",
+          descriptionEn: "Secondment-in",
           descriptionFr: "Détachement",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Student",
-          descriptionFr: "Étudiant",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Casual",
-          descriptionFr: "Travailleur occasionnel",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          descriptionEn: "Term",
-          descriptionFr: "Terme",
           createdAt: new Date(),
           updatedAt: new Date()
         }
