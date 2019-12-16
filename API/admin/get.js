@@ -74,7 +74,7 @@ const dashboardCount = async (request, response) => {
       where: { inactive: true }
     });
 
-    const user = await User.count();
+    const user = await Profile.count();
 
     const exFeeder = await Profile.count({
       where: { exFeeder: true }
