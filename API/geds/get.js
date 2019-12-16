@@ -4,10 +4,10 @@ require("dotenv").config();
 
 async function getEmployeeInfo(request, response) {
   let searchValue = request.params.searchValue;
-  const url =
-    "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=" +
-    encodeURI(searchValue) +
-    "&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000";
+  // const url =
+  //   "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=" +
+  //   encodeURI(searchValue) +
+  //   "&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000";
 
   let info = [];
 
