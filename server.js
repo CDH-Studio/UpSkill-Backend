@@ -133,7 +133,6 @@ app.use("/api", router);
 
 // Set the logout route to use keycloak middleware to kill session
 // app.use(keycloak.middleware({ logout: "/" }));
-
 // START THE SERVER ==================================================
 app.listen(port);
 console.log("Magic happens on port " + port);
