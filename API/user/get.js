@@ -1,8 +1,6 @@
 const Models = require("../../models");
 const User = Models.user;
 
-console.log("MODELS", Models.user);
-
 const getUser = async (request, response) => {
   response.status(200).json(await User.findAll());
   const wtf = await User.findAll();

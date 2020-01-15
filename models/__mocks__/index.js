@@ -4,129 +4,25 @@ const SequelizeMock = require("sequelize-mock");
 // Setup the mock database connection
 const DBConnectionMock = new SequelizeMock();
 
-// Define mock User Model
-const UserMock = DBConnectionMock.define("user");
+// Define our Model
+const UserMock = DBConnectionMock.define("user", {
+  id: "247ed9ea-30c2-11ea-aee3-af83807df973",
+  name: "Sukhsimranpreet Singh Sekhon",
+  email: "sukhsimranpreetsingh.sekhon@canada.ca",
+  inactive: false
+});
 
-// Define mock Profile Model
-const ProfileMock = DBConnectionMock.define("profile");
+// You can also associate mock models as well
+const GroupMock = DBConnectionMock.define("groups", {
+  name: "My Awesome Group"
+});
 
-// const test_getUserInfoById = () => {
-//   const run = UserMock.$queueResult([
-//     UserMock.build({
-//       id: "012345",
-//       name: "John Doe",
-//       email: "john.doe@canada.ca",
-//       inactive: false
-//     }),
-//     UserMock.build({
-//       id: "054321",
-//       name: "Clarence Decatur Howe",
-//       email: "clarencedecatur.howe@canada.ca",
-//       inactive: false
-//     })
-//   ]);
-//   return run;
-// };
+UserMock.belongsTo(GroupMock);
 
-// Note: keep in-order of data entry
+const mock = jest.fn().mockImplementation(() => {
+  return { user: UserMock };
+});
 
-// // // user.post: createUser Test (Fix)
-// UserMock.$queueResult(
-//   UserMock.build({
-//     id: "054321",
-//     name: "Clarence Decatur Howe",
-//     email: "clarencedecatur.howe@canada.ca",
-//     inactive: false
-//   })
-// );
+// mock.user.findAll().then(data => console.log(data));
 
-// user.get:
-
-// getUserById Test
-UserMock.$queueResult([
-  UserMock.build({
-    id: "012345",
-    name: "John Doe",
-    email: "john.doe@canada.ca",
-    inactive: false
-  }),
-  UserMock.build({
-    id: "054321",
-    name: "Clarence Decatur Howe",
-    email: "clarencedecatur.howe@canada.ca",
-    inactive: false
-  })
-]);
-
-// getAllUserInfo Test
-UserMock.$queueResult([
-  UserMock.build({
-    id: "012345",
-    name: "John Doe",
-    email: "john.doe@canada.ca",
-    inactive: false
-  }),
-  UserMock.build({
-    id: "054321",
-    name: "Clarence Decatur Howe",
-    email: "clarencedecatur.howe@canada.ca",
-    inactive: false
-  })
-]);
-
-// admin.get:
-
-//  getInactive Test (Fix)
-UserMock.$queueResult(
-  UserMock.build({
-    id: "012345",
-    name: "John Doe",
-    email: "john.doe@canada.ca",
-    inactive: true
-  })
-);
-
-// getFlagged Test
-ProfileMock.$queueResult(
-  ProfileMock.build({
-    id: "06789",
-    name: "Mary Doe",
-    email: "mary.doe@canada.ca",
-    flagged: true
-  })
-);
-
-// ProfileMock.$queueResult(
-//   ProfileMock.build({
-//     id: "06789",
-//     name: "Mary Doe",
-//     email: "mary.doe@canada.ca",
-//     flagged: true
-//   })
-// );
-
-// // ProfileMock.$queueResult([
-// //   ProfileMock.build({
-// //     id: "012345",
-// //     name: "John Doe",
-// //     email: "john.doe@canada.ca",
-// //     flagged: false
-// //   }),
-// //   ProfileMock.build({
-// //     id: "054321",
-// //     name: "Clarence Decatur Howe",
-// //     email: "clarencedecatur.howe@canada.ca",
-// //     flagged: false
-// //   })
-// // ]);
-
-// // Associate UserMock to ProfileMock:
-// UserMock.belongsTo(ProfileMock, {
-//   foreignKey: { fieldName: "id" }
-// });
-
-// Allow UserMock to be used outside module:
-module.exports = {
-  user: UserMock,
-  profile: ProfileMock
-};
+module.exports = { user: UserMock };
