@@ -1,19 +1,8 @@
 const get = require("../API/user/get");
 const Models = require("../models");
+
+//Will user index.js from ../models/__mocks__
 jest.mock("../models");
-
-// Allows jest to track sequelize-mock:
-// jest.mock("../models/user", () => {
-//   const SequelizeMock = require("sequelize-mock");
-//   const dbMock = new SequelizeMock();
-//   return dbMock.define("user", {
-//     name: "John Doe",
-//     email: "john.doe@canada.ca",
-//     inactive: false
-//   });
-// });
-
-// sequelize.$overrideImport('./users/model.js', './users/mock.js');
 
 const mockRequest = data => {
   const req = {};
@@ -29,21 +18,22 @@ const mockResponse = () => {
   return res;
 };
 
-jest.mock("../models", () => {
-  return { user: jest.fn() };
-});
-
 describe("getUserInfo", () => {
-  it("Should get user from mock", async () => {
-    const req = mockRequest("247ed9ea-30c2-11ea-aee3-af83807df973");
-
+  it("Should get user info", async () => {
+    const id = "247ed9ea-30c2-11ea-aee3-af83807df973";
+    const req = mockRequest(id);
     const res = mockResponse();
-
-    //dbMock.mockImplementationOnce(() => Promise.resolve(mockUserData));
-
     await get.getUserById(req, res).then(data => {
-      console.log(data);
-      expect(data.name).toEqual("Sukhsimranpreet Singh Sekhon");
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json.mock.calls[0][0]).toHaveProperty(
+        "name",
+        "Sukhsimranpreet Singh Sekhon"
+      );
+      expect(res.json.mock.calls[0][0]).toHaveProperty(
+        "email",
+        "sukhsimranpreetsingh.sekhon@canada.ca"
+      );
+      expect(res.json.mock.calls[0][0]).toHaveProperty("id", id);
     });
   });
 });
