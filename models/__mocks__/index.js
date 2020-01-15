@@ -19,8 +19,10 @@ const GroupMock = DBConnectionMock.define("groups", {
 
 UserMock.belongsTo(GroupMock);
 
-await UserMock.findAll().then(([data]) => {
-  console.log(data.dataValues);
+const mock = jest.fn().mockImplementation(() => {
+  return { user: UserMock };
 });
+
+// mock.user.findAll().then(data => console.log(data));
 
 module.exports = { user: UserMock };
