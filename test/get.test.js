@@ -19,19 +19,23 @@ const mockResponse = () => {
 
 // Testing getUserById function (findOne):
 describe("getUserInfoById", () => {
-  it("Should get user info through id", async () => {
-    const id = "b0d410be-30c1-11ea-89a8-d3732f9abb69";
+  it("Get User Info: ", async () => {
+    const id = "012345";
     const req = mockRequest(id);
     const res = mockResponse();
-    await get.getUserById(req, res).then(mockUserData => {
+    await get.getUserById(req, res).then(() => {
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json.mock.calls[0][0][0]).toHaveProperty("name", "John Doe");
-      expect(res.json.mock.calls[0][0][0]).toHaveProperty(
+      expect(res.json.mock.calls[0][0]).toHaveProperty("name", "Sukhu Sekhon");
+      console.log("Name: ", res.json.mock.calls[0][0].name);
+      expect(res.json.mock.calls[0][0]).toHaveProperty(
         "email",
         "john.doe@canada.ca"
       );
-      expect(res.json.mock.calls[0][0][0]).toHaveProperty("id", id);
-      expect(res.json.mock.calls[0][0][0]).toHaveProperty("inactive", false);
+      console.log("Email: ", res.json.mock.calls[0][0].email);
+      expect(res.json.mock.calls[0][0]).toHaveProperty("id", id);
+      console.log("id: ", res.json.mock.calls[0][0].id);
+      expect(res.json.mock.calls[0][0]).toHaveProperty("inactive", false);
+      console.log("Inactive: ", res.json.mock.calls[0][0].inactive);
     });
   });
 });
