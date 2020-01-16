@@ -8,6 +8,7 @@ const createUser = async (request, response) => {
   }).then(async ([user, created]) => {
     console.log("THIS SHOULD BE NULL: ", await user.getProfile(), "The end");
     let hasProfile = !((await user.getProfile()) == null);
+    console.log("THIS SHOULD BE NULL: ", await user.getProfile(), "The end");
     let resData = { user, created, hasProfile };
     response.status(200).json(resData);
   });
