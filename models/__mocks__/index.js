@@ -7,7 +7,7 @@ const DBConnectionMock = new SequelizeMock();
 // Define our Model
 const UserMock = DBConnectionMock.define("user", {
   id: "012345",
-  name: "Sukhu Sekhon",
+  name: "John Doe",
   email: "john.doe@canada.ca",
   inactive: false
 });
@@ -20,9 +20,9 @@ const UserMock = DBConnectionMock.define("user", {
 // UserMock.belongsTo(GroupMock);
 
 // const ProfileMock = DBConnectionMock.define("profile", {
-//   id: "b0d410be-30c1-11ea-89a8-d3732f9abb69",
-//   name: "John Doe1",
-//   email: "john.doe1@canada.ca",
+//   id: "06789",
+//   name: "Mary Doe",
+//   email: "mary.doe@canada.ca",
 //   flagged: false
 // });
 
