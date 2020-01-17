@@ -25,7 +25,8 @@ describe("getUserInfoById", () => {
     const res = mockResponse();
     await get.getUserById(req, res).then(() => {
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json.mock.calls[0][0]).toHaveProperty("name", "Sukhu Sekhon");
+      console.log("getUserInfoById:");
+      expect(res.json.mock.calls[0][0]).toHaveProperty("name", "John Doe");
       console.log("Name: ", res.json.mock.calls[0][0].name);
       expect(res.json.mock.calls[0][0]).toHaveProperty(
         "email",
@@ -33,7 +34,7 @@ describe("getUserInfoById", () => {
       );
       console.log("Email: ", res.json.mock.calls[0][0].email);
       expect(res.json.mock.calls[0][0]).toHaveProperty("id", id);
-      console.log("id: ", res.json.mock.calls[0][0].id);
+      console.log("Id: ", res.json.mock.calls[0][0].id);
       expect(res.json.mock.calls[0][0]).toHaveProperty("inactive", false);
       console.log("Inactive: ", res.json.mock.calls[0][0].inactive);
     });
@@ -45,21 +46,20 @@ describe("getAllUserInfo", () => {
   it("Should get all user info", async () => {
     const req = null;
     const res = mockResponse();
-    await get.getUser(req, res).then(mockUserData => {
+    await get.getUser(req, res).then(() => {
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json.mock.calls[0][0][0][2]).toHaveProperty(
-        "name",
-        "Sir Bobby Hall"
-      );
-      expect(res.json.mock.calls[0][0][0][0]).toHaveProperty(
+      console.log("getAllUserInfo:");
+      expect(res.json.mock.calls[0][0][0]).toHaveProperty("name", "John Doe");
+      console.log("Name: ", res.json.mock.calls[0][0][0].name);
+      expect(res.json.mock.calls[0][0][0]).toHaveProperty(
         "email",
         "john.doe@canada.ca"
       );
-      expect(res.json.mock.calls[0][0][0][1]).toHaveProperty(
-        "id",
-        "faba08aa-ffe3-11e9-8d71-362b9e155667"
-      );
-      expect(res.json.mock.calls[0][0][0][2]).toHaveProperty("inactive", true);
+      console.log("Email: ", res.json.mock.calls[0][0][0].email);
+      expect(res.json.mock.calls[0][0][0]).toHaveProperty("id", "012345");
+      console.log("Id: ", res.json.mock.calls[0][0][0].id);
+      expect(res.json.mock.calls[0][0][0]).toHaveProperty("inactive", false);
+      console.log("Inactive: ", res.json.mock.calls[0][0][0].inactive);
     });
   });
 });
