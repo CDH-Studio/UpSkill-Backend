@@ -25,8 +25,11 @@ const getOption = async (request, response) => {
 
 const getFlagged = async (request, response) => {
   try {
+    console.log("Entered with ID: ", request.params);
+
     const { id } = request.params;
-    Profile.findOne({ where: { id: id } }).then(row =>
+
+    await Profile.findOne({ where: { id: id } }).then(row =>
       response.status(200).json({ value: row.flagged })
     );
   } catch (error) {
@@ -36,9 +39,19 @@ const getFlagged = async (request, response) => {
 
 const getInactive = async (request, response) => {
   try {
+    console.log("Entered with ID: ", request.params);
+
     const { id } = request.params;
-    User.findOne({ where: { id: id } }).then(row =>
+
+    await User.findOne({ where: { id: id } }).then(row =>
       response.status(200).json({ value: row.inactive })
+    );
+
+    const print = await User.findOne({ where: { id: id } });
+
+    console.log(
+      "The End: ",
+      print.then(row => response.status(200).json({ value: row.inactive }))
     );
   } catch (error) {
     response.status(500).json(error);
