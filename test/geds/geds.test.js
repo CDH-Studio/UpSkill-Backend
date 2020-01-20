@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const geds = require("../API/geds");
+const geds = require("../../API/geds");
 
 //Allows jest to track axios
 jest.mock("axios");
