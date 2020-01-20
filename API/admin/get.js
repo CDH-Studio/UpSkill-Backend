@@ -25,6 +25,8 @@ const getOption = async (request, response) => {
 
 const getFlagged = async (request, response) => {
   try {
+    console.log("Entered with ID: ", request.params);
+
     const { id } = request.params;
 
     await Profile.findOne({ where: { id: id } }).then(row =>
