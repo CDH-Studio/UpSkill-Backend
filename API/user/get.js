@@ -3,6 +3,7 @@ const User = Models.user;
 
 const getUser = async (request, response) => {
   response.status(200).json(await User.findAll());
+  const wtf = await User.findAll();
 };
 const getUserById = async (request, response) => {
   const id = request.params.id;
