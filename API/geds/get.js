@@ -7,7 +7,7 @@ async function getEmployeeInfo(request, response) {
   const url =
     "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=" +
     encodeURI(searchValue) +
-    "&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000";
+    "&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000&returnOrganizationInformation=yes";
 
   let info = [];
 
