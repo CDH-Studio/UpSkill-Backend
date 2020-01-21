@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const admin = require("./index");
+const reporting = require("./reporting/index");
 
 const { keycloak } = require("../../util/keycloak");
 
@@ -66,5 +67,8 @@ adminRouter.put(
   keycloak.protect("manage-users"),
   admin.updateInactive
 );
+
+// For testing purposes - Reporting BI
+adminRouter.get("/reporting", admin.getStatistics);
 
 module.exports = adminRouter;

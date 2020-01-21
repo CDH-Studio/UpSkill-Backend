@@ -1,15 +1,10 @@
-const getModel = require("../getModel.js").getModel;
-const models = require("../../../models");
-const User = Models.user; // user.js
-const Profile = Models.profile; // profile.js
-const ProfileSkills = Models.profileSkills; // profileSkills.js
+// const Models = require("../../../models");
 
-const countSkill = async (request, response) => {
-  try {
-    const { id } = request.params; // skill ID
+const utils = require("./util");
 
-    Profile;
-  } catch (error) {
-    response.status(500).json(error);
-  }
+const statistics = async (request, response) => {
+  let results = await utils.countSkillProfiles().then(res => res);
+
+  response.status(200).json(results);
 };
+module.exports = statistics;

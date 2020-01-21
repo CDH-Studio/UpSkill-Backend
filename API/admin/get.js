@@ -4,6 +4,8 @@ const User = Models.user;
 const Profile = Models.profile;
 const Tenure = Models.tenure;
 
+const utils = require("./reporting/util");
+
 const getOption = async (request, response) => {
   try {
     const { type } = request.params;
@@ -86,6 +88,12 @@ const dashboardCount = async (request, response) => {
   }
 };
 
+const statistics = async (request, response) => {
+  let results = await utils.countSkillProfiles().then(res => res);
+
+  response.status(200).json(results);
+};
+
 const checkAdmin = (request, response) =>
   response.status(200).send("Access Granted");
 
@@ -95,5 +103,6 @@ module.exports = {
   getInactive,
   getUser,
   dashboardCount,
-  checkAdmin
+  checkAdmin,
+  statistics
 };
