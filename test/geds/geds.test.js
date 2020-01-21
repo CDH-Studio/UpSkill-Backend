@@ -34,7 +34,7 @@ describe("getEmployeeInfo", () => {
       },
       methon: "get",
       url:
-        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000"
+        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000&returnOrganizationInformation=yes"
     });
 
     expect(res.status).toHaveBeenCalledWith(200);
@@ -148,7 +148,7 @@ describe("getEmployeeInfo", () => {
       },
       methon: "get",
       url:
-        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000"
+        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000&returnOrganizationInformation=yes"
     });
 
     expect(res.status).toHaveBeenCalledWith(429);
@@ -212,7 +212,7 @@ describe("getEmployeeInfo", () => {
       },
       methon: "get",
       url:
-        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000"
+        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000&returnOrganizationInformation=yes"
     });
 
     expect(res.status).toHaveBeenCalledWith(204);
@@ -276,7 +276,7 @@ describe("getEmployeeInfo", () => {
       },
       methon: "get",
       url:
-        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20ES%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000"
+        "https://geds-sage-ssc-spc-apicast-production.api.canada.ca/gapi/v2/employees?searchValue=Java%20Script&searchField=9&searchCriterion=2&searchScope=sub&searchFilter=2&maxEntries=1000&returnOrganizationInformation=yes"
     });
 
     expect(res.status).toHaveBeenCalledWith(888);
