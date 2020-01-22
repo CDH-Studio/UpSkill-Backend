@@ -23,7 +23,6 @@ const countSkillProfiles = async () => {
     ],
     order: [[Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "DESC"]]
   });
-
   return profileSkills;
 };
 
