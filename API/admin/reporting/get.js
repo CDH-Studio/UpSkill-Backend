@@ -7,4 +7,4 @@ const statistics = async (request, response) => {
 
   response.status(200).json(results);
 };
-module.exports = statistics;
+module.exports = { statistics };
