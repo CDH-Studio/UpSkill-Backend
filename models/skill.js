@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   skill.associate = function(models) {
     skill.belongsToMany(models.profile, { through: "profileSkills" });
+    skill.belongsToMany(models.profile, { through: "profileCompetencies" });
   };
   return skill;
 };
