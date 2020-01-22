@@ -1,39 +1,54 @@
+const Sequelize = require("sequelize");
 const Models = require("../../../../models");
 
-const Migration = require("../../../../migrations/20191101141536-add-skill-associations");
-
 const Skills = Models.skill; // skill.js
-const ProfileSkills = Migration[0].up;
+const Profiles = Models.profile; // skill.js
 
 const countSkillProfiles = async () => {
-  const occurences = {}; // {descriptionEn, descriptionFr, profileCount}
+  // const occurences = {}; // {descriptionEn, descriptionFr, profileCount}
 
-  const getRows = await Skills.findAll({
-    where: {
-      type: "skill"
-    }
+  const hi = await Skills.findAll({
+    // group: ["skill.id"],
+    attributes: {
+      include: [
+        (Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "descriptionEn")
+      ]
+    },
+    include: [
+      {
+        model: Profiles,
+        attributes: []
+      }
+    ]
   });
 
-  // console.log("Output: ", getRows);
+  console.log(hi);
 
-  getRows.forEach(row => {
-    const descriptionEn = row.descriptionEn;
+  // const getRows = await Skills.findAll({
+  //   where: {
+  //     type: "skill"
+  //   }
+  // });
 
-    // console.log("Skill: ", descriptionEn);
+  // // console.log("Output: ", getRows);
 
-    const descriptionFr = row.descriptionFr;
+  // getRows.forEach(row => {
+  //   const descriptionEn = row.descriptionEn;
 
-    const id = row.id;
+  //   // console.log("Skill: ", descriptionEn);
 
-    // console.log("Skill ID: ", id);
+  //   const descriptionFr = row.descriptionFr;
 
-    const amount = ProfileSkills.count({ where: { skillId: id } });
+  //   const id = row.id;
 
-    occurences.push([descriptionEn, descriptionFr, amount]);
-  });
+  //   // console.log("Skill ID: ", id);
 
-  // console.log("Occurences", occurences);
-  return occurences;
+  //   occurences.push([descriptionEn, descriptionFr, amount]);
+  // });
+
+  // // console.log("Occurences", occurences);
+  // return occurences;
+  return hi;
 };
 
 module.exports = countSkillProfiles;

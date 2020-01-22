@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const admin = require("./index");
-const reporting = require("./reporting/index");
+const reporting = require("./reporting");
 
 const { keycloak } = require("../../util/keycloak");
 
@@ -69,6 +69,6 @@ adminRouter.put(
 );
 
 // For testing purposes - Reporting BI
-adminRouter.get("/reporting", admin.getStatistics);
+adminRouter.get("/reporting", reporting.get.statistics);
 
 module.exports = adminRouter;
