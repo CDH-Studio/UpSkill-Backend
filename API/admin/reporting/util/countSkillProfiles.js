@@ -22,7 +22,18 @@ const countSkillProfiles = async () => {
     ]
   });
 
-  console.log(hi);
+  const profileSkills = await Skills.findAll({
+    where: { type: "skill" },
+    attributes: ["id", "descriptionEn", "descriptionFr"],
+    include: [
+      {
+        model: Profiles,
+        attributes: ["id"]
+      }
+    ]
+  });
+
+  console.log(profileSkills);
 
   // const getRows = await Skills.findAll({
   //   where: {
@@ -48,7 +59,7 @@ const countSkillProfiles = async () => {
 
   // // console.log("Occurences", occurences);
   // return occurences;
-  return hi;
+  return profileSkills;
 };
 
 module.exports = countSkillProfiles;
