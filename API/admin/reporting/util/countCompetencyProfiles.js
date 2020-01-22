@@ -3,12 +3,12 @@ const Models = require("../../../../models");
 const Skills = Models.skill; // Skills Table
 const Profiles = Models.profile; // Profiles Table
 
-const countSkillProfiles = async () => {
-  const profileSkills = await Skills.findAll({
-    // {Skill ID (id) , descriptionEn, descriptionFr, Count Profile Occurences (countOccurences)}
+const countCompetencyProfiles = async () => {
+  const profileCompetencies = await Skills.findAll({
+    // (Competency ID (id), descriptionEn, descriptionFr, Count Profile Occurences (countOccurences)}
     group: ["skill.id"],
     includeIgnoreAttributes: false,
-    where: { type: "skill" },
+    where: { type: "competency" },
     include: [
       {
         model: Profiles,
@@ -23,8 +23,7 @@ const countSkillProfiles = async () => {
     ],
     order: [[Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "DESC"]]
   });
-
-  return profileSkills;
+  return profileCompetencies;
 };
 
-module.exports = countSkillProfiles;
+module.exports = countCompetencyProfiles;
