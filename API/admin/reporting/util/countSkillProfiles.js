@@ -7,33 +7,41 @@ const Profiles = Models.profile; // skill.js
 const countSkillProfiles = async () => {
   // const occurences = {}; // {descriptionEn, descriptionFr, profileCount}
 
-  const hi = await Skills.findAll({
-    // group: ["skill.id"],
-    attributes: {
-      include: [
-        (Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "descriptionEn")
-      ]
-    },
-    include: [
-      {
-        model: Profiles,
-        attributes: []
-      }
-    ]
-  });
+  // const hi = await Skills.findAll({
+  //   // group: ["skill.id"],
+  //   attributes: {
+  //     include: [
+  //       (Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "descriptionEn")
+  //     ]
+  //   },
+  //   include: [
+  //     {
+  //       model: Profiles,
+  //       attributes: []
+  //     }
+  //   ]
+  // });
 
   const profileSkills = await Skills.findAll({
+    group: ["skill.id"],
+    includeIgnoreAttributes: false,
     where: { type: "skill" },
-    attributes: ["id", "descriptionEn", "descriptionFr"],
     include: [
       {
         model: Profiles,
         attributes: ["id"]
       }
-    ]
+    ],
+    attributes: [
+      "id",
+      "descriptionEn",
+      "descriptionFr",
+      [Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "countOccurences"]
+    ],
+    order: [[Sequelize.fn("COUNT", Sequelize.col("profiles.id")), "DESC"]]
   });
 
-  console.log(profileSkills);
+  // console.log(profileSkills);
 
   // const getRows = await Skills.findAll({
   //   where: {
