@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       through: "profileCompetencies",
       as: "competencies"
     });
+    skill.belongsToMany(models.profile, {
+      through: "profileDevelopmentGoals",
+      as: "developmentGoals"
+    });
   };
   return skill;
 };
