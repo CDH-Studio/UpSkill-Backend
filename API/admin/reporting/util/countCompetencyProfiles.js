@@ -1,8 +1,6 @@
 const Models = require("../../../../models");
 const sequelize = Models.sequelize;
 
-const sequelize = Models.sequelize;
-
 const countCompetencyProfiles = async () => {
   const profileCompetencies = await sequelize.query(
     `SELECT
