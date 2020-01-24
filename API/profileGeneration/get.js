@@ -1,7 +1,9 @@
+const axios = require("axios");
+
 const Models = require("../../models");
 const User = Models.user;
 const Location = Models.location;
-const axios = require("axios");
+const getGedsProfile = require("./util/getGedsProfile");
 
 const getGedsAssist = async (request, response) => {
   id = request.params.id;
@@ -15,15 +17,8 @@ const getGedsAssist = async (request, response) => {
       name.substring(lastSpaceIndex) + ", " + name.substring(0, lastSpaceIndex);
 
     try {
-      let gedsData = await axios
-        .get("http://localhost:8080/api/geds/" + encodeURI(name))
-        .then(res => {
-          return res.data;
-        });
-      if (gedsData.status == 204) {
-        response.status(gedsData.status).send(gedsData.statusText);
-        return;
-      }
+      let gedsData = await getGedsProfile(name);
+
       let promise = gedsData.map(async gedsProfile => {
         let profile = {};
 
@@ -36,49 +31,11 @@ const getGedsAssist = async (request, response) => {
         profile.telephone = gedsProfile.phoneNumber;
         profile.cellphone = gedsProfile.altPhoneNumber;
 
-        // let organizations = gedsProfile.organizations.map(
-        //   ({ organization }, i) => {
-        //     return { description: organization.description, tier: i };
-        //   }
-        // );
-
-        let organizations = [
-          {
-            description: {
-              en: "Innovation, Science and Economic Development Canada",
-              fr: "Innovation, Sciences et Développement économique Canada"
-            },
-            tier: 0
-          },
-          {
-            description: {
-              en: "DIGITAL TRANSFORMATION SERVICE SECTOR",
-              fr: "SECTEUR DU SERVICE DE TRANSFORMATION NUMÉRIQUE"
-            },
-            tier: 1
-          },
-          {
-            description: {
-              en: "Chief Information Office",
-              fr: "Bureau principal de l'information"
-            },
-            tier: 2
-          },
-          {
-            description: {
-              en: "Digital Services Division",
-              fr: "Division des services numériques"
-            },
-            tier: 3
-          },
-          {
-            description: {
-              en: "Business Line Solutions Directorate",
-              fr: "Direction des solutions des lignes d'affaires"
-            },
-            tier: 4
+        let organizations = gedsProfile.organizations.map(
+          ({ organization }, i) => {
+            return { description: organization.description, tier: i };
           }
-        ];
+        );
 
         let branchOrg = organizations[Math.min(2, organizations.length - 1)];
 
@@ -90,9 +47,8 @@ const getGedsAssist = async (request, response) => {
         let location = await Location.findOne({
           where: {
             postalCode:
-              // gedsProfile.organizations[gedsProfile.organizations.length - 1]
-              //   .organization.addressInformation.pc
-              "K1A 0H5"
+              gedsProfile.organizations[gedsProfile.organizations.length - 1]
+                .organization.addressInformation.pc
           }
         }).then(res => {
           if (res) return res.dataValues;
