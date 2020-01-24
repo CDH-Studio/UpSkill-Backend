@@ -1,7 +1,9 @@
+const axios = require("axios");
+
 const Models = require("../../models");
 const User = Models.user;
 const Location = Models.location;
-const axios = require("axios");
+const getGedsProfile = require("./util/getGedsProfile");
 
 const getGedsAssist = async (request, response) => {
   id = request.params.id;
@@ -15,15 +17,8 @@ const getGedsAssist = async (request, response) => {
       name.substring(lastSpaceIndex) + ", " + name.substring(0, lastSpaceIndex);
 
     try {
-      let gedsData = await axios
-        .get("http://localhost:8080/api/geds/" + encodeURI(name))
-        .then(res => {
-          return res.data;
-        });
-      if (gedsData.status == 204) {
-        response.status(gedsData.status).send(gedsData.statusText);
-        return;
-      }
+      let gedsData = await getGedsProfile(name);
+
       let promise = gedsData.map(async gedsProfile => {
         let profile = {};
 

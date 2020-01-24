@@ -12,7 +12,6 @@ const app = express(); // define our app using express
 
 const profile = require("./API/profile");
 const user = require("./API/user");
-const geds = require("./API/geds");
 const profileGeneration = require("./API/profileGeneration");
 const options = require("./API/options").optionRouter;
 const admin = require("./API/admin/router");
@@ -78,8 +77,6 @@ router.get("/getEmployeeInfo/:searchValue", keycloak.protect(), async function(
   const data = await geds.getEmployeeInfo(searchValue);
   res.json(JSON.parse(data.body));
 });
-
-router.get("/geds/:searchValue", geds.getEmployeeInfo);
 
 //User endpoints
 router.get("/user/", keycloak.protect(), user.getUser);
