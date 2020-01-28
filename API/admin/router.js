@@ -32,11 +32,6 @@ adminRouter.get(
   admin.getInactive
 );
 adminRouter.get("/user", keycloak.protect("view-admin-console"), admin.getUser);
-adminRouter.get(
-  "/dashboard",
-  keycloak.protect("view-admin-console"),
-  admin.dashboardCount
-);
 adminRouter.get("/check", keycloak.protect(catchAdminCheck), admin.checkAdmin);
 adminRouter.post(
   "/options/:type",
@@ -69,6 +64,6 @@ adminRouter.put(
 );
 
 // For testing purposes - Reporting BI
-adminRouter.get("/reporting", reporting.get.statistics);
+adminRouter.get("/dashboard", reporting.get.statistics);
 
 module.exports = adminRouter;
