@@ -63,7 +63,6 @@ adminRouter.put(
   admin.updateInactive
 );
 
-// For testing purposes - Reporting BI
 adminRouter.get("/dashboard", reporting.get.statistics);
 
 module.exports = adminRouter;
