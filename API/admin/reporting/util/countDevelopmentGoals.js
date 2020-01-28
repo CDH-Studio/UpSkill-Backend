@@ -1,8 +1,4 @@
-// const Sequelize = require("sequelize");
 const Models = require("../../../../models");
-// const Skills = Models.skill; // Skills Table
-// const Profiles = Models.profile; // Profiles Table
-
 const sequelize = Models.sequelize;
 
 const countDevelopmentGoals = async () => {

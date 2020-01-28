@@ -12,23 +12,15 @@ const growthRateByMonth = async () => {
 
   const currentDate = moment();
 
-  // console.log("Date: ", currentDate); // Check if initialized
-
   profiles.forEach(profile => {
     const profileTime = moment(profile.createdAt);
-    // console.log("Date: ", profileTime);
     const difference = currentDate.diff(profileTime, "months");
-    // console.log("Difference: ", duration);
-    // console.log(countNewUsers[difference]);
-
     countNewUsers[difference] = countNewUsers[difference]
       ? countNewUsers[difference] + 1
       : 1;
   });
 
   countNewUsers = Array.from(countNewUsers, item => item || 0);
-
-  // console.log("Array (Months): ", countNewUsers);
 
   return countNewUsers;
 };
