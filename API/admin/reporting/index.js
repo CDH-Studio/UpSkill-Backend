@@ -1,3 +1,5 @@
 const get = require("./get");
 
-module.exports = { get };
+const report = require("./test");
+
+module.exports = { get, skillsReport: report.generateSkillsReport };
