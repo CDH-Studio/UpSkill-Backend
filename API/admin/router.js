@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const admin = require("./index");
 const reporting = require("./reporting");
-
 const { keycloak } = require("../../util/keycloak");
 
 const catchAdminCheck = token => {
