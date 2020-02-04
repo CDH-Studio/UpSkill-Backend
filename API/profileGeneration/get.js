@@ -4,6 +4,7 @@ const Models = require("../../models");
 const User = Models.user;
 const Location = Models.location;
 const getGedsProfile = require("./util/getGedsProfile");
+const getMygchrProfile = require("./util/getMygchrProfileInfo");
 
 const getGedsAssist = async (request, response) => {
   id = request.params.id;
@@ -11,6 +12,7 @@ const getGedsAssist = async (request, response) => {
     user = user.dataValues;
 
     let name = user.name;
+    let PRI = user.pri;
 
     let lastSpaceIndex = name.lastIndexOf(" ");
     name =
@@ -18,6 +20,9 @@ const getGedsAssist = async (request, response) => {
 
     try {
       let gedsData = await getGedsProfile(name);
+
+      //Get data from MyGCHR database
+      let myGCHRData = await getMygchrProfileInfo(PRI);
 
       let promise = gedsData.map(async gedsProfile => {
         let profile = {};
@@ -85,6 +90,11 @@ const getGedsAssist = async (request, response) => {
   });
 };
 
+const getMygchrAssist = async (request, response) => {
+  //TODO: Remove later on
+};
+
 module.exports = {
-  getGedsAssist
+  getGedsAssist,
+  getMygchrAssist
 };

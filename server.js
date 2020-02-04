@@ -99,6 +99,11 @@ router.use("/admin", admin);
 router.use("/option", options);
 
 router.get("/profGen/:id", keycloak.protect(), profileGeneration.getGedsAssist);
+router.get(
+  "/profGen/:pri",
+  keycloak.protect(),
+  profileGeneration.getMygchrAssist
+);
 
 // Search routes
 router.get("/search/fuzzySearch/", keycloak.protect(), search);

@@ -1,5 +1,6 @@
-const { getGedsAssist } = require("./get");
+const { getGedsAssist, getMygchrAssist } = require("./get");
 
 module.exports = {
-  getGedsAssist
+  getGedsAssist,
+  getMygchrAssist
 };
