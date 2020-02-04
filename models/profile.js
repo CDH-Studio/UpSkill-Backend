@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
       exFeeder: DataTypes.BOOLEAN,
+      isMentor: DataTypes.BOOLEAN,
       flagged: DataTypes.BOOLEAN,
       interestedInRemote: DataTypes.BOOLEAN,
       indeterminate: DataTypes.BOOLEAN,

@@ -98,6 +98,11 @@ module.exports = {
           exFeeder: {
             type: Sequelize.BOOLEAN
           },
+          isMentor: {
+            allowNull: true,
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+          },
           flagged: {
             allowNull: false,
             type: Sequelize.BOOLEAN,
@@ -127,7 +132,8 @@ module.exports = {
               education: true,
               experience: true,
               projects: true,
-              careerInterests: true
+              careerInterests: true,
+              mentor: false
             }
           },
           createdAt: {
