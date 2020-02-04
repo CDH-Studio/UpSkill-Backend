@@ -146,6 +146,19 @@ const getPublicProfileById = async (request, response) => {
       };
   });
 
+  let mentorshipSkills = await profile
+    .getMentorshipSkills()
+    .map(mentorshipSkill => {
+      if (mentorshipSkill)
+        return {
+          id: mentorshipSkill.dataValues.id,
+          description: {
+            en: mentorshipSkill.dataValues.descriptionEn,
+            fr: mentorshipSkill.dataValues.descriptionFr
+          }
+        };
+    });
+
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
     if (res) return res.dataValues;
   });
@@ -273,26 +286,26 @@ const getPublicProfileById = async (request, response) => {
         }
       }
     };
-  if (visibleCards.talentManagement)
-    resData = {
-      ...resData,
+  // if (visibleCards.talentManagement)
+  //   resData = {
+  //     ...resData,
 
-      careerMobility: {
-        id: careerMobility ? careerMobility.id : null,
-        description: {
-          en: careerMobility ? careerMobility.descriptionEn : null,
-          fr: careerMobility ? careerMobility.descriptionFr : null
-        }
-      },
-      exFeeder: data.exFeeder,
-      talentMatrixResult: {
-        id: talentMatrixResult ? talentMatrixResult.id : null,
-        description: {
-          en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
-          fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
-        }
-      }
-    };
+  //     careerMobility: {
+  //       id: careerMobility ? careerMobility.id : null,
+  //       description: {
+  //         en: careerMobility ? careerMobility.descriptionEn : null,
+  //         fr: careerMobility ? careerMobility.descriptionFr : null
+  //       }
+  //     },
+  //     exFeeder: data.exFeeder,
+  //     talentMatrixResult: {
+  //       id: talentMatrixResult ? talentMatrixResult.id : null,
+  //       description: {
+  //         en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
+  //         fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
+  //       }
+  //     }
+  //   };
 
   if (visibleCards.officialLanguage)
     resData = {
@@ -333,6 +346,13 @@ const getPublicProfileById = async (request, response) => {
     resData = {
       ...resData,
       developmentalGoals
+    };
+
+  if (visibleCards.mentorshipSkills)
+    resData = {
+      ...resData,
+      mentorshipSkills,
+      isMentor: data.isMentor
     };
 
   if (visibleCards.education)
@@ -558,6 +578,7 @@ const getPrivateProfileById = async (request, response) => {
     education: educArray,
     email: data.email,
     exFeeder: data.exFeeder,
+    isMentor: data.isMentor,
     flagged: data.flagged,
     firstLanguage: {
       fr: { en: "French", fr: "Français" },
@@ -614,6 +635,7 @@ const getPrivateProfileById = async (request, response) => {
       }
     },
     skills,
+    mentorshipSkills,
     temporaryRole: {
       id: tenure ? tenure.id : null,
       description: {

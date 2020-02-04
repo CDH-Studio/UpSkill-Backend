@@ -36,6 +36,8 @@ const createProfile = async (request, response) => {
     if (dbObject.competencies) profile.setCompetencies(dbObject.competencies);
     if (dbObject.developmentGoals)
       profile.setDevelopmentGoals(dbObject.developmentGoals);
+    if (dbObject.mentorshipSkills)
+      profile.setMentorshipSkills(dbObject.mentorshipSkills);
 
     if (dbObject.education) {
       Education.destroy({ where: { profileId: profile.id } }).then(() => {
