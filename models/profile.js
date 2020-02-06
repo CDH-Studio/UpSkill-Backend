@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
       through: "profileDevelopmentGoals",
       as: "developmentGoals"
     });
+    profile.belongsToMany(models.skill, {
+      through: "profileMentorshipSkills",
+      as: "mentorshipSkills"
+    });
     profile.belongsTo(models.tenure);
     profile.belongsTo(models.groupLevel);
     profile.belongsTo(models.groupLevel, {

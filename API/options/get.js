@@ -162,6 +162,22 @@ const getSkill = async (request, response) => {
   response.status(200).json(resBody);
 };
 
+const getMentorshipSkill = async (request, response) => {
+  let all = await Skill.findAll({
+    where: {
+      type: "skill"
+    }
+  });
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    return {
+      id: one.id,
+      description: { en: one.descriptionEn, fr: one.descriptionFr }
+    };
+  });
+  response.status(200).json(resBody);
+};
+
 const getTalentMatrixResult = async (request, response) => {
   let all = await TalentMatrixResult.findAll();
   let resBody = all.map(one => {
@@ -240,6 +256,7 @@ module.exports = {
   getSchool,
   getSecurityClearance,
   getSkill,
+  getMentorshipSkill,
   getTalentMatrixResult,
   getTenure,
   getLookingForANewJob,

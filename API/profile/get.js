@@ -524,6 +524,19 @@ const getPrivateProfileById = async (request, response) => {
       };
   });
 
+  let mentorshipSkills = await profile
+    .getMentorshipSkills()
+    .map(mentorshipSkill => {
+      if (mentorshipSkill)
+        return {
+          id: mentorshipSkill.dataValues.id,
+          description: {
+            en: mentorshipSkill.dataValues.descriptionEn,
+            fr: mentorshipSkill.dataValues.descriptionFr
+          }
+        };
+    });
+
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
     if (res) return res.dataValues;
   });
