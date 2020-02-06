@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       through: "profileDevelopmentGoals",
       as: "developmentGoals"
     });
+    skill.belongsTo(models.category); // allows us to get the category a skill belongs to
   };
   return skill;
 };

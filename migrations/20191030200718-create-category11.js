@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("skills", {
+    return queryInterface.createTable("category", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -14,9 +14,6 @@ module.exports = {
       descriptionFr: {
         type: Sequelize.STRING
       },
-      type: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -24,18 +21,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      categoryId:{ // addition of category foreign key
-        type: Sequelize.UUID,
-        references:{
-          model: "category",
-          key: "id"
-        },
-        allowNull: false // a skill must belong to a category
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("skills");
+    return queryInterface.dropTable("category");
   }
 };
