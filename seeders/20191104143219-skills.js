@@ -1,22 +1,12 @@
+// category = require('../models/category');
+//categoriesSeeded = category.findAll({attributes:['id'], raw:true});
 "use strict";
-const Sequelize = require('sequelize');
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
     */
-   let category = Sequelize.models.category;
-          // seeder for skills holds temporary id based off its associated category..
-            // function takes in the temporary id and attribute language as input and gives the corresponding category ID from the database
-              // hope this works :((
-          async function getCategoryID(tempCatID){
-
-            // get all the english category IDs
-            let categoriesEn = await category.findAll({attributes: ['id'], raw: true}); 
-
-            return categoriesEn[0][tempCatID - 1];
-        }
    return queryInterface.bulkInsert(
     "skills",
     [
@@ -26,7 +16,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(1)
+        categoryId: 1
       },
       {
         descriptionEn: "Clerical",
@@ -34,7 +24,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(1)
+        categoryId: 1
       },
       {
         descriptionEn: "Executive Support",
@@ -42,7 +32,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(1)
+        categoryId: 1
       },
       {
         descriptionEn: "Business Operations",
@@ -50,7 +40,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(1)
+        categoryId: 1
       },
       {
         descriptionEn: "Internal Audit",
@@ -58,7 +48,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Risk Assessment",
@@ -66,7 +56,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Evaluation (general)",
@@ -74,7 +64,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Evaluation (learning impact)",
@@ -82,7 +72,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Quality Assurance",
@@ -90,7 +80,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Troubleshooting (process/system)",
@@ -98,7 +88,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(2)
+        categoryId: 2
       },
       {
         descriptionEn: "Partnerships and Networks",
@@ -106,7 +96,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(3)
+        categoryId: 3
       },
       {
         descriptionEn: "Negotiating and Adjudicating",
@@ -114,7 +104,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(3)
+        categoryId: 3
       },
       {
         descriptionEn: "Stakeholder Engagement",
@@ -122,7 +112,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(3)
+        categoryId: 3
       },
       {
         descriptionEn: "Customer Satisfaction",
@@ -130,7 +120,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(3)
+        categoryId: 3
       },
       {
         descriptionEn: "Customer Relationship Management (CRM)",
@@ -138,7 +128,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(3)
+        categoryId: 3
       },
       {
         descriptionEn: "Accounting Operations",
@@ -146,7 +136,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(4)
+        categoryId: 4
       },
       {
         descriptionEn: "Financial Analysis",
@@ -154,7 +144,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(4)
+        categoryId: 4
       },
       {
         descriptionEn: "Planning and Resource Management",
@@ -162,7 +152,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(4)
+        categoryId: 4
       },
       {
         descriptionEn: "Financial Policy",
@@ -170,7 +160,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(4)
+        categoryId: 4
       },
       {
         descriptionEn: "Financial Systems",
@@ -178,7 +168,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(4)
+        categoryId: 4
       },
       {
         descriptionEn: "Incident Command",
@@ -186,7 +176,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(5)
+        categoryId: 5
       },
       {
         descriptionEn: "Crisis Communications",
@@ -194,7 +184,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(5)
+        categoryId: 5
       },
       {
         descriptionEn: "Event Planning",
@@ -202,7 +192,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Strategic Communications",
@@ -210,7 +200,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Speech Writing",
@@ -218,7 +208,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Media Relations",
@@ -226,7 +216,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Marketing",
@@ -234,7 +224,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Social Media",
@@ -242,7 +232,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Telecommunications",
@@ -250,7 +240,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Report Writing",
@@ -258,7 +248,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Proposal Writing",
@@ -266,7 +256,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Corporate Communications",
@@ -274,7 +264,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Internal Communications",
@@ -282,7 +272,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Communications Planning",
@@ -290,7 +280,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(6)
+        categoryId: 6
       },
       {
         descriptionEn: "Data Analytics",
@@ -298,7 +288,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Business Intelligence",
@@ -306,7 +296,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Sanitizing Data",
@@ -314,7 +304,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Data Mining",
@@ -322,7 +312,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Data Visualization",
@@ -330,7 +320,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Data Analysis",
@@ -338,7 +328,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Databases",
@@ -346,7 +336,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(7)
+        categoryId: 7
       },
       {
         descriptionEn: "Agile Development",
@@ -354,7 +344,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Cloud Computing",
@@ -362,7 +352,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Artificial Intelligence/ Machine Learning",
@@ -370,7 +360,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Coding",
@@ -378,7 +368,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Graphic Design",
@@ -386,7 +376,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Content Design",
@@ -394,7 +384,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Cyber Security",
@@ -402,7 +392,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Development Operations (DevOps)",
@@ -410,7 +400,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "User Experience (UX) Design",
@@ -418,7 +408,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "User Research",
@@ -426,7 +416,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Social Media Analytics",
@@ -434,7 +424,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "User Interface (UI) Design",
@@ -442,7 +432,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Web Design and Development",
@@ -450,7 +440,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Web Publishing",
@@ -458,7 +448,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Data Literacy",
@@ -466,7 +456,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Learning Technologies",
@@ -474,7 +464,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Digital Learning Development and Production",
@@ -482,7 +472,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Technical Support",
@@ -490,7 +480,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Troubleshooting (electronic)",
@@ -498,7 +488,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Wireless Technologies",
@@ -506,7 +496,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Web Content Writing",
@@ -514,7 +504,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Software Development Life Cycle",
@@ -522,7 +512,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Web Applications",
@@ -530,7 +520,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Microsoft Access",
@@ -538,7 +528,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Spectrum Management",
@@ -546,7 +536,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(8)
+        categoryId: 8
       },
       {
         descriptionEn: "Human Resources Management",
@@ -554,7 +544,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Organizational Design",
@@ -562,7 +552,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Enterprise Architecture",
@@ -570,7 +560,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Classification",
@@ -578,7 +568,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Staffing (Operations)",
@@ -586,7 +576,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Staffing (Policy)",
@@ -594,7 +584,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Performance Management",
@@ -602,7 +592,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Talent Management",
@@ -610,7 +600,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Values and Ethics",
@@ -618,7 +608,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "HR to Pay",
@@ -626,7 +616,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Human Resources Management Systems",
@@ -634,7 +624,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Phoenix",
@@ -642,7 +632,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Compensation Liaison",
@@ -650,7 +640,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Employment Equity",
@@ -658,7 +648,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Official Languages",
@@ -666,7 +656,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Informal Conflict Resolution",
@@ -674,7 +664,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Ombudsman",
@@ -682,7 +672,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Workplace well-being",
@@ -690,7 +680,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Labour Relations (Policy)",
@@ -698,7 +688,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Labour Relations (Operations)",
@@ -706,7 +696,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Recruiting",
@@ -714,7 +704,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(9)
+        categoryId: 9
       },
       {
         descriptionEn: "Foresight",
@@ -722,7 +712,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Design Thinking",
@@ -730,7 +720,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Experimentation",
@@ -738,7 +728,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Systems Thinking",
@@ -746,7 +736,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Prototyping",
@@ -754,7 +744,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Insurgency",
@@ -762,7 +752,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Open Policy-Making",
@@ -770,7 +760,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(10)
+        categoryId: 10
       },
       {
         descriptionEn: "Document Management",
@@ -778,7 +768,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(11)
+        categoryId: 11
       },
       {
         descriptionEn: "Information Technology",
@@ -786,7 +776,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(11)
+        categoryId: 11
       },
       {
         descriptionEn: "Qualitative Research",
@@ -794,7 +784,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(11)
+        categoryId: 11
       },
       {
         descriptionEn: "Quantitative Research",
@@ -802,7 +792,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(11)
+        categoryId: 11
       },
       {
         descriptionEn: "Intellectual Property",
@@ -810,7 +800,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(11)
+        categoryId: 11
       },
       {
         descriptionEn: "Gender-Based Analysis + (GBA+) Analysis",
@@ -818,7 +808,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(12)
+        categoryId: 12
       },
       {
         descriptionEn: "GBA+ Policy",
@@ -826,7 +816,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(12)
+        categoryId: 12
       },
       {
         descriptionEn: "Accessibility",
@@ -834,7 +824,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(12)
+        categoryId: 12
       },
       {
         descriptionEn: "Indigenous Cultural Competence",
@@ -842,7 +832,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(12)
+        categoryId: 12
       },
       {
         descriptionEn: "Managing Resources (Assets and Funds)",
@@ -850,7 +840,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Managing Programs",
@@ -858,7 +848,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Managing Projects",
@@ -866,7 +856,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Performance Measurement",
@@ -874,7 +864,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Building Teams",
@@ -882,7 +872,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Managing People",
@@ -890,7 +880,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Mobilizing People",
@@ -898,7 +888,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Growing Leaders",
@@ -906,7 +896,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Leading Teams",
@@ -914,7 +904,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Change Leadership and Innovation",
@@ -922,7 +912,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Change Management",
@@ -930,7 +920,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Requirements Analysis",
@@ -938,7 +928,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Business Planning",
@@ -946,7 +936,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Management Consulting",
@@ -954,7 +944,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Leadership Development",
@@ -962,7 +952,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Program Evaluation",
@@ -970,7 +960,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Agile Methodologies",
@@ -978,7 +968,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(13)
+        categoryId: 13
       },
       {
         descriptionEn: "Psychometric Tool Debriefing",
@@ -986,7 +976,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Facilitating (online/virtual)",
@@ -994,7 +984,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Producing Virtual Classes",
@@ -1002,7 +992,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Teaching (Instructor)",
@@ -1010,7 +1000,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Moderating (online/virtual)",
@@ -1018,7 +1008,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Facilitating (in person)",
@@ -1026,7 +1016,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(14)
+        categoryId: 14
       },
       {
         descriptionEn: "Research",
@@ -1034,7 +1024,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Analysis",
@@ -1042,7 +1032,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Cost Benefit Analysis",
@@ -1050,7 +1040,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Economic Modeling",
@@ -1058,7 +1048,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Statistics",
@@ -1066,7 +1056,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Public Policy",
@@ -1074,7 +1064,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Policy Development",
@@ -1082,7 +1072,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(15)
+        categoryId: 15
       },
       {
         descriptionEn: "Economics",
@@ -1090,7 +1080,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Economic Development",
@@ -1098,7 +1088,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Engineering",
@@ -1106,7 +1096,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Politics",
@@ -1114,7 +1104,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Entrepreneurship",
@@ -1122,7 +1112,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Political Science",
@@ -1130,7 +1120,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(16)
+        categoryId: 16
       },
       {
         descriptionEn: "Project Assessment and Planning",
@@ -1138,7 +1128,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "Acquisition",
@@ -1146,7 +1136,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "Managing Contracts",
@@ -1154,7 +1144,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "Procurement Negotiations",
@@ -1162,7 +1152,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "Procurement Risk Management",
@@ -1170,7 +1160,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "Procurement Evaluation and Selection",
@@ -1178,7 +1168,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(17)
+        categoryId: 17
       },
       {
         descriptionEn: "International Trade",
@@ -1186,7 +1176,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(18)
+        categoryId: 18
       },
       {
         descriptionEn: "International Development",
@@ -1194,7 +1184,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(18)
+        categoryId: 18
       },
       {
         descriptionEn: "International Relations",
@@ -1202,7 +1192,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(18)
+        categoryId: 18
       },
       {
         descriptionEn: "Foreign Policy",
@@ -1210,7 +1200,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(18)
+        categoryId: 18
       },
       {
         descriptionEn: "Designing Learning Content",
@@ -1218,7 +1208,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(19)
+        categoryId: 19
       },
       {
         descriptionEn: "Designing Learning Products",
@@ -1226,7 +1216,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(19)
+        categoryId: 19
       },
       {
         descriptionEn: "Designing Learning Curricula",
@@ -1234,7 +1224,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(19)
+        categoryId: 19
       },
       {
         descriptionEn: "Training Needs Analysis",
@@ -1242,7 +1232,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(19)
+        categoryId: 19
       },
       {
         descriptionEn: "Briefing",
@@ -1250,7 +1240,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Business Analysis",
@@ -1258,7 +1248,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Writing and Editing",
@@ -1266,7 +1256,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Public Speaking",
@@ -1274,7 +1264,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Communicating Professionally",
@@ -1282,7 +1272,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Critical Thinking",
@@ -1290,7 +1280,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Execution/Implementation",
@@ -1298,7 +1288,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Storytelling",
@@ -1306,7 +1296,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Advising and Consulting",
@@ -1314,7 +1304,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Managing Issues",
@@ -1322,7 +1312,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Strategic Thinking",
@@ -1330,7 +1320,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Client Service",
@@ -1338,7 +1328,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Planning",
@@ -1346,7 +1336,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Analytical Skills",
@@ -1354,7 +1344,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Market Research",
@@ -1362,7 +1352,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Research and Development (R&D)",
@@ -1370,7 +1360,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Data Entry",
@@ -1378,7 +1368,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Legal Research",
@@ -1386,7 +1376,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(20)
+        categoryId: 20
       },
       {
         descriptionEn: "Linux",
@@ -1394,7 +1384,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Matlab",
@@ -1402,7 +1392,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: ".NET Framework",
@@ -1410,7 +1400,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: ".Net Core",
@@ -1418,7 +1408,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Adobe ExtendScript",
@@ -1426,7 +1416,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "AJAX",
@@ -1434,7 +1424,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "ASP",
@@ -1442,7 +1432,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "ASP.Net",
@@ -1450,7 +1440,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "ASP.Net MVC Web applications",
@@ -1458,7 +1448,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "BASH and BSH",
@@ -1466,7 +1456,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Beyond 20/20 - publisher edition",
@@ -1474,7 +1464,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Blaise",
@@ -1482,7 +1472,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "C / C++",
@@ -1490,7 +1480,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "C#",
@@ -1498,7 +1488,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "CGI",
@@ -1506,7 +1496,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "CKAN",
@@ -1514,7 +1504,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "ColdFusion",
@@ -1522,7 +1512,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "CSLA Framework",
@@ -1530,7 +1520,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "CSS 3",
@@ -1538,7 +1528,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Drupal",
@@ -1546,7 +1536,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "D3",
@@ -1554,7 +1544,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "HTML 4",
@@ -1562,7 +1552,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "HTML 5",
@@ -1570,7 +1560,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Infragistics",
@@ -1578,7 +1568,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Java",
@@ -1586,7 +1576,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "JavaScript",
@@ -1594,7 +1584,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Jdeveloper (Oracle BPM)",
@@ -1602,7 +1592,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "jQuery",
@@ -1610,7 +1600,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Korn shell (ksh) - could be the same as shell scripts",
@@ -1618,7 +1608,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Log parser",
@@ -1626,7 +1616,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Visual Studio",
@@ -1634,7 +1624,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Windows Active Directory Scripting",
@@ -1642,7 +1632,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Windows cscript",
@@ -1650,7 +1640,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Windows Office Suite Macros & VBA",
@@ -1658,7 +1648,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Windows PowerShell",
@@ -1666,7 +1656,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "MS Windows Script Host (WSH)",
@@ -1674,7 +1664,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "NetBeans",
@@ -1682,7 +1672,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Node.js",
@@ -1690,7 +1680,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "OpenText Content Server (GCDOCS)",
@@ -1698,7 +1688,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Perl",
@@ -1706,7 +1696,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "PL/SQL",
@@ -1714,7 +1704,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "T-SQL",
@@ -1722,7 +1712,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "SQL Developer",
@@ -1730,7 +1720,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Power Shell",
@@ -1738,7 +1728,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Python",
@@ -1746,7 +1736,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "SAS (Base, Macro)",
@@ -1754,7 +1744,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "SAS JMP",
@@ -1762,7 +1752,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Sharepoint",
@@ -1770,7 +1760,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Shell Scripts",
@@ -1778,7 +1768,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Single sign-on software (i.e. ADFS, GetAccess)",
@@ -1786,7 +1776,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "SOLR",
@@ -1794,7 +1784,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Spring loC / DI",
@@ -1802,7 +1792,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Ultraseek (search engine)",
@@ -1810,7 +1800,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "VB.NET",
@@ -1818,7 +1808,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Win Runner",
@@ -1826,7 +1816,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Windows Scripting (.bat)",
@@ -1834,7 +1824,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "XML",
@@ -1842,7 +1832,7 @@ module.exports = {
         type: "skill",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(21)
+        categoryId: 21
       },
       {
         descriptionEn: "Demonstrating integrity and respect",
@@ -1850,7 +1840,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Thinking Things Through",
@@ -1858,7 +1848,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Working Effectively with Others",
@@ -1866,7 +1856,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Showing Initiative and Being Action-Oriented",
@@ -1874,7 +1864,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Uphold Integrity and Respect",
@@ -1882,7 +1872,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Create Vision and Strategy",
@@ -1890,7 +1880,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Mobilize People",
@@ -1898,7 +1888,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Collaborate with Partners and Stakeholders",
@@ -1906,7 +1896,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Promote Innovation and Guide Change",
@@ -1914,7 +1904,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Achieve Results",
@@ -1922,7 +1912,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Manage People",
@@ -1930,7 +1920,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Budget",
@@ -1938,7 +1928,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Policies",
@@ -1946,7 +1936,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Corporate",
@@ -1954,7 +1944,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Action Oriented",
@@ -1962,7 +1952,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Dealing with Ambiguity",
@@ -1970,7 +1960,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Approachability",
@@ -1978,7 +1968,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Boss Relationships",
@@ -1986,7 +1976,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Business Acumen",
@@ -1994,7 +1984,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Career Ambition",
@@ -2002,7 +1992,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Caring About Direct Reports",
@@ -2010,7 +2000,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Comfort Around Higher Management",
@@ -2018,7 +2008,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Command Skills",
@@ -2026,7 +2016,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Compassion",
@@ -2034,7 +2024,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Composure",
@@ -2042,7 +2032,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Conflict Management",
@@ -2050,7 +2040,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Confronting Direct Reports",
@@ -2058,7 +2048,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Creativity",
@@ -2066,7 +2056,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Customer Focus",
@@ -2074,7 +2064,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Timely Decision Making",
@@ -2082,7 +2072,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Decision Quality",
@@ -2090,7 +2080,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Delegation",
@@ -2098,7 +2088,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Developing Direct Reports with Others",
@@ -2106,7 +2096,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "",
@@ -2114,7 +2104,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Directing Others",
@@ -2122,7 +2112,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Managing Diversity",
@@ -2130,7 +2120,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Ethics and Values",
@@ -2138,7 +2128,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Fairness to Direct Reports",
@@ -2146,7 +2136,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Functional/Technical Skills",
@@ -2154,7 +2144,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Hiring and Staffing",
@@ -2162,7 +2152,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Informing",
@@ -2170,7 +2160,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Innovation Management",
@@ -2178,7 +2168,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Integrity and Trust",
@@ -2186,7 +2176,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Intellectual Horsepower",
@@ -2194,7 +2184,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Interpersonal Savvy",
@@ -2202,7 +2192,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Learning on the Fly",
@@ -2210,7 +2200,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Listening",
@@ -2218,7 +2208,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Managerial Courage",
@@ -2226,7 +2216,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Managing and Measuring Work",
@@ -2234,7 +2224,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Motivating Others",
@@ -2242,7 +2232,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Negotiating",
@@ -2250,7 +2240,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Organizational Agility",
@@ -2258,7 +2248,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Organizing",
@@ -2266,7 +2256,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Dealing with Paradox",
@@ -2274,7 +2264,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Patience",
@@ -2282,7 +2272,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Peer Relationships",
@@ -2290,7 +2280,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Perseverance",
@@ -2298,7 +2288,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Personal Disclosure",
@@ -2306,7 +2296,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Personal Learning",
@@ -2314,7 +2304,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Perspective",
@@ -2322,7 +2312,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Planning",
@@ -2330,7 +2320,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Political Savvy",
@@ -2338,7 +2328,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Presentation Skills",
@@ -2346,7 +2336,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Problem Solving",
@@ -2354,7 +2344,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Process Management",
@@ -2362,7 +2352,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Drive for Results",
@@ -2370,7 +2360,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Self-Development",
@@ -2378,7 +2368,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Self-Knowledge",
@@ -2386,7 +2376,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Sizing Up People",
@@ -2394,7 +2384,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Standing Alone",
@@ -2402,7 +2392,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Managing Through Systems",
@@ -2410,7 +2400,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Building Effective Teams",
@@ -2418,7 +2408,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Technical Learning",
@@ -2426,7 +2416,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Time Management",
@@ -2434,7 +2424,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Total Work Systems",
@@ -2442,7 +2432,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Understanding Others",
@@ -2450,7 +2440,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Managing Vision and Purpose",
@@ -2458,7 +2448,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       },
       {
         descriptionEn: "Written Communications",
@@ -2466,7 +2456,7 @@ module.exports = {
         type: "competency",
         createdAt: new Date(),
         updatedAt: new Date(),
-        categoryId: getCategoryID(22)
+        categoryId: 22
       }
      ],
     {}

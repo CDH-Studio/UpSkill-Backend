@@ -3,10 +3,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('categories', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.literal("uuid_generate_v1()")
+        autoIncrement: true // initial value 0.. skills id is set to the associated number
+        // need to figure out if 1) important to have 
       },
       descriptionEn: {
         type: Sequelize.STRING

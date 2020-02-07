@@ -26,12 +26,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       categoryId:{ // addition of category foreign key
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
+        allowNull: false, // a skill must belong to a category
         references:{
-          model: "category",
+          model: "categories",
           key: "id"
-        },
-        allowNull: false // a skill must belong to a category
+        }
       }
     });
   },
