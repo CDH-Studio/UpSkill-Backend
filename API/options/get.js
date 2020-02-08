@@ -9,6 +9,7 @@ const KeyCompetency = Models.keyCompetency;
 const Location = Models.location;
 const School = Models.school;
 const SecurityClearance = Models.securityClearance;
+const Category = Models.category;
 const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
@@ -146,6 +147,18 @@ const getSecurityClearance = async (request, response) => {
   response.status(200).json(resBody);
 };
 
+const getCategory = async (request, response) => {
+  let all = await Category.findAll();
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    return {
+      id: one.id,
+      description: { en: one.descriptionEn, fr: one.descriptionFr }
+    };
+  });
+  response.status(200).json(resBody);
+};
+
 const getSkill = async (request, response) => {
   let all = await Skill.findAll({
     where: {
@@ -156,7 +169,8 @@ const getSkill = async (request, response) => {
     one = one.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr }
+      description: { en: one.descriptionEn, fr: one.descriptionFr },
+      categoryId: one.categoryId
     };
   });
   response.status(200).json(resBody);
@@ -172,7 +186,8 @@ const getMentorshipSkill = async (request, response) => {
     one = one.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr }
+      description: { en: one.descriptionEn, fr: one.descriptionFr },
+      categoryId: one.categoryId
     };
   });
   response.status(200).json(resBody);
@@ -253,8 +268,10 @@ module.exports = {
   getGroupLevel,
   getKeyCompetency,
   getLocation,
+  getCategory,
   getSchool,
   getSecurityClearance,
+  getCategory,
   getSkill,
   getMentorshipSkill,
   getTalentMatrixResult,

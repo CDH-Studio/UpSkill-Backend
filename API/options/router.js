@@ -10,6 +10,7 @@ const {
   getLocation,
   getSchool,
   getSecurityClearance,
+  getCategory,
   getSkill,
   getMentorshipSkill,
   getTalentMatrixResult,
@@ -29,6 +30,7 @@ optionRouter.get("/getKeyCompetency", getKeyCompetency);
 optionRouter.get("/getLocation", getLocation);
 optionRouter.get("/getSchool", getSchool);
 optionRouter.get("/getSecurityClearance", getSecurityClearance);
+optionRouter.get("/getCategory", getCategory);
 optionRouter.get("/getSkill", getSkill);
 optionRouter.get("/getMentorshipSkill", getMentorshipSkill);
 optionRouter.get("/getTalentMatrixResult", getTalentMatrixResult);

@@ -18,6 +18,7 @@
   "careerMobility": "careerMobilityId",
   "talentMatrixResult": "talentMatrixResultId",
   "exFeeder": "exFeeder",
+  "categories": "categories",
   "skills": "skills",
   "competencies": "competencies",
   "developmentalGoals": "developmentGoals",

@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "mentorshipSkills"
     });
     skill.belongsTo(models.category, { foreignKey: "id" }); // allows us to get the category a skill belongs to
+    // skill.belongsTo(models.category, {
+    //   foreignKey: { fieldName: "categoryId" },
+    //   as: "category"
+    // });
   };
   return skill;
 };

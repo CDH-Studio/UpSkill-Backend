@@ -113,6 +113,17 @@ const getPublicProfileById = async (request, response) => {
       return orgList;
     });
 
+  // let categories = await profile.getCategories().map(skill => {
+  //   if (skill)
+  //     return {
+  //       id: skill.dataValues.id,
+  //       description: {
+  //         en: skill.dataValues.descriptionEn,
+  //         fr: skill.dataValues.descriptionFr
+  //       }
+  //     };
+  // });
+
   let skills = await profile.getSkills().map(skill => {
     if (skill)
       return {
@@ -120,7 +131,8 @@ const getPublicProfileById = async (request, response) => {
         description: {
           en: skill.dataValues.descriptionEn,
           fr: skill.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -131,7 +143,8 @@ const getPublicProfileById = async (request, response) => {
         description: {
           en: competencies.dataValues.descriptionEn,
           fr: competencies.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -142,7 +155,8 @@ const getPublicProfileById = async (request, response) => {
         description: {
           en: goal.dataValues.descriptionEn,
           fr: goal.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -155,7 +169,8 @@ const getPublicProfileById = async (request, response) => {
           description: {
             en: mentorshipSkill.dataValues.descriptionEn,
             fr: mentorshipSkill.dataValues.descriptionFr
-          }
+          },
+          categoryId: skill.dataValues.categoryId
         };
     });
 
@@ -330,6 +345,12 @@ const getPublicProfileById = async (request, response) => {
       secondLanguage: null
     };
 
+  // if (visibleCards.categories)
+  //   resData = {
+  //     ...resData,
+  //     categories
+  //   };
+
   if (visibleCards.skills)
     resData = {
       ...resData,
@@ -491,6 +512,17 @@ const getPrivateProfileById = async (request, response) => {
       return orgList;
     });
 
+  // let categories = await profile.getCategories().map(category => {
+  //   if (category)
+  //     return {
+  //       id: category.dataValues.id,
+  //       description: {
+  //         en: category.dataValues.descriptionEn,
+  //         fr: category.dataValues.descriptionFr
+  //       }
+  //     };
+  // });
+
   let skills = await profile.getSkills().map(skill => {
     if (skill)
       return {
@@ -498,7 +530,8 @@ const getPrivateProfileById = async (request, response) => {
         description: {
           en: skill.dataValues.descriptionEn,
           fr: skill.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -509,7 +542,8 @@ const getPrivateProfileById = async (request, response) => {
         description: {
           en: competencies.dataValues.descriptionEn,
           fr: competencies.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -520,7 +554,8 @@ const getPrivateProfileById = async (request, response) => {
         description: {
           en: goal.dataValues.descriptionEn,
           fr: goal.dataValues.descriptionFr
-        }
+        },
+        categoryId: skill.dataValues.categoryId
       };
   });
 
@@ -533,7 +568,8 @@ const getPrivateProfileById = async (request, response) => {
           description: {
             en: mentorshipSkill.dataValues.descriptionEn,
             fr: mentorshipSkill.dataValues.descriptionFr
-          }
+          },
+          categoryId: skill.dataValues.categoryId
         };
     });
 
@@ -647,6 +683,7 @@ const getPrivateProfileById = async (request, response) => {
         fr: securityClearance ? securityClearance.descriptionFr : null
       }
     },
+    // categories,
     skills,
     mentorshipSkills,
     temporaryRole: {
