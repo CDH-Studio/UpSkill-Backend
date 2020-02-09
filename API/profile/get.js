@@ -473,12 +473,15 @@ const getPrivateProfileById = async (request, response) => {
 
   let skills = await profile.getSkills().map(skill => {
     if (skill)
+      catEn = Models.Category.findOne({where:{id: skill.dataValues.categoryId}}).descriptionEn;
+      catFr = Models.Category.findOne({where:{id: skill.dataValues.categoryId}}).descriptionFr;
       return {
         id: skill.dataValues.id,
         description: {
           en: skill.dataValues.descriptionEn,
           fr: skill.dataValues.descriptionFr
-        }
+        },
+        cat: {en: catEn, fr: catFr}  // set the skill category to text instead of id
       };
   });
 

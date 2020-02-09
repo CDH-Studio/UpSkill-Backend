@@ -2,6 +2,7 @@ const Models = require("../../models");
 const Sequelize = require("sequelize");
 const Profile = Models.profile;
 const CareerMobility = Models.careerMobility;
+const Category = Models.category;
 const Competency = Models.competency;
 const Diploma = Models.diploma;
 const GroupLevel = Models.groupLevel;
@@ -51,9 +52,11 @@ const getCompetency = async (request, response) => {
   });
   let resBody = all.map(one => {
     one = one.dataValues;
+    cat = Category.findOne({where: {id: one.categoryId}}); // get the associated category ID (in this case would just be competency)
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr }
+      description: { en: one.descriptionEn, fr: one.descriptionFr},
+      category: {en:  cat.descriptionEn, fr: cat.descriptionFr} 
     };
   });
   response.status(200).json(resBody);
@@ -146,6 +149,18 @@ const getSecurityClearance = async (request, response) => {
   response.status(200).json(resBody);
 };
 
+const getCategory = async(request, response) => {
+  let all = await Category.findAll();
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    return {
+      id: one.id,
+      description: {en: one.descriptionEn, fr: one.descriptionFr}
+    };
+  });
+  response.status(200).json(resBody);
+};
+
 const getSkill = async (request, response) => {
   let all = await Skill.findAll({
     where: {
@@ -154,9 +169,11 @@ const getSkill = async (request, response) => {
   });
   let resBody = all.map(one => {
     one = one.dataValues;
+    cat = Category.findOne({where: {id: one.categoryId}}); // get the associated category ID
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr }
+      description: { en: one.descriptionEn, fr: one.descriptionFr},
+      category: {en:  cat.descriptionEn, fr: cat.descriptionFr} 
     };
   });
   response.status(200).json(resBody);
@@ -239,6 +256,7 @@ module.exports = {
   getLocation,
   getSchool,
   getSecurityClearance,
+  getCategory,
   getSkill,
   getTalentMatrixResult,
   getTenure,
