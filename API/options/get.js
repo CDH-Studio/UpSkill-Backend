@@ -46,17 +46,20 @@ const getCareerMobility = async (request, response) => {
 
 const getCompetency = async (request, response) => {
   let all = await Skill.findAll({
+    include: Category,
+    attributes: ["descriptionEn", "descriptionFr"], 
+    require: true,
     where: {
       type: "competency"
     }
-  });
+  }); 
   let resBody = all.map(one => {
     one = one.dataValues;
-    cat = Category.findOne({where: {id: one.categoryId}}); // get the associated category ID (in this case would just be competency)
+    let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr},
-      category: {en:  cat.descriptionEn, fr: cat.descriptionFr} 
+      description: { en: one.descriptionEn, fr: one.descriptionFr },
+      category: {categoryEn : ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
     };
   });
   response.status(200).json(resBody);
@@ -150,12 +153,28 @@ const getSecurityClearance = async (request, response) => {
 };
 
 const getCategory = async(request, response) => {
-  let all = await Category.findAll();
+  let all = await Category.findAll({
+    include:Skill, 
+    attributes: ["descriptionEn", "descriptionFr", "id"], 
+    require: true
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
+    let skillsCat = one.skills.map(skillCat =>{
+      skillCat = skillCat.dataValues;
+      if(skillCat.categoryId == one.id){
+        return {
+          description: {descEn: skillCat.descriptionEn, descFr: skillCat.descriptionFr}
+        }
+      }else{
+        return {
+          description: {descEn: null, descFr: null}
+        }
+      }
+    });
     return {
       id: one.id,
-      description: {en: one.descriptionEn, fr: one.descriptionFr}
+      description: {en: one.descriptionEn, fr: one.descriptionFr, skills: skillsCat}
     };
   });
   response.status(200).json(resBody);
@@ -163,17 +182,20 @@ const getCategory = async(request, response) => {
 
 const getSkill = async (request, response) => {
   let all = await Skill.findAll({
+    include: Category,
+    attributes: ["descriptionEn", "descriptionFr"], 
+    require: true,
     where: {
       type: "skill"
     }
-  });
+  }); 
   let resBody = all.map(one => {
     one = one.dataValues;
-    cat = Category.findOne({where: {id: one.categoryId}}); // get the associated category ID
+    let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr},
-      category: {en:  cat.descriptionEn, fr: cat.descriptionFr} 
+      description: { en: one.descriptionEn, fr: one.descriptionFr },
+      category: {categoryEn : ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
     };
   });
   response.status(200).json(resBody);
