@@ -47,7 +47,7 @@ const getCareerMobility = async (request, response) => {
 const getCompetency = async (request, response) => {
   let all = await Skill.findAll({
     include: Category,
-    attributes: ["descriptionEn", "descriptionFr"], 
+    attributes: ["descriptionEn", "descriptionFr", "id"], 
     require: true,
     where: {
       type: "competency"
@@ -164,10 +164,12 @@ const getCategory = async(request, response) => {
       skillCat = skillCat.dataValues;
       if(skillCat.categoryId == one.id){
         return {
+          id:skillCat.id,
           description: {descEn: skillCat.descriptionEn, descFr: skillCat.descriptionFr}
         }
       }else{
         return {
+          id: skillCat.id,
           description: {descEn: null, descFr: null}
         }
       }
@@ -183,7 +185,7 @@ const getCategory = async(request, response) => {
 const getSkill = async (request, response) => {
   let all = await Skill.findAll({
     include: Category,
-    attributes: ["descriptionEn", "descriptionFr"], 
+    attributes: ["descriptionEn", "descriptionFr", "id"], 
     require: true,
     where: {
       type: "skill"
