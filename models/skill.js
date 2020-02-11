@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "developmentGoals"
     });
     skill.belongsTo(models.category, {foreignKey: "categoryId"}); // allows us to get the category a skill belongs to
+    skill.belongsToMany(models.profile, {
+      through: "profileMentorshipSkills",
+      as: "mentorshipSkills"
+    });
   };
   return skill;
 };
