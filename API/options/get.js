@@ -10,7 +10,6 @@ const KeyCompetency = Models.keyCompetency;
 const Location = Models.location;
 const School = Models.school;
 const SecurityClearance = Models.securityClearance;
-const Category = Models.category;
 const Skill = Models.skill;
 const TalentMatrixResult = Models.talentMatrixResult;
 const Tenure = Models.tenure;
