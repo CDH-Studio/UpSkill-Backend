@@ -472,16 +472,14 @@ const getPrivateProfileById = async (request, response) => {
     });
 
   let skills = await profile.getSkills().map(skill => {
-    if (skill)
-      catEn = Models.Category.findOne({where:{id: skill.dataValues.categoryId}}).descriptionEn;
-      catFr = Models.Category.findOne({where:{id: skill.dataValues.categoryId}}).descriptionFr;
       return {
         id: skill.dataValues.id,
         description: {
           en: skill.dataValues.descriptionEn,
-          fr: skill.dataValues.descriptionFr
-        },
-        cat: {en: catEn, fr: catFr}  // set the skill category to text instead of id
+          fr: skill.dataValues.descriptionFr,
+          categoryEn: skill.dataValues.categoryEn,
+          categoryFr: skill.dataValues.categoryFr
+        }
       };
   });
 
@@ -491,7 +489,9 @@ const getPrivateProfileById = async (request, response) => {
         id: competencies.dataValues.id,
         description: {
           en: competencies.dataValues.descriptionEn,
-          fr: competencies.dataValues.descriptionFr
+          fr: competencies.dataValues.descriptionFr,
+          categoryEn: skill.dataValues.categoryEn,
+          categoryFr: skill.dataValues.categoryFr
         }
       };
   });

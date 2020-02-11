@@ -13,7 +13,6 @@ const createOption = async (request, response) => {
     }
 
     await model.create(dbObject, { returning: true });
-    console.log(dbObject.datavalues);
     response.status(200).send("OK");
   } catch (error) {
     response.status(500).send(error.message);

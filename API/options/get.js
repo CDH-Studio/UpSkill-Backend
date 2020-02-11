@@ -58,8 +58,8 @@ const getCompetency = async (request, response) => {
     let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr },
-      category: {categoryEn : ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
+      description: { en: one.descriptionEn, fr: one.descriptionFr , 
+        categoryEn: ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
     };
   });
   response.status(200).json(resBody);
@@ -193,11 +193,12 @@ const getSkill = async (request, response) => {
   }); 
   let resBody = all.map(one => {
     one = one.dataValues;
-    console.log(one.dataValues);
+
     let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr , categoryEn: ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
+      description: { en: one.descriptionEn, fr: one.descriptionFr , 
+        categoryEn: ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
     };
   });
   response.status(200).json(resBody);
