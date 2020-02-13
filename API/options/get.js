@@ -43,26 +43,42 @@ const getCareerMobility = async (request, response) => {
   response.status(200).json(resBody);
 };
 
+// const getCompetency = async (request, response) => {
+//   let all = await Skill.findAll({
+//     include: Category,
+//     attributes: ["descriptionEn", "descriptionFr", "id"],
+//     require: true,
+//     where: {
+//       type: "competency"
+//     }
+//   });
+//   let resBody = all.map(one => {
+//     one = one.dataValues;
+//     let ascCats = one.category.dataValues;
+//     return {
+//       id: one.id,
+//       description: {
+//         en: one.descriptionEn,
+//         fr: one.descriptionFr,
+//         categoryEn: ascCats.descriptionEn,
+//         categoryFr: ascCats.descriptionFr
+//       }
+//     };
+//   });
+//   response.status(200).json(resBody);
+// };
+
 const getCompetency = async (request, response) => {
   let all = await Skill.findAll({
-    include: Category,
-    attributes: ["descriptionEn", "descriptionFr", "id"],
-    require: true,
     where: {
       type: "competency"
     }
   });
   let resBody = all.map(one => {
     one = one.dataValues;
-    let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: {
-        en: one.descriptionEn,
-        fr: one.descriptionFr,
-        categoryEn: ascCats.descriptionEn,
-        categoryFr: ascCats.descriptionFr
-      }
+      description: { en: one.descriptionEn, fr: one.descriptionFr }
     };
   });
   response.status(200).json(resBody);

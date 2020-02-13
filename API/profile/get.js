@@ -136,15 +136,14 @@ const getPublicProfileById = async (request, response) => {
       };
   });
 
-  let competencies = await profile.getCompetencies().map(competencies => {
-    if (competencies)
+  let competencies = await profile.getCompetencies().map(competency => {
+    if (competency)
       return {
-        id: competencies.dataValues.id,
+        id: competency.dataValues.id,
         description: {
-          en: competencies.dataValues.descriptionEn,
-          fr: competencies.dataValues.descriptionFr
-        },
-        categoryId: skill.dataValues.categoryId
+          en: competency.dataValues.descriptionEn,
+          fr: competency.dataValues.descriptionFr
+        }
       };
   });
 
@@ -155,8 +154,7 @@ const getPublicProfileById = async (request, response) => {
         description: {
           en: goal.dataValues.descriptionEn,
           fr: goal.dataValues.descriptionFr
-        },
-        categoryId: skill.dataValues.categoryId
+        }
       };
   });
 
@@ -170,7 +168,7 @@ const getPublicProfileById = async (request, response) => {
             en: mentorshipSkill.dataValues.descriptionEn,
             fr: mentorshipSkill.dataValues.descriptionFr
           },
-          categoryId: skill.dataValues.categoryId
+          categoryId: mentorshipSkill.dataValues.categoryId
         };
     });
 
@@ -301,26 +299,6 @@ const getPublicProfileById = async (request, response) => {
         }
       }
     };
-  // if (visibleCards.talentManagement)
-  //   resData = {
-  //     ...resData,
-
-  //     careerMobility: {
-  //       id: careerMobility ? careerMobility.id : null,
-  //       description: {
-  //         en: careerMobility ? careerMobility.descriptionEn : null,
-  //         fr: careerMobility ? careerMobility.descriptionFr : null
-  //       }
-  //     },
-  //     exFeeder: data.exFeeder,
-  //     talentMatrixResult: {
-  //       id: talentMatrixResult ? talentMatrixResult.id : null,
-  //       description: {
-  //         en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
-  //         fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
-  //       }
-  //     }
-  //   };
 
   if (visibleCards.officialLanguage)
     resData = {
@@ -524,7 +502,7 @@ const getPrivateProfileById = async (request, response) => {
   // });
 
   let skills = await profile.getSkills().map(skill => {
-    if(skill)
+    if (skill)
       return {
         id: skill.dataValues.id,
         description: {
@@ -543,10 +521,7 @@ const getPrivateProfileById = async (request, response) => {
         id: competency.dataValues.id,
         description: {
           en: competency.dataValues.descriptionEn,
-          fr: competency.dataValues.descriptionFr,
-          categoryEn: competency.dataValues.categoryEn,
-          categoryFr: competency.dataValues.categoryFr,
-          categoryId: competency.dataValues.categoryId
+          fr: competency.dataValues.descriptionFr
         }
       };
   });
@@ -558,8 +533,7 @@ const getPrivateProfileById = async (request, response) => {
         description: {
           en: goal.dataValues.descriptionEn,
           fr: goal.dataValues.descriptionFr
-        },
-        categoryId: skill.dataValues.categoryId
+        }
       };
   });
 
@@ -573,7 +547,7 @@ const getPrivateProfileById = async (request, response) => {
             en: mentorshipSkill.dataValues.descriptionEn,
             fr: mentorshipSkill.dataValues.descriptionFr
           },
-          categoryId: skill.dataValues.categoryId
+          categoryId: mentorshipSkill.dataValues.categoryId
         };
     });
 
