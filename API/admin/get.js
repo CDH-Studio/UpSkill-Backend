@@ -26,7 +26,8 @@ const getOption = async (request, response) => {
 const getFlagged = async (request, response) => {
   try {
     const { id } = request.params;
-    Profile.findOne({ where: { id: id } }).then(row =>
+
+    await Profile.findOne({ where: { id: id } }).then(row =>
       response.status(200).json({ value: row.flagged })
     );
   } catch (error) {
@@ -37,9 +38,12 @@ const getFlagged = async (request, response) => {
 const getInactive = async (request, response) => {
   try {
     const { id } = request.params;
-    User.findOne({ where: { id: id } }).then(row =>
+
+    await User.findOne({ where: { id: id } }).then(row =>
       response.status(200).json({ value: row.inactive })
     );
+
+    const print = await User.findOne({ where: { id: id } });
   } catch (error) {
     response.status(500).json(error);
   }
@@ -64,28 +68,6 @@ const getUser = async (request, response) => {
   response.status(200).json(values);
 };
 
-const dashboardCount = async (request, response) => {
-  try {
-    const flagged = await Profile.count({
-      where: { flagged: true }
-    });
-
-    const inactive = await User.count({
-      where: { inactive: true }
-    });
-
-    const user = await Profile.count();
-
-    const exFeeder = await Profile.count({
-      where: { exFeeder: true }
-    });
-
-    response.status(200).json({ user, exFeeder, flagged, inactive });
-  } catch (error) {
-    response.status(500).json(error);
-  }
-};
-
 const checkAdmin = (request, response) =>
   response.status(200).send("Access Granted");
 
@@ -94,6 +76,5 @@ module.exports = {
   getFlagged,
   getInactive,
   getUser,
-  dashboardCount,
   checkAdmin
 };

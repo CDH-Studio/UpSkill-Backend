@@ -3,6 +3,8 @@ const post = require("./post");
 const del = require("./delete");
 const get = require("./get");
 
+const report = require("./reporting");
+
 module.exports = {
   createOption: post.createOption,
   bulkDeleteOption: post.bulkDeleteOption,
@@ -14,7 +16,8 @@ module.exports = {
   getFlagged: get.getFlagged,
   getInactive: get.getInactive,
   getUser: get.getUser,
-  dashboardCount: get.dashboardCount,
   checkAdmin: get.checkAdmin,
-  updateProfileStatus: put.updateProfileStatus
+  updateProfileStatus: put.updateProfileStatus,
+  getStatistics: report.get.statistics,
+  getSkillsReport: report.skillsReport
 };
