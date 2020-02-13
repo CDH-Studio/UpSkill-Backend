@@ -47,19 +47,23 @@ const getCareerMobility = async (request, response) => {
 const getCompetency = async (request, response) => {
   let all = await Skill.findAll({
     include: Category,
-    attributes: ["descriptionEn", "descriptionFr", "id"], 
+    attributes: ["descriptionEn", "descriptionFr", "id"],
     require: true,
     where: {
       type: "competency"
     }
-  }); 
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
     let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr , 
-        categoryEn: ascCats.descriptionEn, categoryFr: ascCats.descriptionFr}
+      description: {
+        en: one.descriptionEn,
+        fr: one.descriptionFr,
+        categoryEn: ascCats.descriptionEn,
+        categoryFr: ascCats.descriptionFr
+      }
     };
   });
   response.status(200).json(resBody);
@@ -152,31 +156,76 @@ const getSecurityClearance = async (request, response) => {
   response.status(200).json(resBody);
 };
 
-const getCategory = async(request, response) => {
+const getCategorySkills = async (request, response) => {
   let all = await Category.findAll({
-    include:Skill, 
-    attributes: ["descriptionEn", "descriptionFr", "id"], 
+    include: Skill,
+    attributes: ["descriptionEn", "descriptionFr", "id"],
     require: true
   });
   let resBody = all.map(one => {
     one = one.dataValues;
-    let skillsCat = one.skills.map(skillCat =>{
+    let skillsCat = one.skills.map(skillCat => {
       skillCat = skillCat.dataValues;
-      if(skillCat.categoryId == one.id){
-        return {
-          id:skillCat.id,
-          description: {descEn: skillCat.descriptionEn, descFr: skillCat.descriptionFr}
-        }
-      }else{
+      if (skillCat.categoryId == one.id) {
         return {
           id: skillCat.id,
-          description: {descEn: null, descFr: null}
+          description: {
+            en: skillCat.descriptionEn,
+            fr: skillCat.descriptionFr
+          }
+        };
+      } else {
+        return {
+          id: skillCat.id,
+          description: { descEn: null, descFr: null }
+        };
+      }
+    });
+    return {
+      aCategory: {
+        skill: {
+          catId: one.id,
+          description: { en: one.descriptionEn, fr: one.descriptionFr },
+          skillsCat
         }
+      }
+    };
+  });
+  response.status(200).json(resBody);
+};
+
+const getCategory = async (request, response) => {
+  let all = await Category.findAll({
+    include: Skill,
+    attributes: ["descriptionEn", "descriptionFr", "id"],
+    require: true
+  });
+  let resBody = all.map(one => {
+    one = one.dataValues;
+    let skillsCat = one.skills.map(skillCat => {
+      skillCat = skillCat.dataValues;
+      if (skillCat.categoryId == one.id) {
+        return {
+          id: skillCat.id,
+          description: {
+            descEn: skillCat.descriptionEn,
+            descFr: skillCat.descriptionFr
+          }
+        };
+      } else {
+        return {
+          id: skillCat.id,
+          description: { descEn: null, descFr: null }
+        };
       }
     });
     return {
       id: one.id,
-      description: {en: one.descriptionEn, fr: one.descriptionFr, skills: skillsCat}
+      description: {
+        en: one.descriptionEn,
+        fr: one.descriptionFr,
+        skills: skillsCat
+      }
     };
   });
   response.status(200).json(resBody);
@@ -185,20 +234,23 @@ const getCategory = async(request, response) => {
 const getSkill = async (request, response) => {
   let all = await Skill.findAll({
     include: Category,
-    attributes: ["descriptionEn", "descriptionFr", "id"], 
+    attributes: ["descriptionEn", "descriptionFr", "id"],
     require: true,
     where: {
       type: "skill"
     }
-  }); 
+  });
   let resBody = all.map(one => {
     one = one.dataValues;
 
     let ascCats = one.category.dataValues;
     return {
       id: one.id,
-      description: { en: one.descriptionEn, fr: one.descriptionFr , 
-        categoryEn: ascCats.descriptionEn, categoryFr: ascCats.descriptionFr
+      description: {
+        en: one.descriptionEn,
+        fr: one.descriptionFr,
+        categoryEn: ascCats.descriptionEn,
+        categoryFr: ascCats.descriptionFr
       }
     };
   });
@@ -301,6 +353,7 @@ module.exports = {
   getSchool,
   getSecurityClearance,
   getCategory,
+  getCategorySkills,
   getSkill,
   getMentorshipSkill,
   getTalentMatrixResult,
