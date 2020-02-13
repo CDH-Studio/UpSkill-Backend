@@ -62,6 +62,6 @@ adminRouter.put(
   admin.updateInactive
 );
 
-adminRouter.get("/dashboard", reporting.skillsReport);
+adminRouter.get("/dashboard", reporting.get.statistics);
 
 module.exports = adminRouter;
