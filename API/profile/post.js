@@ -1,5 +1,4 @@
 const moment = require("moment");
-
 const Models = require("../../models");
 const Profile = Models.profile;
 const Education = Models.education;
@@ -31,11 +30,13 @@ const createProfile = async (request, response) => {
       { id, ...dbObject },
       { returning: true }
     );
-
+    
     if (dbObject.skills) profile.setSkills(dbObject.skills);
     if (dbObject.competencies) profile.setCompetencies(dbObject.competencies);
     if (dbObject.developmentGoals)
       profile.setDevelopmentGoals(dbObject.developmentGoals);
+    if (dbObject.mentorshipSkills)
+      profile.setMentorshipSkills(dbObject.mentorshipSkills);
 
     if (dbObject.education) {
       Education.destroy({ where: { profileId: profile.id } }).then(() => {
