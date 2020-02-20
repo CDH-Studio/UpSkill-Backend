@@ -168,16 +168,27 @@ const getPublicProfileById = async (request, response) => {
     .getMentorshipSkills()
     .map(async mentorshipSkill => {
       if (mentorshipSkill) {
-        let cat = await mentorshipSkill.getCategory({
-          attributes: ["descriptionEn", "descriptionFr", "id"]
+        let cats = await mentorshipSkill.getCategory({
+          attributes: ["descriptionEn", "descriptionFr", "id"],
+          require: true
         });
         return {
           id: mentorshipSkill.dataValues.id,
           description: {
-            en: mentorshipSkill.dataValues.descriptionEn,
-            fr: mentorshipSkill.dataValues.descriptionFr
-          },
-          categoryId: mentorshipSkill.dataValues.categoryId
+            en:
+              cats.dataValues.descriptionEn +
+              ": " +
+              mentorshipSkill.dataValues.descriptionEn,
+            fr:
+              cats.dataValues.descriptionFr +
+              ": " +
+              mentorshipSkill.dataValues.descriptionFr,
+            category: {
+              categoryEn: cats.dataValues.descriptionEn,
+              categoryFr: cats.dataValues.descriptionFr
+            },
+            categoryId: mentorshipSkill.dataValues.categoryId
+          }
         };
       }
     });
@@ -331,12 +342,6 @@ const getPublicProfileById = async (request, response) => {
         : null,
       secondLanguage: null
     };
-
-  // if (visibleCards.categories)
-  //   resData = {
-  //     ...resData,
-  //     categories
-  //   };
 
   if (visibleCards.skills)
     resData = {
@@ -505,10 +510,6 @@ const getPrivateProfileById = async (request, response) => {
         attributes: ["descriptionEn", "descriptionFr", "id"],
         require: true
       });
-      // console.log(
-      //   "akjdfa;ksdjfl;kadjfl;asdjf;lkadsjfa",
-      //   cats.dataValues.descriptionEn
-      // );
       return {
         id: skill.dataValues.id,
         description: {
@@ -554,16 +555,32 @@ const getPrivateProfileById = async (request, response) => {
 
   let mentorshipSkills = await profile
     .getMentorshipSkills()
-    .map(mentorshipSkill => {
-      if (mentorshipSkill)
+    .map(async mentorshipSkill => {
+      if (mentorshipSkill) {
+        let cats = await mentorshipSkill.getCategory({
+          attributes: ["descriptionEn", "descriptionFr", "id"],
+          require: true
+        });
+
         return {
           id: mentorshipSkill.dataValues.id,
           description: {
-            en: mentorshipSkill.dataValues.descriptionEn,
-            fr: mentorshipSkill.dataValues.descriptionFr
-          },
-          categoryId: mentorshipSkill.dataValues.categoryId
+            en:
+              cats.dataValues.descriptionEn +
+              ": " +
+              mentorshipSkill.dataValues.descriptionEn,
+            fr:
+              cats.dataValues.descriptionFr +
+              ": " +
+              mentorshipSkill.dataValues.descriptionFr,
+            category: {
+              categoryEn: cats.dataValues.descriptionEn,
+              categoryFr: cats.dataValues.descriptionFr
+            },
+            categoryId: mentorshipSkill.dataValues.categoryId
+          }
         };
+      }
     });
 
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {

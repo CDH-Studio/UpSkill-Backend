@@ -43,31 +43,6 @@ const getCareerMobility = async (request, response) => {
   response.status(200).json(resBody);
 };
 
-// const getCompetency = async (request, response) => {
-//   let all = await Skill.findAll({
-//     include: Category,
-//     attributes: ["descriptionEn", "descriptionFr", "id"],
-//     require: true,
-//     where: {
-//       type: "competency"
-//     }
-//   });
-//   let resBody = all.map(one => {
-//     one = one.dataValues;
-//     let ascCats = one.category.dataValues;
-//     return {
-//       id: one.id,
-//       description: {
-//         en: one.descriptionEn,
-//         fr: one.descriptionFr,
-//         categoryEn: ascCats.descriptionEn,
-//         categoryFr: ascCats.descriptionFr
-//       }
-//     };
-//   });
-//   response.status(200).json(resBody);
-// };
-
 const getCompetency = async (request, response) => {
   let all = await Skill.findAll({
     where: {
@@ -267,27 +242,8 @@ const getSkill = async (request, response) => {
       }
     };
   });
-  //
-  //
   response.status(200).json(resBody);
 };
-
-// const getMentorshipSkill = async (request, response) => {
-//   let all = await Skill.findAll({
-//     where: {
-//       type: "skill"
-//     }
-//   });
-//   let resBody = all.map(one => {
-//     one = one.dataValues;
-//     return {
-//       id: one.id,
-//       description: { en: one.descriptionEn, fr: one.descriptionFr },
-//       categoryId: one.categoryId
-//     };
-//   });
-//   response.status(200).json(resBody);
-// };
 
 const getTalentMatrixResult = async (request, response) => {
   let all = await TalentMatrixResult.findAll();
@@ -370,7 +326,6 @@ module.exports = {
   getCategory,
   getCategorySkills,
   getSkill,
-  // getMentorshipSkill,
   getTalentMatrixResult,
   getTenure,
   getLookingForANewJob,
