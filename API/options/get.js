@@ -185,8 +185,8 @@ const getCategorySkills = async (request, response) => {
         return {
           id: skillCat.id,
           description: {
-            en: skillCat.descriptionEn,
-            fr: skillCat.descriptionFr
+            en: one.descriptionEn + ": " + skillCat.descriptionEn,
+            fr: one.descriptionFr + ": " + skillCat.descriptionFr
           }
         };
       } else {
@@ -262,13 +262,13 @@ const getSkill = async (request, response) => {
     return {
       id: one.id,
       description: {
-        en: one.descriptionEn,
-        fr: one.descriptionFr,
-        categoryEn: ascCats.descriptionEn,
-        categoryFr: ascCats.descriptionFr
+        en: ascCats.descriptionEn + ": " + one.descriptionEn,
+        fr: ascCats.descriptionFr + ": " + one.descriptionFr
       }
     };
   });
+  //
+  //
   response.status(200).json(resBody);
 };
 
