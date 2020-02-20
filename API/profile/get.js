@@ -1,6 +1,8 @@
 const moment = require("moment");
 const Models = require("../../models");
 const Profile = Models.profile;
+const Skill = Models.skill;
+const Category = Models.category;
 
 const getProfile = async (request, response) => {
   response.status(200).json(await Profile.findAll());
@@ -113,24 +115,40 @@ const getPublicProfileById = async (request, response) => {
       return orgList;
     });
 
-  let skills = await profile.getSkills().map(skill => {
-    if (skill)
+  let skills = await profile.getSkills().map(async skill => {
+    if (skill) {
+      let cats = await skill.getCategory({
+        attributes: ["descriptionEn", "descriptionFr", "id"],
+        require: true
+      });
       return {
         id: skill.dataValues.id,
         description: {
-          en: skill.dataValues.descriptionEn,
-          fr: skill.dataValues.descriptionFr
+          en:
+            cats.dataValues.descriptionEn +
+            ": " +
+            skill.dataValues.descriptionEn,
+          fr:
+            cats.dataValues.descriptionFr +
+            ": " +
+            skill.dataValues.descriptionFr,
+          category: {
+            categoryEn: cats.dataValues.descriptionEn,
+            categoryFr: cats.dataValues.descriptionFr
+          },
+          categoryId: skill.dataValues.categoryId
         }
       };
+    }
   });
 
-  let competencies = await profile.getCompetencies().map(competencies => {
-    if (competencies)
+  let competencies = await profile.getCompetencies().map(competency => {
+    if (competency)
       return {
-        id: competencies.dataValues.id,
+        id: competency.dataValues.id,
         description: {
-          en: competencies.dataValues.descriptionEn,
-          fr: competencies.dataValues.descriptionFr
+          en: competency.dataValues.descriptionEn,
+          fr: competency.dataValues.descriptionFr
         }
       };
   });
@@ -145,6 +163,35 @@ const getPublicProfileById = async (request, response) => {
         }
       };
   });
+
+  let mentorshipSkills = await profile
+    .getMentorshipSkills()
+    .map(async mentorshipSkill => {
+      if (mentorshipSkill) {
+        let cats = await mentorshipSkill.getCategory({
+          attributes: ["descriptionEn", "descriptionFr", "id"],
+          require: true
+        });
+        return {
+          id: mentorshipSkill.dataValues.id,
+          description: {
+            en:
+              cats.dataValues.descriptionEn +
+              ": " +
+              mentorshipSkill.dataValues.descriptionEn,
+            fr:
+              cats.dataValues.descriptionFr +
+              ": " +
+              mentorshipSkill.dataValues.descriptionFr,
+            category: {
+              categoryEn: cats.dataValues.descriptionEn,
+              categoryFr: cats.dataValues.descriptionFr
+            },
+            categoryId: mentorshipSkill.dataValues.categoryId
+          }
+        };
+      }
+    });
 
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
     if (res) return res.dataValues;
@@ -179,7 +226,6 @@ const getPublicProfileById = async (request, response) => {
 
   //Response Object
   const visibleCards = data.visibleCards;
-  // console.log(visibleCards);
 
   let resData = {
     visibleCards,
@@ -273,26 +319,6 @@ const getPublicProfileById = async (request, response) => {
         }
       }
     };
-  if (visibleCards.talentManagement)
-    resData = {
-      ...resData,
-
-      careerMobility: {
-        id: careerMobility ? careerMobility.id : null,
-        description: {
-          en: careerMobility ? careerMobility.descriptionEn : null,
-          fr: careerMobility ? careerMobility.descriptionFr : null
-        }
-      },
-      exFeeder: data.exFeeder,
-      talentMatrixResult: {
-        id: talentMatrixResult ? talentMatrixResult.id : null,
-        description: {
-          en: talentMatrixResult ? talentMatrixResult.descriptionEn : null,
-          fr: talentMatrixResult ? talentMatrixResult.descriptionFr : null
-        }
-      }
-    };
 
   if (visibleCards.officialLanguage)
     resData = {
@@ -333,6 +359,13 @@ const getPublicProfileById = async (request, response) => {
     resData = {
       ...resData,
       developmentalGoals
+    };
+
+  if (visibleCards.mentorshipSkills)
+    resData = {
+      ...resData,
+      mentorshipSkills,
+      isMentor: data.isMentor
     };
 
   if (visibleCards.education)
@@ -471,24 +504,40 @@ const getPrivateProfileById = async (request, response) => {
       return orgList;
     });
 
-  let skills = await profile.getSkills().map(skill => {
-    if (skill)
+  let skills = await profile.getSkills().map(async skill => {
+    if (skill) {
+      let cats = await skill.getCategory({
+        attributes: ["descriptionEn", "descriptionFr", "id"],
+        require: true
+      });
       return {
         id: skill.dataValues.id,
         description: {
-          en: skill.dataValues.descriptionEn,
-          fr: skill.dataValues.descriptionFr
+          en:
+            cats.dataValues.descriptionEn +
+            ": " +
+            skill.dataValues.descriptionEn,
+          fr:
+            cats.dataValues.descriptionFr +
+            ": " +
+            skill.dataValues.descriptionFr,
+          category: {
+            categoryEn: cats.dataValues.descriptionEn,
+            categoryFr: cats.dataValues.descriptionFr
+          },
+          categoryId: skill.dataValues.categoryId
         }
       };
+    }
   });
 
-  let competencies = await profile.getCompetencies().map(competencies => {
-    if (competencies)
+  let competencies = await profile.getCompetencies().map(competency => {
+    if (competency)
       return {
-        id: competencies.dataValues.id,
+        id: competency.dataValues.id,
         description: {
-          en: competencies.dataValues.descriptionEn,
-          fr: competencies.dataValues.descriptionFr
+          en: competency.dataValues.descriptionEn,
+          fr: competency.dataValues.descriptionFr
         }
       };
   });
@@ -503,6 +552,36 @@ const getPrivateProfileById = async (request, response) => {
         }
       };
   });
+
+  let mentorshipSkills = await profile
+    .getMentorshipSkills()
+    .map(async mentorshipSkill => {
+      if (mentorshipSkill) {
+        let cats = await mentorshipSkill.getCategory({
+          attributes: ["descriptionEn", "descriptionFr", "id"],
+          require: true
+        });
+
+        return {
+          id: mentorshipSkill.dataValues.id,
+          description: {
+            en:
+              cats.dataValues.descriptionEn +
+              ": " +
+              mentorshipSkill.dataValues.descriptionEn,
+            fr:
+              cats.dataValues.descriptionFr +
+              ": " +
+              mentorshipSkill.dataValues.descriptionFr,
+            category: {
+              categoryEn: cats.dataValues.descriptionEn,
+              categoryFr: cats.dataValues.descriptionFr
+            },
+            categoryId: mentorshipSkill.dataValues.categoryId
+          }
+        };
+      }
+    });
 
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
     if (res) return res.dataValues;
@@ -558,6 +637,7 @@ const getPrivateProfileById = async (request, response) => {
     education: educArray,
     email: data.email,
     exFeeder: data.exFeeder,
+    isMentor: data.isMentor,
     flagged: data.flagged,
     firstLanguage: {
       fr: { en: "French", fr: "Français" },
@@ -613,7 +693,9 @@ const getPrivateProfileById = async (request, response) => {
         fr: securityClearance ? securityClearance.descriptionFr : null
       }
     },
+    // categories,
     skills,
+    mentorshipSkills,
     temporaryRole: {
       id: tenure ? tenure.id : null,
       description: {

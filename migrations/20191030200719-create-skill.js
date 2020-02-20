@@ -24,6 +24,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      categoryId:{ // addition of category foreign key
+        type: Sequelize.INTEGER,
+        allowNull: false, // a skill must belong to a category
+        references:{
+          model: "categories",
+          key: "id"
+        }
       }
     });
   },

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       github: DataTypes.STRING,
       twitter: DataTypes.STRING,
       exFeeder: DataTypes.BOOLEAN,
+      isMentor: DataTypes.BOOLEAN,
       flagged: DataTypes.BOOLEAN,
       interestedInRemote: DataTypes.BOOLEAN,
       indeterminate: DataTypes.BOOLEAN,
@@ -42,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     profile.belongsToMany(models.skill, {
       through: "profileDevelopmentGoals",
       as: "developmentGoals"
+    });
+    profile.belongsToMany(models.skill, {
+      through: "profileMentorshipSkills",
+      as: "mentorshipSkills"
     });
     profile.belongsTo(models.tenure);
     profile.belongsTo(models.groupLevel);
