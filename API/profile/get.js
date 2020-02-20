@@ -205,7 +205,6 @@ const getPublicProfileById = async (request, response) => {
 
   //Response Object
   const visibleCards = data.visibleCards;
-  // console.log(visibleCards);
 
   let resData = {
     visibleCards,
