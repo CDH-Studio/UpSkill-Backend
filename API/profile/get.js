@@ -1,6 +1,8 @@
 const moment = require("moment");
 const Models = require("../../models");
 const Profile = Models.profile;
+const Skill = Models.skill;
+const Category = Models.category;
 
 const getProfile = async (request, response) => {
   response.status(200).json(await Profile.findAll());
@@ -113,27 +115,31 @@ const getPublicProfileById = async (request, response) => {
       return orgList;
     });
 
-  // let categories = await profile.getCategories().map(skill => {
-  //   if (skill)
-  //     return {
-  //       id: skill.dataValues.id,
-  //       description: {
-  //         en: skill.dataValues.descriptionEn,
-  //         fr: skill.dataValues.descriptionFr
-  //       }
-  //     };
-  // });
-
-  let skills = await profile.getSkills().map(skill => {
-    if (skill)
+  let skills = await profile.getSkills().map(async skill => {
+    if (skill) {
+      let cats = await skill.getCategory({
+        attributes: ["descriptionEn", "descriptionFr", "id"],
+        require: true
+      });
       return {
         id: skill.dataValues.id,
         description: {
-          en: skill.dataValues.descriptionEn,
-          fr: skill.dataValues.descriptionFr
-        },
-        categoryId: skill.dataValues.categoryId
+          en:
+            cats.dataValues.descriptionEn +
+            ": " +
+            skill.dataValues.descriptionEn,
+          fr:
+            cats.dataValues.descriptionFr +
+            ": " +
+            skill.dataValues.descriptionFr,
+          category: {
+            categoryEn: cats.dataValues.descriptionEn,
+            categoryFr: cats.dataValues.descriptionFr
+          },
+          categoryId: skill.dataValues.categoryId
+        }
       };
+    }
   });
 
   let competencies = await profile.getCompetencies().map(competency => {
@@ -160,8 +166,11 @@ const getPublicProfileById = async (request, response) => {
 
   let mentorshipSkills = await profile
     .getMentorshipSkills()
-    .map(mentorshipSkill => {
-      if (mentorshipSkill)
+    .map(async mentorshipSkill => {
+      if (mentorshipSkill) {
+        let cat = await mentorshipSkill.getCategory({
+          attributes: ["descriptionEn", "descriptionFr", "id"]
+        });
         return {
           id: mentorshipSkill.dataValues.id,
           description: {
@@ -170,6 +179,7 @@ const getPublicProfileById = async (request, response) => {
           },
           categoryId: mentorshipSkill.dataValues.categoryId
         };
+      }
     });
 
   let secLangProf = await profile.getSecondLanguageProficiency().then(res => {
@@ -489,29 +499,35 @@ const getPrivateProfileById = async (request, response) => {
       return orgList;
     });
 
-  // let categories = await profile.getCategories().map(category => {
-  //   if (category)
-  //     return {
-  //       id: category.dataValues.id,
-  //       description: {
-  //         en: category.dataValues.descriptionEn,
-  //         fr: category.dataValues.descriptionFr
-  //       }
-  //     };
-  // });
-
-  let skills = await profile.getSkills().map(skill => {
-    if (skill)
+  let skills = await profile.getSkills().map(async skill => {
+    if (skill) {
+      let cats = await skill.getCategory({
+        attributes: ["descriptionEn", "descriptionFr", "id"],
+        require: true
+      });
+      // console.log(
+      //   "akjdfa;ksdjfl;kadjfl;asdjf;lkadsjfa",
+      //   cats.dataValues.descriptionEn
+      // );
       return {
         id: skill.dataValues.id,
         description: {
-          en: skill.dataValues.descriptionEn,
-          fr: skill.dataValues.descriptionFr,
-          categoryEn: skill.dataValues.categoryEn,
-          categoryFr: skill.dataValues.categoryFr,
+          en:
+            cats.dataValues.descriptionEn +
+            ": " +
+            skill.dataValues.descriptionEn,
+          fr:
+            cats.dataValues.descriptionFr +
+            ": " +
+            skill.dataValues.descriptionFr,
+          category: {
+            categoryEn: cats.dataValues.descriptionEn,
+            categoryFr: cats.dataValues.descriptionFr
+          },
           categoryId: skill.dataValues.categoryId
         }
       };
+    }
   });
 
   let competencies = await profile.getCompetencies().map(competency => {
