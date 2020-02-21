@@ -24,7 +24,8 @@ const getAllProfiles = async searchValue => {
       "locationId",
       "actingId",
       "exFeeder",
-      "flagged"
+      "flagged",
+      "visibleCards"
     ],
     include: [
       { model: User, attributes: ["inactive"], where: { inactive: false } }
@@ -50,6 +51,8 @@ _getProf = async (profile, searchValue) => {
   let user = await profile.getUser({ attributes: ["email"] });
 
   if (!profile) response.status(404).send("Profile Not Found");
+
+  let privateInfo = profile.visibleCards;
 
   let profileData = profile ? profile.dataValues : {};
   let userData = user ? user.dataValues : {};
@@ -177,17 +180,20 @@ _getProf = async (profile, searchValue) => {
   let resData = {
     id: data.id,
     acting: {
-      id: acting ? acting.id : null,
-      description: acting ? acting.description : null
+      //this
+      id: acting && privateInfo.info ? acting.id : null,
+      description: acting && privateInfo.info ? acting.description : null
     },
     branch: data.branchEn,
-    careerSummary,
+    careerSummary: privateInfo.experience ? careerSummary : null,
     classification: {
-      id: groupLevel ? groupLevel.id : null,
-      description: groupLevel ? groupLevel.description : null
+      //this
+      id: groupLevel && privateInfo.info ? groupLevel.id : null,
+      description:
+        groupLevel && privateInfo.info ? groupLevel.description : null
     },
     competencies,
-    education: educArray,
+    education: privateInfo.education ? educArray : null,
     email: data.email,
     exFeeder: data.exFeeder,
     flagged: data.flagged,
@@ -213,13 +219,13 @@ _getProf = async (profile, searchValue) => {
           : null
       }
     },
-    manager: data.manager,
+    manager: privateInfo.manager ? data.manager : null,
     cellphone: data.cellphone,
     organizationList,
-    skills,
+    skills: privateInfo.skill ? skills : null,
     team: data.team,
     telephone: data.telephone,
-    projects: projects,
+    projects: privateInfo.projects ? projects : null,
     resultSkills
   };
   return resData;

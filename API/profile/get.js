@@ -225,7 +225,8 @@ const getPublicProfileById = async (request, response) => {
   });
 
   //Response Object
-  const visibleCards = data.visibleCards;
+  const visibleCards = data.visibleCards; // should be done in search folder...
+  // assuming the reason we can't search for these things is because that value is undefined here
 
   let resData = {
     visibleCards,
